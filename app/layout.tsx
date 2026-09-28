@@ -9,9 +9,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Roadmap Labs",
+  title: "Roadmap Labs - apps, websites and automations that fit real use",
   description:
-    "Building software has never been easier. Building the right software is still just as hard.",
+    "We work out exactly what your business needs, then build apps, websites and automations around how people actually use them.",
 };
 
 export const viewport: Viewport = {
