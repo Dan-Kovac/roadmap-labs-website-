@@ -101,22 +101,22 @@ export function SelectedWork() {
       <ul className="work-strip">
         {selectedWork.map((project) => (
           <li key={project.slug} className={`work-panel work-panel-${project.frame}`}>
-            <h3>{project.name}</h3>
+            <div className="work-copy">
+              <h3>{project.name}</h3>
+              <p>{project.job}</p>
+              {project.external ? (
+                <a className="platform-cta" href={project.href}>
+                  {project.cta}
+                </a>
+              ) : (
+                <Link className="platform-cta" href={project.href}>
+                  {project.cta}
+                </Link>
+              )}
+            </div>
             <div className="panel">
               <div className="panel-ui" aria-hidden="true">
                 <Frame frame={project.frame} />
-              </div>
-              <div className="panel-foot">
-                <p>{project.job}</p>
-                {project.external ? (
-                  <a className="platform-cta" href={project.href}>
-                    {project.cta}
-                  </a>
-                ) : (
-                  <Link className="platform-cta" href={project.href}>
-                    {project.cta}
-                  </Link>
-                )}
               </div>
             </div>
           </li>
