@@ -293,6 +293,49 @@ a.rl-btn-secondary:focus-visible {
   background: #cfcfcf;
 }
 
+.underfold {
+  max-width: 100%;
+  padding: clamp(4.75rem, 12vh, 8.5rem) var(--page-pad) clamp(4.25rem, 10vh, 7.25rem);
+  overflow-x: clip;
+  background: var(--rl-bg);
+}
+
+.underfold h2 {
+  margin: 0;
+  max-width: 18em;
+  font-weight: 400;
+}
+
+.underfold-line {
+  display: block;
+  color: #111111;
+  font-size: clamp(1.5rem, 2.62vw, 2.45rem);
+  font-weight: 400;
+  letter-spacing: -0.032em;
+  line-height: 1.12;
+  text-wrap: pretty;
+}
+
+.underfold-copy {
+  max-width: 38rem;
+  margin-top: clamp(1.85rem, 4.5vh, 2.75rem);
+}
+
+.underfold-copy p {
+  margin: 0;
+  max-width: 36em;
+  font-size: clamp(1.15rem, 1.55vw, 1.4rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.45;
+  color: #161616;
+  text-wrap: pretty;
+}
+
+.underfold-copy p + p {
+  margin-top: 1.25rem;
+}
+
 @media (min-width: 900px) {
   .fold-line {
     white-space: nowrap;
@@ -683,6 +726,19 @@ a.rl-btn-secondary:focus-visible {
 
   .bleed {
     min-height: 11rem;
+  }
+
+  .underfold {
+    padding-block: 2.75rem 2.6rem;
+  }
+
+  .underfold-line {
+    font-size: clamp(1.38rem, 6.5vw, 1.7rem);
+    line-height: 1.18;
+  }
+
+  .underfold-copy {
+    margin-top: 1.35rem;
   }
 
   .offer {

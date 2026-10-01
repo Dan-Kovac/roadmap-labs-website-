@@ -21,6 +21,20 @@ export default function HomePage() {
         </h1>
       </section>
       <div className="bleed" aria-hidden="true" />
+      <section className="underfold" aria-labelledby="underfold-title">
+        <h2 id="underfold-title">
+          <span className="underfold-line">Software that respects the time.</span>
+          <span className="underfold-line">It does the job, then it stops.</span>
+        </h2>
+        <div className="underfold-copy">
+          <p>
+            People open a tool to finish something. The useful ones let them. The rest keep a tab
+            open and spend the hour on work the software should have done.
+          </p>
+          <p>The brief is smaller than it sounds. Do the job well. Leave the rest of the day alone.</p>
+          <p>A clear step. A finished task. A product that does not ask for more time than it needs.</p>
+        </div>
+      </section>
       <OfferStrip />
       <SelectedWork />
     </div>
