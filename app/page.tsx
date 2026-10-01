@@ -16,6 +16,8 @@ export default function HomePage() {
           <br />
           Building the right software is still just as hard.
         </h1>
+      </section>
+      <div className="fold-follow">
         <p className="fold-support">
           We work out exactly what your business needs, then build apps, websites
           and automations around how people actually use them.
@@ -23,7 +25,7 @@ export default function HomePage() {
         <a className="rl-btn rl-btn-primary" href={contactHref}>
           Email Dan
         </a>
-      </section>
+      </div>
       <SelectedWork />
     </div>
   );
