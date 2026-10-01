@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Logo } from "@/components/logo";
 import { contactHref, navItems } from "@/lib/site";
 
 function isCurrent(pathname: string, href: string) {
@@ -14,8 +15,8 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="site-bar">
-        <Link className="wordmark" href="/">
-          Roadmap Labs
+        <Link className="logo-link" href="/">
+          <Logo />
         </Link>
         <nav className="nav" aria-label="Primary">
           {navItems.map((item) => (

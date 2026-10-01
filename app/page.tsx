@@ -1,11 +1,30 @@
-import { RoutePlaceholder } from "@/components/route-placeholder";
+import type { Metadata } from "next";
+import { SelectedWork } from "@/components/selected-work";
+import { contactHref } from "@/lib/site";
+
+export const metadata: Metadata = {
+  description:
+    "We work out exactly what your business needs, then build apps, websites and automations around how people actually use them.",
+};
 
 export default function HomePage() {
   return (
-    <RoutePlaceholder
-      kicker="Roadmap Labs"
-      title="Home"
-      note="Placeholder. Thesis, offer, and selected work come next."
-    />
+    <div className="home">
+      <section className="fold">
+        <h1>
+          Building software has never been easier.
+          <br />
+          Building the right software is still just as hard.
+        </h1>
+        <p className="fold-support">
+          We work out exactly what your business needs, then build apps, websites
+          and automations around how people actually use them.
+        </p>
+        <a className="rl-btn rl-btn-primary" href={contactHref}>
+          Email Dan
+        </a>
+      </section>
+      <SelectedWork />
+    </div>
   );
 }

@@ -17,7 +17,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 | Path | Status |
 | --- | --- |
-| `/` | Placeholder |
+| `/` | Fold copy and selected-work mock-ups |
 | `/projects` | Placeholder |
 | `/projects/[slug]` | Placeholder |
 | `/insights` | Placeholder |
