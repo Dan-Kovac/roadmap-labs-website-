@@ -1,57 +1,33 @@
+/* Roadmap Labs — existing live marketing brand (from roadmaplabs.com.au / blue lockup).
+   Source of truth for this rebuild. Do NOT use Petrol & Ochre. */
 :root {
-  /* colour */
-  --rl-petrol: #1F4E56;
-  --rl-pitch: #12262A;
-  --rl-ochre: #D9A441;
-  --rl-cream: #F0E7C8;
-  --rl-chalk: #EDE8DC;
-  --rl-sage: #8FA9A9;
+  --rl-bg: #f3f7fc;
+  --rl-panel: #f7fbfe;
+  --rl-blue: #2a62f0;
+  --rl-blue-deep: #1a46c4;
+  --rl-logo: #067dfb;
+  --rl-ink: #172033;
+  --rl-navy: #152033;
+  --rl-muted: #526070;
+  --rl-labs: #66707c;
+  --rl-frame: #3d649452;
+  --rl-focus: #2a62f0;
+  --rl-white: #ffffff;
 
-  /* text */
-  --rl-text: #12262A;
-  --rl-text-muted: #33474A;
-  --rl-text-quiet: #5C7375;
-  --rl-text-on-dark: #F0E7C8;
-  --rl-text-on-dark-muted: #B9CFCF;
-  --rl-border: #D8D0BE;
-
-  /* type */
-  --rl-font-display: 'Big Shoulders Display', 'Arial Black', sans-serif;
-  --rl-font-body: 'Newsreader', Georgia, serif;
-  --rl-font-mono: 'JetBrains Mono', ui-monospace, monospace;
-
-  --rl-size-display: 88px;  --rl-lh-display: .9;
-  --rl-size-h1: 52px;       --rl-lh-h1: .95;
-  --rl-size-lead: 24px;     --rl-lh-lead: 1.5;
-  --rl-size-body: 18px;     --rl-lh-body: 1.65;
-  --rl-size-caption: 13px;  --rl-lh-caption: 1.6;
-  --rl-size-label: 11px;    --rl-track-label: .2em;
-
-  /* radii */
-  --rl-radius-chip: 8px;
-  --rl-radius-input: 14px;
-  --rl-radius-card: 18px;
-  --rl-radius-panel: 24px;
-  --rl-radius-section: 32px;
-  --rl-radius-pill: 999px;
-
-  /* mark */
-  --rl-lean: -8deg;
+  --rl-font-ui: "DM Sans", system-ui, sans-serif;
+  --rl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-/* Fonts: https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap */
-
-.rl-display { font-family: var(--rl-font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .02em; }
-.rl-body    { font-family: var(--rl-font-body); font-size: var(--rl-size-body); line-height: var(--rl-lh-body); color: var(--rl-text-muted); text-wrap: pretty; }
-.rl-label   { font-family: var(--rl-font-mono); font-size: var(--rl-size-label); letter-spacing: var(--rl-track-label); text-transform: uppercase; color: var(--rl-text-quiet); }
-
-.rl-btn           { font-family: var(--rl-font-display); font-weight: 700; font-size: 19px; letter-spacing: .1em; text-transform: uppercase; border-radius: var(--rl-radius-pill); padding: 15px 32px; border: 0; cursor: pointer; }
-.rl-btn-primary   { background: var(--rl-ochre); color: var(--rl-pitch); }
-.rl-btn-secondary { background: transparent; color: var(--rl-petrol); border: 2px solid var(--rl-petrol); padding: 13px 30px; }
-
-.rl-input { border: 2px solid var(--rl-pitch); border-radius: var(--rl-radius-input); padding: 13px 16px; font-family: var(--rl-font-body); font-size: 16px; background: var(--rl-chalk); }
-.rl-card  { border: 1px solid var(--rl-border); border-radius: var(--rl-radius-card); background: var(--rl-chalk); padding: 24px; }
-.rl-panel { border-radius: var(--rl-radius-panel); }
-
-/* photography: always black and white */
-.rl-photo { filter: grayscale(1) contrast(1.05); }
+.rl-btn-primary {
+  background: var(--rl-blue);
+  color: var(--rl-white);
+  border-radius: 999px;
+  font-family: var(--rl-font-ui);
+  font-weight: 600;
+}
+.rl-btn-secondary {
+  background: transparent;
+  color: var(--rl-blue);
+  border: 1.5px solid var(--rl-blue);
+  border-radius: 999px;
+}

@@ -43,10 +43,10 @@ function Frame({ kind }: { kind: WorkFrame }) {
   if (kind === "portfolio") {
     return (
       <div className="ui ui-portfolio">
-        <span className="ui-tile is-petrol" />
+        <span className="ui-tile is-blue" />
         <span className="ui-tile" />
         <span className="ui-tile" />
-        <span className="ui-tile is-petrol is-mark" />
+        <span className="ui-tile is-blue is-mark" />
       </div>
     );
   }
