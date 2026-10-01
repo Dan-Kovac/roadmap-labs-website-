@@ -99,21 +99,27 @@ export function SelectedWork() {
         {homeWork.map((project) => (
           <li key={project.slug} className={`work-panel work-panel-${project.frame}`}>
             <div className="work-copy">
-              <h3>{project.name}</h3>
+              <h3>
+                <Link href={`/projects/${project.slug}`}>{project.name}</Link>
+              </h3>
               <p>{project.job}</p>
               {project.external ? (
                 <a className="platform-cta" href={project.href} rel="noreferrer">
                   {project.cta}
                 </a>
               ) : (
-                <Link className="platform-cta" href={project.href}>
+                <Link className="platform-cta" href={`/projects/${project.slug}`}>
                   {project.cta}
                 </Link>
               )}
             </div>
-            <div className={`scene scene-${project.frame}`}>
+            <Link
+              className={`scene scene-${project.frame}`}
+              href={`/projects/${project.slug}`}
+              aria-label={project.name}
+            >
               <Frame frame={project.frame} />
-            </div>
+            </Link>
           </li>
         ))}
       </ul>
