@@ -1,0 +1,32 @@
+/* Roadmap Labs — live marketing brand from roadmaplabs.com.au. */
+:root {
+  --rl-bg: #f3f7fc;
+  --rl-panel: #f7fbfe;
+  --rl-blue: #2a62f0;
+  --rl-blue-deep: #1a46c4;
+  --rl-logo: #067dfb;
+  --rl-ink: #172033;
+  --rl-navy: #152033;
+  --rl-muted: #526070;
+  --rl-labs: #66707c;
+  --rl-frame: #3d649452;
+  --rl-focus: #2a62f0;
+  --rl-white: #ffffff;
+
+  --rl-font-ui: "DM Sans", system-ui, sans-serif;
+  --rl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.rl-btn-primary {
+  background: var(--rl-blue);
+  color: var(--rl-white);
+  border-radius: 999px;
+  font-family: var(--rl-font-ui);
+  font-weight: 600;
+}
+.rl-btn-secondary {
+  background: transparent;
+  color: var(--rl-blue);
+  border: 1.5px solid var(--rl-blue);
+  border-radius: 999px;
+}
