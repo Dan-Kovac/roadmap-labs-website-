@@ -41,6 +41,8 @@ export const selectedWork = [
 
 export type WorkFrame = (typeof selectedWork)[number]["frame"];
 
+export const homeWork = selectedWork.filter((project) => project.slug !== "compass-website");
+
 export function findSelectedWork(slug: string) {
   return selectedWork.find((project) => project.slug === slug);
 }

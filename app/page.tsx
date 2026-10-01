@@ -5,30 +5,22 @@ import { contactHref } from "@/lib/site";
 
 export const metadata: Metadata = {
   description:
-    "We work out exactly what your business needs, then build apps, websites and automations around how people actually use them.",
+    "Building software has never been easier. Building the right software is still just as hard.",
 };
 
 export default function HomePage() {
   return (
     <div className="home">
       <section className="fold" aria-labelledby="fold-title">
-        <div className="fold-copy">
-          <h1 id="fold-title">
-            Building software has never been easier. Building the right software
-            is still just as hard.
-          </h1>
-          <p className="fold-support">
-            We work out exactly what your business needs, then build apps, websites
-            and automations around how people actually use them.
-          </p>
-          <a className="fold-cta" href={contactHref}>
-            Email Dan
+        <h1 className="fold-copy" id="fold-title">
+          <span className="fold-line">Building software has never been easier.</span>
+          <span className="fold-line">Building the right software is still just as hard.</span>
+          <a className="fold-line fold-cta" href={contactHref}>
+            Email Dan.
           </a>
-        </div>
+        </h1>
       </section>
-      <section className="bleed" aria-label="Photograph">
-        <p>Black-and-white photograph. None approved yet.</p>
-      </section>
+      <div className="bleed" aria-hidden="true" />
       <OfferStrip />
       <SelectedWork />
     </div>

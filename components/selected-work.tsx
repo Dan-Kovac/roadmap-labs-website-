@@ -1,111 +1,108 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
-import { selectedWork, type WorkFrame } from "@/lib/selected-work";
+import { homeWork } from "@/lib/selected-work";
 
-function Hill({ className }: { className?: string }) {
+function Hill() {
   return (
-    <svg className={className} viewBox="0 0 160 72" aria-hidden="true">
+    <svg className="screen-hill" viewBox="0 0 200 90" aria-hidden="true">
       <path
         fill="currentColor"
-        d="M0 72V46c16 1 26-28 46-26 16 2 22 18 40 16 14-2 24-8 36-20 12 10 22 24 38 28v28H0Z"
+        d="M0 90V52c22 2 34-34 62-32 24 2 30 22 54 20 18-2 32-12 48-26 12 14 24 28 36 32v44H0Z"
       />
     </svg>
   );
 }
 
-function CompassOs() {
+function Phone({ children, wide = false }: { children: ReactNode; wide?: boolean }) {
   return (
-    <div className="ui-os">
-      <Hill className="ui-hill" />
-      <p className="ui-word">Compass</p>
-      <ul className="ui-list">
-        <li>Today</li>
-        <li>Board</li>
-        <li>Notes</li>
-      </ul>
+    <div className={wide ? "phone phone-wide" : "phone"}>
+      <div className="phone-screen">{children}</div>
     </div>
   );
 }
 
-function Stars({ filled }: { filled: number }) {
+function CompassOs() {
   return (
-    <span className="ui-stars">
-      {Array.from({ length: 5 }, (_, index) => (
-        <span key={index} className={index < filled ? "is-on" : undefined} />
-      ))}
-    </span>
-  );
-}
-
-function ReviewRow({ filled }: { filled: number }) {
-  return (
-    <li>
-      <span className="ui-avatar" />
-      <span className="ui-copy">
-        <span className="ui-line" />
-        <span className="ui-line ui-line-short" />
-        <Stars filled={filled} />
-      </span>
-    </li>
+    <Phone>
+      <div className="screen screen-compass">
+        <div className="screen-hero">
+          <Hill />
+        </div>
+        <div className="screen-sheet">
+          <p className="screen-name">Compass</p>
+          <p className="screen-line">Today</p>
+          <p className="screen-line">Board</p>
+          <p className="screen-line">Notes</p>
+        </div>
+      </div>
+    </Phone>
   );
 }
 
 function ReviewBuddy() {
   return (
-    <div className="ui-rb">
-      <p className="ui-word">Review Buddy</p>
-      <ul className="ui-reviews">
-        <ReviewRow filled={5} />
-        <ReviewRow filled={4} />
-        <ReviewRow filled={5} />
-      </ul>
-    </div>
+    <Phone wide>
+      <div className="screen screen-reviews">
+        <p className="screen-name">Review Buddy</p>
+        <div className="review-card">
+          <p className="screen-kicker">New</p>
+          <p className="screen-quote">Clear, and done the same day.</p>
+          <p className="screen-stars" aria-hidden="true">
+            ●●●●●
+          </p>
+        </div>
+        <div className="review-card">
+          <p className="screen-kicker">Answered</p>
+          <p className="screen-quote">Asked once. Replied once.</p>
+          <p className="screen-stars" aria-hidden="true">
+            ●●●●○
+          </p>
+        </div>
+      </div>
+    </Phone>
   );
 }
 
 function Flexfolio() {
   return (
-    <div className="ui-flex">
-      <div className="ui-flex-bar">Flexfolio</div>
-      <ul className="ui-flex-list">
-        <li>Project</li>
-        <li>Project</li>
-        <li>Writing</li>
-      </ul>
-    </div>
+    <Phone>
+      <div className="screen screen-flex">
+        <p className="flex-mark">Flexfolio</p>
+        <div className="flex-piece">
+          <p className="screen-name">Project</p>
+          <p className="screen-kicker">Published</p>
+        </div>
+        <div className="flex-piece">
+          <p className="screen-name">Project</p>
+          <p className="screen-kicker">Draft</p>
+        </div>
+        <div className="flex-piece">
+          <p className="screen-name">Writing</p>
+          <p className="screen-kicker">Live</p>
+        </div>
+      </div>
+    </Phone>
   );
 }
 
-function CompassSite() {
-  return (
-    <div className="ui-site">
-      <p className="ui-word">Compass</p>
-      <Hill className="ui-hill ui-hill-lg" />
-    </div>
-  );
-}
-
-function Frame({ frame }: { frame: WorkFrame }) {
+function Frame({ frame }: { frame: (typeof homeWork)[number]["frame"] }) {
   if (frame === "compass-os") return <CompassOs />;
   if (frame === "review-buddy") return <ReviewBuddy />;
-  if (frame === "flexfolio") return <Flexfolio />;
-  return <CompassSite />;
+  return <Flexfolio />;
 }
 
 export function SelectedWork() {
   return (
     <section className="work" aria-labelledby="selected-work">
-      <div className="work-intro">
-        <h2 id="selected-work">Selected work</h2>
-        <p>Placeholder frames. Product colour only.</p>
-      </div>
+      <h2 id="selected-work">Selected work</h2>
       <ul className="work-strip">
-        {selectedWork.map((project) => (
+        {homeWork.map((project) => (
           <li key={project.slug} className={`work-panel work-panel-${project.frame}`}>
             <div className="work-copy">
               <h3>{project.name}</h3>
               <p>{project.job}</p>
               {project.external ? (
-                <a className="platform-cta" href={project.href}>
+                <a className="platform-cta" href={project.href} rel="noreferrer">
                   {project.cta}
                 </a>
               ) : (
@@ -114,10 +111,8 @@ export function SelectedWork() {
                 </Link>
               )}
             </div>
-            <div className="panel">
-              <div className="panel-ui" aria-hidden="true">
-                <Frame frame={project.frame} />
-              </div>
+            <div className={`scene scene-${project.frame}`}>
+              <Frame frame={project.frame} />
             </div>
           </li>
         ))}
