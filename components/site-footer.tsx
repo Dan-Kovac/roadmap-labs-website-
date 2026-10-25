@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
-import { contactHref, navItems } from "@/lib/site";
+import { contactEmail, contactHref, contactPath, navItems } from "@/lib/site";
 
 export function SiteFooter() {
   return (
@@ -11,6 +11,7 @@ export function SiteFooter() {
             <Logo variant="footer" />
           </Link>
           <p className="footer-descriptor">Software & automations studio</p>
+          <p className="footer-meta">Melbourne, Australia</p>
         </div>
         <nav className="nav" aria-label="Footer">
           {navItems.map((item) => (
@@ -18,7 +19,8 @@ export function SiteFooter() {
               {item.label}
             </Link>
           ))}
-          <a href={contactHref}>Email Dan</a>
+          <Link href={contactPath}>Get in touch</Link>
+          <a href={contactHref}>Email {contactEmail}</a>
         </nav>
       </div>
     </footer>

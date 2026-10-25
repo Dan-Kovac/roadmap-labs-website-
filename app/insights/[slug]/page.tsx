@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { findInsight, insights } from "@/lib/insights";
+import { findInsight, getInsights } from "@/lib/content";
+import { Markdown } from "@/lib/markdown";
+import { pageMetadata } from "@/lib/metadata";
 
 export function generateStaticParams() {
-  return insights.map((article) => ({ slug: article.slug }));
+  return getInsights().map((article) => ({ slug: article.slug }));
 }
 
 export const dynamicParams = false;
@@ -19,10 +21,14 @@ export async function generateMetadata({
     return { title: "Insight" };
   }
 
-  return {
+  const canonical = article.canonical.startsWith("https://") ? article.canonical : undefined;
+
+  return pageMetadata({
     title: article.title,
     description: article.dek,
-  };
+    path: `/insights/${article.slug}`,
+    canonical,
+  });
 }
 
 export default async function InsightPage({ params }: PageProps<"/insights/[slug]">) {
@@ -33,6 +39,8 @@ export default async function InsightPage({ params }: PageProps<"/insights/[slug
     notFound();
   }
 
+  const canonical = article.canonical.startsWith("https://") ? article.canonical : "";
+
   return (
     <article className="editorial">
       <p className="quiet">
@@ -42,11 +50,19 @@ export default async function InsightPage({ params }: PageProps<"/insights/[slug
       <h1 className="thesis">
         <span className="thesis-line">{article.title}</span>
       </h1>
+      <p className="positioning">{article.dek}</p>
       <div className="article-body">
-        {article.body.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
+        <Markdown source={article.body} />
       </div>
+      <p className="canonical-note">
+        {canonical ? (
+          <a href={canonical} rel="noreferrer">
+            Canonical copy on Substack
+          </a>
+        ) : (
+          "[SUBSTACK URL TBC]"
+        )}
+      </p>
       <p className="article-back">
         <Link className="back-link" href="/insights">
           Back to Insights

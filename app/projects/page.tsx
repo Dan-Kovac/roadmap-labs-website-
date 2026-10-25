@@ -1,29 +1,28 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { selectedWork } from "@/lib/selected-work";
+import { WorkGrid } from "@/components/work-grid";
+import { getWork } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Work",
-  description: "Selected work from Roadmap Labs.",
-};
+  description:
+    "ReviewBuddy, Flexfolio, Compass OS and the Compass Buyers Agency website.",
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
+  const work = getWork();
+
   return (
     <section className="editorial" aria-labelledby="work-title">
       <p className="quiet">Work</p>
       <h1 className="thesis" id="work-title">
         <span className="thesis-line">The work, one page each.</span>
       </h1>
-      <ul className="index-list">
-        {selectedWork.map((project) => (
-          <li key={project.slug}>
-            <Link href={`/projects/${project.slug}`}>
-              <span className="index-title">{project.name}</span>
-              <span className="index-dek">{project.job}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <p className="positioning">
+        Screens where a live page could be reached. Empty frames where it could not.
+      </p>
+      <WorkGrid items={work} />
     </section>
   );
 }

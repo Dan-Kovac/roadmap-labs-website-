@@ -1,26 +1,37 @@
-import type { Metadata } from "next";
+import { ClosingCta } from "@/components/closing-cta";
+import { OffersBand } from "@/components/offers-band";
 import { OfferStrip } from "@/components/offer-strip";
-import { SelectedWork } from "@/components/selected-work";
-import { contactHref } from "@/lib/site";
-
-export const metadata: Metadata = {
-  description:
-    "Building software has never been easier. Building the right software is still just as hard.",
-};
+import { WorkGrid } from "@/components/work-grid";
+import { BookingLink } from "@/components/booking-link";
+import { getHomeWork } from "@/lib/content";
+import { contactHref, lockedDescription } from "@/lib/site";
+import Link from "next/link";
 
 export default function HomePage() {
+  const featured = getHomeWork();
+
   return (
     <div className="home">
       <section className="fold" aria-labelledby="fold-title">
-        <h1 className="fold-copy" id="fold-title">
-          <span className="fold-line">Building software has never been easier.</span>
-          <span className="fold-line">Building the right software is still just as hard.</span>
-          <a className="fold-line fold-cta" href={contactHref}>
-            Email Dan.
-          </a>
-        </h1>
+        <div className="fold-copy">
+          <p className="fold-kicker">Melbourne</p>
+          <h1 className="fold-title" id="fold-title">
+            <span className="fold-line">Building software has never been easier.</span>
+            <span className="fold-line">Building the right software is still just as hard.</span>
+          </h1>
+          <p className="fold-support">{lockedDescription}</p>
+          <div className="fold-actions">
+            <BookingLink className="rl-btn rl-btn-primary">Book a call</BookingLink>
+            <Link className="rl-btn rl-btn-secondary" href="/contact">
+              Get in touch
+            </Link>
+            <a className="fold-mail" href={contactHref}>
+              Email Dan
+            </a>
+          </div>
+        </div>
       </section>
-      <div className="bleed" aria-hidden="true" />
+      <OffersBand />
       <section className="underfold" aria-labelledby="underfold-title">
         <h2 id="underfold-title">
           <span className="underfold-line">Software that respects the time.</span>
@@ -36,7 +47,11 @@ export default function HomePage() {
         </div>
       </section>
       <OfferStrip />
-      <SelectedWork />
+      <section className="work" aria-labelledby="selected-work">
+        <h2 id="selected-work">Selected work</h2>
+        <WorkGrid items={featured} />
+      </section>
+      <ClosingCta />
     </div>
   );
 }

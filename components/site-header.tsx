@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { BookingLink } from "@/components/booking-link";
 import { Logo } from "@/components/logo";
-import { contactHref, navItems } from "@/lib/site";
+import { contactPath, navItems } from "@/lib/site";
 
 function isCurrent(pathname: string, href: string) {
   if (href.includes("#")) {
@@ -25,27 +26,22 @@ export function SiteHeader() {
           <Logo />
         </Link>
         <nav className="nav nav-desktop" aria-label="Primary">
-          {navItems.map((item) =>
-            item.href.includes("#") ? (
-              <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
-                {item.label}
-              </a>
-            ) : (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ),
-          )}
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
+              onClick={() => setOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
         <div className="header-actions">
-          <a className="header-mail" href={contactHref}>
-            Email Dan
-          </a>
+          <Link className="header-mail" href={contactPath}>
+            Get in touch
+          </Link>
+          <BookingLink className="rl-btn rl-btn-primary header-book">Book a call</BookingLink>
           <button
             className="nav-toggle"
             type="button"
@@ -59,22 +55,20 @@ export function SiteHeader() {
       </div>
       {open ? (
         <nav className="nav nav-mobile" id="mobile-nav" aria-label="Primary">
-          {navItems.map((item) =>
-            item.href.includes("#") ? (
-              <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
-                {item.label}
-              </a>
-            ) : (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ),
-          )}
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
+              onClick={() => setOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link href={contactPath} onClick={() => setOpen(false)}>
+            Get in touch
+          </Link>
+          <BookingLink className="mobile-book">Book a call</BookingLink>
         </nav>
       ) : null}
     </header>
