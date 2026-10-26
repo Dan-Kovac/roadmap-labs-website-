@@ -30,6 +30,16 @@ export function findMarkers(text: string) {
   return text.match(markerPattern) ?? [];
 }
 
+/** Copy with slot markers removed. An empty string means the line should not render. */
+export function visibleCopy(text: string) {
+  return stripGst(text)
+    .replace(markerPattern, "")
+    .replace(/[ ]{2,}/g, " ")
+    .replace(/\s+([.,;:])/g, "$1")
+    .replace(/\(\s*\)/g, "")
+    .trim();
+}
+
 export function splitMarkers(text: string) {
   const parts: { text: string; marker: boolean }[] = [];
   const pattern = new RegExp(markerPattern.source, "g");

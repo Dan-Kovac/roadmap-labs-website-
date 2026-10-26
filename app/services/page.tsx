@@ -13,6 +13,7 @@ import { howItWorks, offer, servicesPage } from "@/lib/copy";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbJsonLd, faqJsonLd, serviceOfferJsonLd } from "@/lib/schema";
 import { seo } from "@/lib/seo";
+import { visibleCopy } from "@/lib/text";
 import { FinePrint } from "@/components/plan-block";
 
 export const metadata = pageMetadata({
@@ -52,7 +53,7 @@ export default function ServicesPage() {
             title={servicesPage.buildTitle}
           />
           <div className="kind-grid four">
-            {servicesPage.kinds.map((kind) => (
+            {servicesPage.kinds.filter((kind) => visibleCopy(kind.body)).map((kind) => (
               <article key={kind.title} className="kind">
                 <h3>{kind.href ? <Link href={kind.href}>{kind.title}</Link> : kind.title}</h3>
                 <p>

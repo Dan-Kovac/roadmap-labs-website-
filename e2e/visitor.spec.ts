@@ -73,24 +73,33 @@ test("about states the problem and ten years in digital marketing", async ({ pag
 test("work lists the three projects and the compass study stays a website", async ({ page }) => {
   await page.goto("/projects");
   await expect(page.getByRole("heading", { name: "Compass Buyers Agency" })).toBeVisible();
-  await expect(page.getByText("A website project for a buyers agency from Byron Bay to the Gold Coast.")).toBeVisible();
+  await expect(page.getByText("A buyers agency from Byron Bay to the Gold Coast. We built their website.")).toBeVisible();
+  await expect(page.getByText("Website · SEO · Conversion")).toBeVisible();
+  await expect(page.getByText("Own company · In beta")).toHaveCount(2);
+  await expect(page.getByText("AI automation")).toHaveCount(0);
   await expect(page.getByText("Australian tradies")).toBeVisible();
   await expect(page.getByText("product managers")).toBeVisible();
   await expect(page.locator('img[alt="Compass Buyers Agency home"]')).toBeVisible();
   await page.goto("/projects/compass-buyers-agency");
-  await expect(page.getByRole("link", { name: "Visit the site" })).toHaveAttribute("href", "https://compassagency.com.au");
-  await expect(page.getByRole("link", { name: "Visit the site" })).toHaveAttribute("rel", /noopener/);
+  await expect(page.getByRole("link", { name: "Visit the site" })).toHaveCount(0);
+  const live = page.getByRole("link", { name: /compassagency\.com\.au/ });
+  await expect(live).toHaveAttribute("href", "https://compassagency.com.au");
+  await expect(live).not.toHaveClass(/rl-btn/);
+  await expect(page.locator(".cta-band").getByRole("link", { name: "Send enquiry" })).toHaveAttribute("href", "/contact");
+  await expect(page.getByRole("heading", { name: "The result" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "What's next" })).toHaveCount(0);
+  await expect(page.getByText("Home page on desktop, with the free consultation and call buttons.")).toBeVisible();
   await expect(page.locator('img[alt="Compass Buyers Agency home, desktop"]')).toBeVisible();
   await expect(page.locator('img[alt="Compass Buyers Agency home, mobile"]')).toBeVisible();
   await expect(page.locator('img[alt="Compass Buyers Agency Byron Bay page"]')).toBeVisible();
   await expect(page.locator('img[alt="Compass Buyers Agency contact page"]')).toBeVisible();
   await expect(page.locator('img[alt="Compass Buyers Agency about page"]')).toBeVisible();
-  const aboutPhone = page.locator("figure.phone-figure", { hasText: "About page, the team" });
+  const aboutPhone = page.locator("figure.phone-figure", { hasText: "About page on a phone" });
   await expect(aboutPhone.locator("figcaption")).toBeVisible();
   const aboutBox = await aboutPhone.boundingBox();
   expect(aboutBox?.width ?? 0).toBeLessThan(280);
-  await expect(page.getByText("[[result, with Compass's OK. Leave out until real]]")).toBeVisible();
-  await expect(page.getByText("[[quote, with written OK. Leave out until real]]")).toBeVisible();
+  await expect(page.getByText("[[")).toHaveCount(0);
+  await expect(page.getByText("[TBC]")).toHaveCount(0);
   await expect(page.getByText("Nick")).toHaveCount(0);
   await expect(page.locator("main").getByText("Google Ads")).toHaveCount(0);
   await expect(page.getByText("Retool")).toHaveCount(0);
@@ -102,6 +111,35 @@ test("reviewbuddy shows the widget and does not link the dead site", async ({ pa
   await expect(page.getByText("Australian tradies").first()).toBeVisible();
   await expect(page.locator('img[alt="ReviewBuddy review widget"]')).toBeVisible();
   await expect(page.locator('a[href*="reviewbuddy.com.au"]')).toHaveCount(0);
+  await expect(page.getByText("After the job, the tradie shares their review link or QR code.")).toBeVisible();
+  await expect(page.getByText("runs on the same AI automations")).toHaveCount(0);
+  await expect(page.getByText("In beta", { exact: true })).toBeVisible();
+});
+
+test("public pages hide placeholder brackets", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "1440", "one pass is enough");
+  const paths = [
+    "/",
+    "/services",
+    "/services/marketing",
+    "/services/automations",
+    "/services/software",
+    "/about",
+    "/contact",
+    "/projects",
+    "/projects/compass-buyers-agency",
+    "/projects/review-buddy",
+    "/projects/flexfolio",
+    "/privacy",
+  ];
+
+  for (const path of paths) {
+    await page.goto(path);
+    const text = await page.locator("body").innerText();
+    expect(text, path).not.toContain("[TBC]");
+    expect(text, path).not.toContain("[DECISION]");
+    expect(text, path).not.toContain("[[");
+  }
 });
 
 test("insights lists both launch articles", async ({ page }) => {

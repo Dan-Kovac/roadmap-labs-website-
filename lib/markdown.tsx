@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { splitMarkers } from "@/lib/text";
+import { visibleCopy } from "@/lib/text";
 
 type Block =
   | { type: "h2"; text: string }
@@ -23,22 +23,13 @@ function safeHref(href: string) {
 }
 
 function marked(text: string, keyPrefix: string): ReactNode[] {
-  const nodes: ReactNode[] = [];
+  const clean = visibleCopy(text);
 
-  splitMarkers(text).forEach((part, index) => {
-    if (part.marker) {
-      nodes.push(
-        <span key={`${keyPrefix}-slot-${index}`} className="copy-slot">
-          {part.text}
-        </span>,
-      );
-      return;
-    }
+  if (!clean) {
+    return [];
+  }
 
-    nodes.push(...inline(part.text, `${keyPrefix}-${index}`));
-  });
-
-  return nodes;
+  return inline(clean, keyPrefix);
 }
 
 function inline(text: string, keyPrefix: string): ReactNode[] {
@@ -194,14 +185,23 @@ export function Markdown({ source }: { source: string }) {
 
         if (block.type === "ul" || block.type === "ol") {
           const List = block.type === "ul" ? "ul" : "ol";
+          const items = block.items.filter((item) => visibleCopy(item));
+
+          if (!items.length) {
+            return null;
+          }
 
           return (
             <List key={key}>
-              {block.items.map((item) => (
+              {items.map((item) => (
                 <li key={item}>{marked(item, `${key}-${item}`)}</li>
               ))}
             </List>
           );
+        }
+
+        if (!visibleCopy(block.text)) {
+          return null;
         }
 
         return <p key={key}>{marked(block.text, key)}</p>;

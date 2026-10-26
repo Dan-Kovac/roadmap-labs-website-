@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Markdown } from "@/lib/markdown";
 import { Rich } from "@/components/rich";
 import { CaseShots } from "@/components/case-shots";
+import { CtaBand } from "@/components/cta-band";
 import { ShotFrame } from "@/components/shot-frame";
 import { findWork, getListedWork, getWork, nextWork } from "@/lib/content";
 import { caseStudy } from "@/lib/copy";
@@ -47,11 +48,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const crumbs = [
     { name: "Home", path: "/" },
     { name: "Work", path: "/projects" },
-    { name: project.title, path: `/projects/${project.slug}` },
+    { name: project.name ?? project.title, path: `/projects/${project.slug}` },
   ];
   const next = nextWork(slug);
 
   return (
+    <>
     <article className="section">
       <JsonLd
         data={[
@@ -66,7 +68,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       />
       <div className="rl-container">
         <Breadcrumbs items={crumbs} />
-        <p className="rl-mono">{project.role}</p>
         <h1>{project.title}</h1>
         <p className="lead">{project.dek}</p>
         <dl className="card-grid">
@@ -144,5 +145,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         ) : null}
       </div>
     </article>
+    <CtaBand secondary={false} />
+    </>
   );
 }

@@ -3,7 +3,7 @@ slug: review-buddy
 title: "ReviewBuddy: Google reviews for Australian tradies"
 name: ReviewBuddy
 job: Google review software for Australian tradies.
-dek: ReviewBuddy is our own company. It helps tradies get more Google reviews and show them on their website. It's in beta, and it runs on our own systems.
+dek: ReviewBuddy is our own company. It helps Australian tradies get more Google reviews and show them on their website. It's in beta.
 role: Own company
 order: 2
 home: true
@@ -11,37 +11,36 @@ publish: true
 permission: public
 indexable: true
 seoTitle: ReviewBuddy, our own review software · Roadmap Labs
-seoDescription: ReviewBuddy is our own Google review software for Australian tradies. It's in beta, and it runs on the AI systems and automations we build.
+seoDescription: ReviewBuddy is our own Google review software for Australian tradies, now in beta. What we built and how it works.
 client: Our own company
 services: Product, AI automation
 status: In beta
-liveNote: "[TBC: reviewbuddy.com.au, once the site is serving]"
 aboutName: ReviewBuddy
 shots:
   - label: Widget
+    place: hero
     crop: wide
     src: /work/reviewbuddy-widget.jpg
     alt: ReviewBuddy review widget
-    caption: "The ReviewBuddy review widget, captured October 2026. [TBC: capture without a client's reviews, or the client's OK]"
-  - label: App
-    crop: wide
-    alt: ReviewBuddy app
-    caption: "The ReviewBuddy app, captured October 2026. [TBC: screenshot]"
-    placeholder: "[SCREENSHOT TBC]"
+    caption: The ReviewBuddy review widget, captured October 2026.
 ---
 
-## The brief
+## Who it's for
 
-Before someone rings a tradie, they check the Google reviews. Then they look at the website. [TBC: Dan to write why he started ReviewBuddy, in two or three lines]
+ReviewBuddy is for Australian tradies. Before someone rings a tradie, they check the Google reviews. Then they look at the website.
+
+Reviews copied onto a website by hand go out of date as soon as nobody updates them.
 
 ## What we built
 
-Each business gets its own Google review link and QR code to share after a job. Reviews show on their website in one widget, alongside the other review sites they use. It updates when a new Google review comes in.
+Each business gets its own Google review link and QR code to share after a job. A widget on their website shows their reviews, alongside other review sites they use, like hipages.
 
-On the Growth plan, ReviewBuddy emails customers to ask for a review, with one reminder. Past customers can be brought in from a CSV.
+On the Growth plan, ReviewBuddy emails customers to ask for a review, with one reminder. Past customers can be loaded in from a spreadsheet.
 
-Behind it, ReviewBuddy runs on the AI systems and automations we build for clients. [TBC: which systems and automations, named by Dan]
+## How it works
 
-## Where it is now
+1. After the job, the tradie shares their review link or QR code.
+2. The customer leaves a Google review.
+3. The widget on the tradie's website updates with the new review.
 
-ReviewBuddy is in beta, with a 7-day free trial and free setup. [TBC: what's next, from Dan]
+ReviewBuddy is in beta. Setup is free, and there's a 7-day free trial.

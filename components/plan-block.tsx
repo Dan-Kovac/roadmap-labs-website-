@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Rich } from "@/components/rich";
 import { offer } from "@/lib/copy";
-import { priceFigure, priceLine, priceUnit } from "@/lib/text";
+import { priceFigure, priceLine, priceUnit, visibleCopy } from "@/lib/text";
 
 export function PlanBlock({ services = false }: { services?: boolean }) {
   return (
@@ -80,10 +80,8 @@ export function FinePrint({ items }: { items: { title: string; body: string; mar
       {items.map((item) => (
         <article key={item.title}>
           <h3>
-            {item.marker ? (
-              <span className="copy-slot">
-                {item.marker}{" "}
-              </span>
+            {item.marker && visibleCopy(item.marker) ? (
+              <span className="copy-slot">{visibleCopy(item.marker)} </span>
             ) : null}
             {item.title}
           </h3>

@@ -14,7 +14,7 @@ import { homeInsightsVisible } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 import { professionalServiceJsonLd, websiteJsonLd } from "@/lib/schema";
 import { seo } from "@/lib/seo";
-import { priceFigure, priceUnit } from "@/lib/text";
+import { priceFigure, priceUnit, visibleCopy } from "@/lib/text";
 
 export const metadata = pageMetadata({
   title: seo.home.title,
@@ -59,7 +59,7 @@ export default function HomePage() {
             lead={<Rich text={properly.lead} />}
           />
           <div className="card-grid">
-            {properly.blocks.map((block) => (
+            {properly.blocks.filter((block) => visibleCopy(block.body)).map((block) => (
               <article key={block.title} className="card">
                 <h3>{block.title}</h3>
                 <p>
@@ -135,8 +135,8 @@ export default function HomePage() {
               </Link>
             }
           />
-          <div className="dan-layout">
-            <p className="portrait copy-slot">{dan.portrait}</p>
+          <div className={visibleCopy(dan.portrait) ? "dan-layout" : undefined}>
+            {visibleCopy(dan.portrait) ? <p className="portrait copy-slot">{visibleCopy(dan.portrait)}</p> : null}
             <p className="lead">
               <Rich text={dan.bio} />
             </p>

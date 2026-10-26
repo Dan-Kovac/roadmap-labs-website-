@@ -59,7 +59,7 @@ export default function ProjectsPage() {
           </div>
         </div>
       </article>
-      <CtaBand index="02" />
+      <CtaBand index="02" secondary={false} />
     </>
   );
 }

@@ -1,13 +1,11 @@
 import Image from "next/image";
 import { Rich } from "@/components/rich";
-import { showPlaceholders } from "@/lib/text";
 
 export function ShotFrame({
   src,
   alt,
   caption,
   ratio = "wide",
-  placeholder,
   objectPosition = "top center",
 }: {
   src?: string;
@@ -18,22 +16,7 @@ export function ShotFrame({
   objectPosition?: string;
 }) {
   if (!src) {
-    if (!showPlaceholders() || !placeholder) {
-      return null;
-    }
-
-    return (
-      <figure className={`shot shot-${ratio} shot-missing`}>
-        <div className="shot-slot rl-mono">
-          <Rich text={placeholder} />
-        </div>
-        {caption ? (
-          <figcaption>
-            <Rich text={caption} />
-          </figcaption>
-        ) : null}
-      </figure>
-    );
+    return null;
   }
 
   return (

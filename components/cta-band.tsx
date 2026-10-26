@@ -8,7 +8,7 @@ export function CtaBand({
   secondary = true,
   form = false,
 }: {
-  index: string;
+  index?: string;
   secondary?: boolean;
   form?: boolean;
 }) {
@@ -16,7 +16,7 @@ export function CtaBand({
     <section className="section rl-dark cta-band" id="start" aria-labelledby="start-heading">
       <div className="rl-container">
         <p className="rl-mono section-label">
-          {index} · {start.label}
+          {index ? `${index} · ${start.label}` : start.label}
         </p>
         <h2 id="start-heading">
           <span className="voice-2">{start.line1}</span>

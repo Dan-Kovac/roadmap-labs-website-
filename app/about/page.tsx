@@ -8,6 +8,7 @@ import { aboutCopy } from "@/lib/copy";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbJsonLd, personJsonLd, profileJsonLd } from "@/lib/schema";
 import { seo } from "@/lib/seo";
+import { visibleCopy } from "@/lib/text";
 
 export const metadata = pageMetadata({
   title: seo.about.title,
@@ -28,7 +29,7 @@ export default function AboutPage() {
         <div className="rl-container">
           <Breadcrumbs items={crumbs} />
           <PageHeader label={aboutCopy.label} line1={aboutCopy.title} lead={<Rich text={aboutCopy.lead} />} />
-          <p className="copy-slot">{aboutCopy.photo}</p>
+          {visibleCopy(aboutCopy.photo) ? <p className="copy-slot">{visibleCopy(aboutCopy.photo)}</p> : null}
           <div className="prose">
             {aboutCopy.body.map((paragraph) => (
               <p key={paragraph}>
@@ -44,7 +45,9 @@ export default function AboutPage() {
                 <article key={problem.title} className="belief">
                   <p className="rl-mono">{String(index + 1).padStart(2, "0")}</p>
                   <h3>{problem.title}</h3>
-                  <p>{problem.body}</p>
+                  <p>
+                    <Rich text={problem.body} />
+                  </p>
                 </article>
               ))}
             </div>
@@ -57,7 +60,9 @@ export default function AboutPage() {
                 <article key={belief.title} className="belief">
                   <p className="rl-mono">{String(index + 1).padStart(2, "0")}</p>
                   <h3>{belief.title}</h3>
-                  <p>{belief.body}</p>
+                  <p>
+                    <Rich text={belief.body} />
+                  </p>
                 </article>
               ))}
             </div>
@@ -75,9 +80,11 @@ export default function AboutPage() {
               </article>
             ))}
           </section>
-          <p className="copy-slot" style={{ marginTop: 24 }}>
-            {aboutCopy.sameAs}
-          </p>
+          {visibleCopy(aboutCopy.sameAs) ? (
+            <p className="copy-slot" style={{ marginTop: 24 }}>
+              {visibleCopy(aboutCopy.sameAs)}
+            </p>
+          ) : null}
         </div>
       </article>
       <CtaBand index="03" />

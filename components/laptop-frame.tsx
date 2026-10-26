@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Rich } from "@/components/rich";
-import { showPlaceholders } from "@/lib/text";
+import { visibleCopy } from "@/lib/text";
 
 export function LaptopFrame({
   alt,
@@ -21,7 +21,8 @@ export function LaptopFrame({
   objectPosition?: string;
   priority?: boolean;
 }) {
-  const showNote = showPlaceholders() && state !== "image" && note;
+  const noteText = note ? visibleCopy(note) : "";
+  const showNote = state !== "image" && noteText;
 
   return (
     <figure className="lap">
@@ -40,7 +41,7 @@ export function LaptopFrame({
               style={{ objectFit: "cover", objectPosition }}
             />
           ) : null}
-          {showNote ? (
+          {note && showNote ? (
             <p className="lap-note rl-mono">
               <Rich text={note} />
             </p>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { privacyCopy } from "@/lib/copy";
+import { visibleCopy } from "@/lib/text";
 
 const listeners = new Set<() => void>();
 
@@ -34,7 +35,7 @@ export function CookieNotice() {
       <div className="rl-container cookie-bar">
         <p>
           Analytics stays off until it is switched on.{" "}
-          <span className="copy-slot">{privacyCopy.consent}</span>{" "}
+          {visibleCopy(privacyCopy.consent) ? <span className="copy-slot">{visibleCopy(privacyCopy.consent)} </span> : null}
           <Link href="/privacy">Privacy</Link>
         </p>
         <button

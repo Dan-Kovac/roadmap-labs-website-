@@ -1,4 +1,5 @@
 import { insightsCopy } from "@/lib/copy";
+import { visibleCopy } from "@/lib/text";
 
 export function NewsletterBand({ variant = "index" }: { variant?: "index" | "article" }) {
   const line1 = variant === "article" ? insightsCopy.articleLine1 : null;
@@ -13,7 +14,9 @@ export function NewsletterBand({ variant = "index" }: { variant?: "index" | "art
           <span className="h-line">{line2}</span>
         </h2>
         <p className="lead">{insightsCopy.newsletterPitch}</p>
-        <p className="copy-slot substack-decision">{insightsCopy.substackDecision}</p>
+        {visibleCopy(insightsCopy.substackDecision) ? (
+          <p className="copy-slot substack-decision">{visibleCopy(insightsCopy.substackDecision)}</p>
+        ) : null}
         <p>
           <span className="rl-btn rl-btn-primary" aria-disabled="true">
             {insightsCopy.newsletterButton}

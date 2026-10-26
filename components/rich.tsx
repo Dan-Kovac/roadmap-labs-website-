@@ -1,20 +1,11 @@
-import { Fragment } from "react";
-import { splitMarkers, stripGst } from "@/lib/text";
+import { visibleCopy } from "@/lib/text";
 
 export function Rich({ text }: { text: string }) {
-  const parts = splitMarkers(stripGst(text));
+  const clean = visibleCopy(text);
 
-  return (
-    <>
-      {parts.map((part, index) =>
-        part.marker ? (
-          <span key={index} className="copy-slot">
-            {part.text}
-          </span>
-        ) : (
-          <Fragment key={index}>{part.text}</Fragment>
-        ),
-      )}
-    </>
-  );
+  if (!clean) {
+    return null;
+  }
+
+  return <>{clean}</>;
 }

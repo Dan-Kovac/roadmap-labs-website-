@@ -12,7 +12,7 @@ export type Shot = {
   src?: string;
   placeholder?: string;
   caption?: string;
-  place?: "hero" | "seo" | "conversion" | "about";
+  place?: "hero" | "seo" | "conversion" | "about" | "built";
   frame?: "laptop" | "phone";
 };
 
@@ -130,7 +130,8 @@ function asShots(value: unknown): Shot[] {
         record.place === "hero" ||
         record.place === "seo" ||
         record.place === "conversion" ||
-        record.place === "about"
+        record.place === "about" ||
+        record.place === "built"
           ? record.place
           : undefined,
       frame: record.frame === "laptop" || record.frame === "phone" ? record.frame : undefined,
