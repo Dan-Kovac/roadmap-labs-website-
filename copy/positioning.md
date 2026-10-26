@@ -41,7 +41,7 @@ One idea each. Short.
 2. **The two promises under it.** Properly. And everything you can, ethically and safely.
 3. **Where it goes.** The quote, the follow-up, the marketing, the admin. The portal when the data needs a home.
 4. **How it works.** A call. A roadmap with the numbers. Then the build, one job at a time, a month to prove it.
-5. **The fee.** A$3,500 a month, including GST and AI running costs. No contract.
+5. **The fee.** A$3,500 a month, including GST. AI running costs are billed to the client, separately. No contract.
 6. **Dan.** Named. Flexfolio and ReviewBuddy run on these systems.
 7. **Close.** Book a call.
 
@@ -123,16 +123,39 @@ Closest to the word "ethical". It can sound like a poster if it leads. Better as
 | hero.lead | 150 | 117 | Use AI fully, and keep it ethical. You'll know what's being done, and you can stand behind it. It starts with a call. |
 | hero.micro | 60 | 41 | A conversation about using AI, carefully. |
 
+## The fee, and the model bill
+
+Confirmed 26 October 2026. The A$3,500 includes GST. Model costs are a separate bill.
+
+| Slot | Limit | Chars | Copy |
+|---|---|---|---|
+| offer.price | 24 | 20 | A$3,500/mo incl. GST |
+| offer.price-note | 90 | 71 | AI running costs are billed separately. Usually A$250 to A$300 a month. |
+
+About A$808 a week is the fee only. It stays under the price, with the model bill named beside it.
+
+You described the tool as "Business Court Open Router". The product that matches is OpenRouter Business ([openrouter.ai/business](https://openrouter.ai/business)): one account, many models, spend you can watch. The FAQ uses that name. `[CONFIRM: OpenRouter Business, in the client's name.]` If the account is called something else, only the name changes.
+
+### FAQ
+
+The question is the one a buyer asks when the price looks all-in.
+
+| Slot | Limit | Chars | Copy |
+|---|---|---|---|
+| faq.running-costs.q | 60 | 34 | Are the AI running costs included? |
+| faq.running-costs.a | 240 | 235 | No. A$3,500 a month includes GST. Model costs are billed to you, through OpenRouter Business. We pick the model for each job and manage the spend. Expect about A$250 to A$300 a month. Anything past that is agreed as part of the budget. |
+
+"About A$250 to A$300" is the normal top, not a promise that the bill can never go higher. Past that, the extra is agreed as part of the budget. The page does not say guaranteed, capped, or included.
+
 ## Still true, lower on the page
 
-- A$3,500 a month, including GST and AI running costs. About A$808 a week, under the price only.
 - One fee. Software, automations, marketing automations, and a client software build.
 - Free discovery, then a roadmap of estimates, then the build. No pressure. Look over the numbers, then decide.
 - One job at a time. A month to prove it. Switched off if it isn't working.
 - No contract. Cancel any month. Handover, with "you keep what we built" still `[CONFIRM]`.
 - Flexfolio and ReviewBuddy run on Roadmap Labs systems. "Tested on our own first" stays off until confirmed.
 - A small handful of clients. Dan is named.
-- Benchmarks stay a sense-check under the fee: about A$5,170 elsewhere, gap about A$1,670 until the GST basis is confirmed.
+- Benchmarks stay a sense-check under the fee. SEO, ad-management fees and a VA come to about A$5,170. The fee plus a typical model bill is about A$3,750 to A$3,800, so the gap is about A$1,370 to A$1,420. GST on the benchmarks is still unconfirmed, so the gap above is the smaller one. These figures are Dan's benchmarks from his agency years.
 - Insights stays hidden until three articles exist.
 
 ## Still need from you
