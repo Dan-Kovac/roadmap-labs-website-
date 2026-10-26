@@ -85,6 +85,10 @@ test("work lists the three projects and the compass study stays a website", asyn
   await expect(page.locator('img[alt="Compass Buyers Agency Byron Bay page"]')).toBeVisible();
   await expect(page.locator('img[alt="Compass Buyers Agency contact page"]')).toBeVisible();
   await expect(page.locator('img[alt="Compass Buyers Agency about page"]')).toBeVisible();
+  const aboutPhone = page.locator("figure.phone-figure", { hasText: "About page, the team" });
+  await expect(aboutPhone.locator("figcaption")).toBeVisible();
+  const aboutBox = await aboutPhone.boundingBox();
+  expect(aboutBox?.width ?? 0).toBeLessThan(280);
   await expect(page.getByText("[[result, with Compass's OK. Leave out until real]]")).toBeVisible();
   await expect(page.getByText("[[quote, with written OK. Leave out until real]]")).toBeVisible();
   await expect(page.getByText("Nick")).toHaveCount(0);

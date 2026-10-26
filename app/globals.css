@@ -528,6 +528,11 @@ main {
   margin: 16px 0 0;
 }
 
+.phone-figure {
+  width: min(100%, 240px);
+  margin-inline: auto;
+}
+
 .shot figcaption,
 .lap figcaption,
 .phone-figure figcaption {
@@ -541,11 +546,6 @@ main {
   gap: 24px;
   align-items: center;
   margin-top: 32px;
-}
-
-.device-pair .phone-figure {
-  width: min(100%, 240px);
-  margin-inline: auto;
 }
 
 .phone {
