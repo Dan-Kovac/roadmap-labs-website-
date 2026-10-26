@@ -57,7 +57,8 @@ export function visibleText(env = process.env.VERCEL_ENV) {
     ...marketingPage.heldQuestions.map((item) => `${item.q} ${item.a}`),
     ...marketingPage.questions.map((item) => item.a),
     notFoundCopy.line1,
-    contactCopy.unconfiguredNote,
+    contactCopy.fallbackBefore,
+    contactCopy.success,
     privacyCopy.consent,
     privacyCopy.missing,
     ...getListedWork(env).flatMap((project) => [

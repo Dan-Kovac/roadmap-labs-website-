@@ -16,32 +16,17 @@ export const logoUrl = `${siteUrl}${logoPath}`;
 
 export const contactPath = "/contact";
 
-/**
- * Set NEXT_PUBLIC_BOOKING_URL to an https booking page.
- * Until then, Book a call opens the contact form.
- */
-export function bookingUrl() {
-  const value = process.env.NEXT_PUBLIC_BOOKING_URL?.trim() ?? "";
-
-  if (!value) {
-    return "";
+/** Home keeps the enquiry on the page. Every other page goes to /contact. */
+export function enquiryHref(pathname: string) {
+  if (pathname === "/") {
+    return "#start";
   }
 
-  try {
-    const url = new URL(value);
-
-    if (url.protocol === "https:" || url.protocol === "http:") {
-      return url.toString();
-    }
-  } catch {
-    return "";
+  if (pathname === "/contact") {
+    return "#enquiry";
   }
 
-  return "";
-}
-
-export function bookingHref() {
-  return bookingUrl() || "/contact?intent=call#book";
+  return "/contact";
 }
 
 /** Set NEXT_PUBLIC_GA_ID to a GA4 measurement ID. Unset means analytics does not load. */

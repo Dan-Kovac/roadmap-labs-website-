@@ -58,9 +58,9 @@ export const seo = {
       "Dan Kovac did ten years in digital marketing. Roadmap Labs is his Melbourne studio for software, AI automation and marketing.",
   },
   contact: {
-    title: "Book a call with Roadmap Labs",
+    title: "Send an enquiry · Roadmap Labs",
     description:
-      "Book a free discovery session. We'll look at where your team's time and money go and map out the automations and marketing worth starting with.",
+      "Send Dan a note about where AI should help. He reads every enquiry and replies by email.",
   },
   insights: {
     title: "Insights on AI, automation and marketing · Roadmap Labs",
@@ -74,7 +74,7 @@ export const seo = {
   },
   notFound: {
     title: "Page not found · Roadmap Labs",
-    description: "That page is not on this site. Go home, read the services, or book a call.",
+    description: "That page is not on this site. Go home, read the services, or send an enquiry.",
   },
 } as const;
 

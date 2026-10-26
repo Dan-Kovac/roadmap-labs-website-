@@ -1,133 +1,246 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { Suspense, useActionState, useEffect } from "react";
-import { submitEnquiry, type EnquiryState } from "@/app/contact/actions";
+import { useRef, useState, type FormEvent } from "react";
 import { track } from "@/lib/analytics";
 import { contactCopy } from "@/lib/copy";
+import {
+  firstError,
+  initialEnquiryState,
+  reduceEnquiry,
+  type EnquiryFields,
+  type EnquiryState,
+} from "@/lib/enquiry";
+import { contactEmail, contactHref } from "@/lib/site";
 
-const initialState: EnquiryState = { status: "idle" };
+function readFields(data: FormData): EnquiryFields {
+  return {
+    name: String(data.get("name") ?? ""),
+    email: String(data.get("email") ?? ""),
+    company: String(data.get("company") ?? ""),
+    website: String(data.get("website") ?? ""),
+    message: String(data.get("message") ?? ""),
+    gotcha: String(data.get("_gotcha") ?? ""),
+  };
+}
 
-function ContactFormInner({ deliveryConfigured }: { deliveryConfigured: boolean }) {
-  const [state, formAction, pending] = useActionState(submitEnquiry, initialState);
-  const params = useSearchParams();
-  const requested = params.get("intent") ?? "";
-  const aliased = contactCopy.intentAliases[requested] ?? requested;
-  const defaultIntent = contactCopy.intents.includes(aliased as (typeof contactCopy.intents)[number])
-    ? aliased
-    : "";
+export function ContactForm({ endpoint, formId }: { endpoint: string; formId: string }) {
+  const [state, setState] = useState<EnquiryState>(initialEnquiryState);
+  const sending = useRef(false);
 
-  useEffect(() => {
-    if (state.status === "sent") {
-      track("contact_submit", { location: "contact" });
-    }
-  }, [state.status]);
-
-  if (state.status === "sent") {
+  if (!endpoint) {
     return (
-      <div>
-        <h2>{contactCopy.sentTitle}</h2>
-        <p className="lead">{contactCopy.sentBody}</p>
-      </div>
+      <p className="form-fallback">
+        {contactCopy.fallbackBefore}{" "}
+        <a className="rl-link" href={contactHref}>
+          {contactEmail}
+        </a>
+        .
+      </p>
     );
   }
 
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    if (sending.current) {
+      return;
+    }
+
+    const reduced = reduceEnquiry(state, {
+      type: "submit",
+      fields: readFields(new FormData(form)),
+      endpoint,
+    });
+    setState(reduced.state);
+
+    if (!reduced.request) {
+      const key = firstError(reduced.state.errors);
+      if (key) {
+        document.getElementById(`${formId}-${key}`)?.focus();
+      }
+      return;
+    }
+
+    sending.current = true;
+
+    try {
+      const response = await fetch(reduced.request.endpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reduced.request.payload),
+      });
+
+      if (!response.ok) {
+        sending.current = false;
+        setState(reduceEnquiry(reduced.state, { type: "failed" }).state);
+        return;
+      }
+
+      track("contact_submit", { location: formId });
+      setState(reduceEnquiry(reduced.state, { type: "succeeded" }).state);
+    } catch {
+      sending.current = false;
+      setState(reduceEnquiry(reduced.state, { type: "failed" }).state);
+    }
+  }
+
+  const statusId = `${formId}-status`;
+  const showStatus = state.status === "sent" || state.status === "error" || state.status === "invalid" || state.status === "sending";
+
   return (
-    <form id="book" className="enquiry" action={formAction} noValidate>
-      <p className="form-note">
-        {deliveryConfigured ? contactCopy.configuredNote : contactCopy.unconfiguredNote}
+    <form id={formId === "contact-form" ? "enquiry" : formId} className="enquiry" onSubmit={onSubmit}>
+      <p id={statusId} role="status" aria-live="polite" className={showStatus ? "form-status" : "sr-only"}>
+        {state.status === "sending" ? contactCopy.sending : null}
+        {state.status === "sent" ? contactCopy.success : null}
+        {state.status === "invalid" ? contactCopy.invalid : null}
+        {state.status === "error" ? (
+          <>
+            {contactCopy.errorBefore}{" "}
+            <a className="rl-link" href={contactHref}>
+              {contactEmail}
+            </a>{" "}
+            {contactCopy.errorAfter}
+          </>
+        ) : null}
       </p>
-      {state.status === "error" ? (
-        <div>
-          <h2>{contactCopy.failTitle}</h2>
-          <p>{contactCopy.failBody}</p>
-        </div>
-      ) : null}
-      {state.status === "unconfigured" && state.mailto ? (
-        <p>
-          <a className="rl-link" href={state.mailto}>
-            Email this note to Dan
-          </a>
-        </p>
-      ) : null}
-      <div className="hp" aria-hidden="true">
-        <label>
-          Company website
-          <input name="company_website" tabIndex={-1} autoComplete="off" />
-        </label>
-      </div>
-      <div className="field">
-        <label htmlFor="name">
-          {contactCopy.name} {contactCopy.required}
-        </label>
-        <input id="name" name="name" autoComplete="name" aria-invalid={Boolean(state.errors?.name)} aria-describedby={state.errors?.name ? "name-error" : undefined} required />
-        {state.errors?.name ? (
-          <p id="name-error" className="field-error">
-            {state.errors.name}
-          </p>
-        ) : null}
-      </div>
-      <div className="field">
-        <label htmlFor="email">
-          {contactCopy.email} {contactCopy.required}
-        </label>
-        <input id="email" name="email" type="email" autoComplete="email" aria-invalid={Boolean(state.errors?.email)} aria-describedby={state.errors?.email ? "email-error" : undefined} required />
-        {state.errors?.email ? (
-          <p id="email-error" className="field-error">
-            {state.errors.email}
-          </p>
-        ) : null}
-      </div>
-      <div className="field">
-        <label htmlFor="organisation">{contactCopy.business}</label>
-        <input id="organisation" name="organisation" autoComplete="organization" />
-      </div>
-      <fieldset className="field">
-        <legend>{contactCopy.team}</legend>
-        <div className="choices">
-          {contactCopy.teamOptions.map((option) => (
-            <label key={option}>
-              <input type="radio" name="team" value={option} /> {option}
+      {state.status === "sent" ? null : (
+        <>
+          <input type="hidden" name="_subject" value="New Roadmap Labs enquiry" />
+          <div className="hp" aria-hidden="true">
+            <label>
+              Leave this blank
+              <input name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
             </label>
-          ))}
-        </div>
-      </fieldset>
-      <fieldset className="field">
-        <legend>
-          {contactCopy.intent} {contactCopy.required}
-        </legend>
-        <div className="choices">
-          {contactCopy.intents.map((option) => (
-            <label key={option}>
-              <input type="radio" name="intent" value={option} defaultChecked={option === defaultIntent} /> {option}
-            </label>
-          ))}
-        </div>
-        {state.errors?.intent ? <p className="field-error">{state.errors.intent}</p> : null}
-      </fieldset>
-      <div className="field">
-        <label htmlFor="message">
-          {contactCopy.message} {contactCopy.required}
-        </label>
-        <textarea id="message" name="message" rows={5} aria-invalid={Boolean(state.errors?.message)} aria-describedby={state.errors?.message ? "message-error" : undefined} required />
-        {state.errors?.message ? (
-          <p id="message-error" className="field-error">
-            {state.errors.message}
-          </p>
-        ) : null}
-      </div>
-      <button className="rl-btn rl-btn-primary" type="submit" aria-busy={pending}>
-        {contactCopy.send}
-        {pending ? <span className="sr-only">Sending</span> : null}
-      </button>
+          </div>
+          <Field
+            formId={formId}
+            name="name"
+            label={contactCopy.name}
+            required
+            autoComplete="name"
+            minLength={2}
+            maxLength={120}
+            error={state.errors.name}
+          />
+          <Field
+            formId={formId}
+            name="email"
+            label={contactCopy.email}
+            type="email"
+            required
+            autoComplete="email"
+            maxLength={160}
+            error={state.errors.email}
+          />
+          <Field
+            formId={formId}
+            name="company"
+            label={contactCopy.company}
+            autoComplete="organization"
+            maxLength={160}
+          />
+          <Field
+            formId={formId}
+            name="website"
+            label={contactCopy.website}
+            autoComplete="url"
+            inputMode="url"
+            maxLength={200}
+            error={state.errors.website}
+          />
+          <Field
+            formId={formId}
+            name="message"
+            label={contactCopy.message}
+            required
+            minLength={2}
+            maxLength={4000}
+            multiline
+            error={state.errors.message}
+          />
+          <button className="rl-btn rl-btn-primary" type="submit" disabled={state.status === "sending"} aria-busy={state.status === "sending"}>
+            {state.status === "sending" ? contactCopy.sending : contactCopy.send}
+          </button>
+        </>
+      )}
     </form>
   );
 }
 
-export function ContactForm({ deliveryConfigured }: { deliveryConfigured: boolean }) {
+function Field({
+  formId,
+  name,
+  label,
+  type = "text",
+  required = false,
+  autoComplete,
+  inputMode,
+  minLength,
+  maxLength,
+  multiline = false,
+  error,
+}: {
+  formId: string;
+  name: string;
+  label: string;
+  type?: string;
+  required?: boolean;
+  autoComplete?: string;
+  inputMode?: "url";
+  minLength?: number;
+  maxLength?: number;
+  multiline?: boolean;
+  error?: string;
+}) {
+  const id = `${formId}-${name}`;
+  const errorId = `${id}-error`;
+  const describedBy = error ? errorId : undefined;
+
   return (
-    <Suspense fallback={<p className="form-note">{contactCopy.configuredNote}</p>}>
-      <ContactFormInner deliveryConfigured={deliveryConfigured} />
-    </Suspense>
+    <div className="field">
+      <label htmlFor={id}>
+        {label}
+        {required ? <span className="sr-only">, required</span> : null}
+      </label>
+      {multiline ? (
+        <textarea
+          id={id}
+          name={name}
+          rows={5}
+          required={required}
+          minLength={minLength}
+          maxLength={maxLength}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={describedBy}
+        />
+      ) : (
+        <input
+          id={id}
+          name={name}
+          type={type}
+          required={required}
+          autoComplete={autoComplete}
+          inputMode={inputMode}
+          minLength={minLength}
+          maxLength={maxLength}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={describedBy}
+        />
+      )}
+      {error ? (
+        <p id={errorId} className="field-error">
+          {error}
+        </p>
+      ) : null}
+    </div>
   );
 }

@@ -225,6 +225,11 @@ main {
   padding-block: var(--rl-section-y);
 }
 
+#start,
+#enquiry {
+  scroll-margin-top: calc(var(--rl-nav-h) + 12px);
+}
+
 .section-label,
 .rl-mono {
   font-family: var(--rl-font-mono);
@@ -559,6 +564,19 @@ main {
   display: grid;
   gap: 16px;
   max-width: 40rem;
+  margin-top: 32px;
+}
+
+.enquiry button[type="submit"] {
+  min-height: 44px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .enquiry button[type="submit"] {
+    width: auto;
+    min-width: 11rem;
+  }
 }
 
 .field {
@@ -569,13 +587,23 @@ main {
 .field input,
 .field textarea {
   width: 100%;
-  min-height: var(--rl-field-h);
+  min-height: 44px;
   border: 1px solid var(--rl-color-rule-strong);
   border-radius: var(--rl-radius-field);
   padding: 12px 14px;
-  background: var(--rl-color-bg);
+  background: var(--rl-color-bg-subtle);
   color: var(--rl-color-text);
   font: inherit;
+}
+
+.field textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.form-status,
+.form-fallback {
+  max-width: var(--rl-measure);
 }
 
 .choices {

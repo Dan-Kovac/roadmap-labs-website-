@@ -7,6 +7,9 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      # Test double only. Playwright intercepts this host. The Vercel project stays unset until the real Formspree id is added.
+      NEXT_PUBLIC_FORMSPREE_ENDPOINT: https://formspree.io/f/test
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

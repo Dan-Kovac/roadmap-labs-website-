@@ -1,8 +1,18 @@
-import { BookingLink } from "@/components/booking-link";
+import { ContactForm } from "@/components/contact-form";
+import { EnquiryLink } from "@/components/enquiry-link";
 import { chrome, start } from "@/lib/copy";
+import { formspreeEndpoint } from "@/lib/formspree";
 import { contactHref } from "@/lib/site";
 
-export function CtaBand({ index, secondary = true }: { index: string; secondary?: boolean }) {
+export function CtaBand({
+  index,
+  secondary = true,
+  form = false,
+}: {
+  index: string;
+  secondary?: boolean;
+  form?: boolean;
+}) {
   return (
     <section className="section rl-dark cta-band" id="start" aria-labelledby="start-heading">
       <div className="rl-container">
@@ -13,16 +23,27 @@ export function CtaBand({ index, secondary = true }: { index: string; secondary?
           <span className="voice-2">{start.line1}</span>
           <span className="h-line">{start.line2}</span>
         </h2>
-        <div className="cta-actions">
-          <BookingLink className="rl-btn rl-btn-primary" location="closing">
-            {chrome.book}
-          </BookingLink>
-          {secondary ? (
-            <a className="rl-btn rl-btn-secondary" href={contactHref}>
+        {form ? (
+          <ContactForm endpoint={formspreeEndpoint()} formId="start-form" />
+        ) : (
+          <div className="cta-actions">
+            <EnquiryLink className="rl-btn rl-btn-primary" location="closing" href="/contact">
+              {chrome.enquire}
+            </EnquiryLink>
+            {secondary ? (
+              <a className="rl-btn rl-btn-secondary" href={contactHref}>
+                {chrome.emailDan}
+              </a>
+            ) : null}
+          </div>
+        )}
+        {form && secondary ? (
+          <p className="cta-note">
+            <a className="rl-link" href={contactHref}>
               {chrome.emailDan}
             </a>
-          ) : null}
-        </div>
+          </p>
+        ) : null}
         <p className="cta-note">{start.reassurance}</p>
       </div>
     </section>

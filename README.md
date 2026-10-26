@@ -60,8 +60,7 @@ The site builds without these. Nothing below is invented in the repo.
 
 | Variable | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_BOOKING_URL` | HTTPS booking page. Book a call uses the contact form until this is set. |
-| `CONTACT_FORM_ENDPOINT` | HTTPS endpoint that accepts a JSON POST. Until this is set, the form stores nothing and does not send email. |
+| `NEXT_PUBLIC_FORMSPREE_ENDPOINT` | HTTPS Formspree form URL, such as `https://formspree.io/f/xxxx`. Enquiry forms post here and Formspree delivers to dan@roadmaplabs.com.au. Until this is set, the form is replaced by a mailto link and the build logs a warning. |
 | `NEXT_PUBLIC_GA_ID` | GA4 measurement ID. Analytics stays off until this is set. |
 
 Contact on the site remains `dan@roadmaplabs.com.au`.

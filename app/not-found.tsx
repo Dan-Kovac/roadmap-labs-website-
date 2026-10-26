@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BookingLink } from "@/components/booking-link";
+import { EnquiryLink } from "@/components/enquiry-link";
 import { chrome, notFoundCopy } from "@/lib/copy";
 import { pageMetadata } from "@/lib/metadata";
 import { seo } from "@/lib/seo";
@@ -24,9 +24,9 @@ export default function NotFound() {
         </h1>
         <p className="lead">{notFoundCopy.lead}</p>
         <div className="inline-actions">
-          <BookingLink className="rl-btn rl-btn-primary" location="not-found">
-            {chrome.book}
-          </BookingLink>
+          <EnquiryLink className="rl-btn rl-btn-primary" location="not-found" href="/contact">
+            {chrome.enquire}
+          </EnquiryLink>
           <Link className="rl-btn-text" href="/">
             {notFoundCopy.home}
           </Link>

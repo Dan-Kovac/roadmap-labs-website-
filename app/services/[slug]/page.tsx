@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BookingLink } from "@/components/booking-link";
+import { EnquiryLink } from "@/components/enquiry-link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CtaBand } from "@/components/cta-band";
 import { JsonLd } from "@/components/json-ld";
@@ -77,9 +77,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             lead={<Rich text={marketingPage.lead} />}
           />
           <div className="inline-actions">
-            <BookingLink className="rl-btn rl-btn-primary" location="marketing">
-              {chrome.book}
-            </BookingLink>
+            <EnquiryLink className="rl-btn rl-btn-primary" location="marketing">
+              {chrome.enquire}
+            </EnquiryLink>
             <Link className="rl-btn-text" href="/services">
               {marketingPage.planLink}
             </Link>
@@ -154,9 +154,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <span className="h-line">{marketingPage.close.line2}</span>
             </h2>
             <div className="cta-actions">
-              <BookingLink className="rl-btn rl-btn-primary" location="marketing-close">
-                {chrome.book}
-              </BookingLink>
+              <EnquiryLink className="rl-btn rl-btn-primary" location="marketing-close" href="/contact">
+                {chrome.enquire}
+              </EnquiryLink>
             </div>
             <p className="cta-note">{marketingPage.close.reassurance}</p>
           </div>
@@ -211,9 +211,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           ) : null}
         </div>
         <div className="inline-actions">
-          <BookingLink className="rl-btn rl-btn-primary" location={slug}>
-            {chrome.book}
-          </BookingLink>
+          <EnquiryLink className="rl-btn rl-btn-primary" location={slug}>
+            {chrome.enquire}
+          </EnquiryLink>
         </div>
       </div>
       <CtaBand index="02" />

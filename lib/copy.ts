@@ -59,7 +59,7 @@ export function selectedHero() {
 }
 
 export const chrome = {
-  book: "Book a call",
+  enquire: "Send enquiry",
   emailDan: "Email Dan",
   eyebrow: "For owner-led businesses",
   howItWorks: "How it works →",
@@ -256,7 +256,7 @@ export const offer = {
   supporting: "That's about A$1,670 a month you could put back into the business or your people.",
   beforeYouCommit:
     "Before you commit, you see what each automation could save, when it'll be running and when it should pay back. The most you can spend finding out after that is one month, and you keep what we built.",
-  textLink: "Book a call →",
+  textLink: "Send enquiry →",
   planLink: "See what's in the plan",
 };
 
@@ -328,7 +328,7 @@ export const homeInsights = {
 export const start = {
   label: "Start",
   line1: "Not sure where AI fits yet?",
-  line2: "That's what the first call is for.",
+  line2: "Send a note and Dan will reply.",
   reassurance: "No pressure and no contract. We take on a small handful of clients at a time.",
 };
 
@@ -344,7 +344,7 @@ export const servicesPage = {
   fineLabel: "Fine print",
   fineTitle: "In plain English.",
   questionsLabel: "Questions",
-  questionsTitle: "Before you book.",
+  questionsTitle: "Before you get in touch.",
   meta: "In the fee",
   kinds: [
     {
@@ -406,46 +406,27 @@ export const contactCopy = {
   label: "Contact",
   line1: "The first step is free.",
   line2: "Tell Dan where AI should help.",
-  lead: "Book a call to talk it through, or send a note below. Dan reads these and replies by email.",
-  configuredNote: "Dan reads these and replies by email.",
-  unconfiguredNote:
-    "The form is on the page. It is not connected to an inbox yet, so a note typed here is not stored and is not emailed. For anything that needs a reply now, email Dan directly. On send, you can open a prefilled email with what you wrote.",
+  lead: "Send a note below. Dan reads these and replies by email.",
+  fallbackBefore: "The form isn't connected yet. Email Dan at",
   name: "Name",
   email: "Email",
-  business: "Business name, if you have one",
-  team: "How many people work there?",
-  teamOptions: ["Just me", "2 to 4", "5 to 10", "11 to 25", "More than 25"],
-  intent: "What do you need help with?",
-  intents: [
-    "Getting AI working properly",
-    "Connecting our tools and data",
-    "Using AI safely with client data",
-    "Admin, quotes or follow-ups",
-    "Marketing: SEO, social or email",
-    "Not sure yet",
-    "ReviewBuddy or Flexfolio",
-    "Something else",
-  ],
-  intentAliases: {
-    automation: "Admin, quotes or follow-ups",
-  } as Record<string, string>,
-  message: "Where should AI be helping?",
-  required: "(required)",
+  company: "Company, optional",
+  website: "Website, optional",
+  message: "What do you want help with?",
   errors: {
-    name: "Error: enter your name.",
-    email: "Error: enter a full email address.",
-    intent: "Error: pick what you need help with.",
-    message: "Error: add a line or two about the business.",
+    name: "Enter your name.",
+    email: "Enter a full email address.",
+    website: "Enter a website like example.com.au, or leave it blank.",
+    message: "Say what you want help with.",
   },
-  send: "Send",
-  sentTitle: "Sent",
-  sentBody: "Thanks. It's with Dan, and he'll reply by email. If it's easier, book a call in the meantime.",
-  failTitle: "Not sent",
-  failBody: "Something went wrong on our end. Email Dan at dan@roadmaplabs.com.au and it'll get to him.",
+  send: "Send enquiry",
+  sending: "Sending",
+  invalid: "Check the fields and try again.",
+  success: "Thanks. I'll get back to you within one business day.",
+  errorBefore: "That didn't send. Email",
+  errorAfter: "and it'll get there.",
   asideEmail: "Email",
-  asideBook: "Book a call",
   asideBased: "Based in",
-  asideLink: "Free first call →",
   based: "Melbourne",
 };
 
@@ -639,7 +620,7 @@ export const marketingPage = {
       "Typical costs from Dan's ten years in digital marketing. The ad row is the agency's management fee on its own.",
     link: "See everything in the plan →",
   },
-  questionsTitle: "Before you book.",
+  questionsTitle: "Before you get in touch.",
   heldQuestions: [
     { q: "Is Google Ads spend included?", a: "[TBC: Dan confirming]" },
     {
@@ -668,7 +649,7 @@ export const marketingPage = {
   close: {
     label: "Start",
     line1: "Marketing keeps getting dropped?",
-    line2: "That's what the first call is for.",
+    line2: "Send a note and Dan will reply.",
     reassurance: "No pressure and no contract. We take on a small handful of clients at a time.",
   },
 };
@@ -677,7 +658,7 @@ export const notFoundCopy = {
   label: "404",
   line1: "This page isn't here.",
   line2: "The rest of the site is.",
-  lead: "The link may be old, or the page has moved. Head home, or book a call if you were looking for Dan.",
+  lead: "The link may be old, or the page has moved. Head home, or send an enquiry if you were looking for Dan.",
   home: "Back to home →",
 };
 

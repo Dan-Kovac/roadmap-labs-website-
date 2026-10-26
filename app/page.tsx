@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookingLink } from "@/components/booking-link";
+import { EnquiryLink } from "@/components/enquiry-link";
 import { ComparisonTable } from "@/components/comparison-table";
 import { CtaBand } from "@/components/cta-band";
 import { JsonLd } from "@/components/json-ld";
@@ -36,9 +36,9 @@ export default function HomePage() {
           </h1>
           <p className="lead">{hero.lead}</p>
           <div className="hero-actions">
-            <BookingLink className="rl-btn rl-btn-primary" location="hero">
-              {chrome.book}
-            </BookingLink>
+            <EnquiryLink className="rl-btn rl-btn-primary" location="hero">
+              {chrome.enquire}
+            </EnquiryLink>
             <a className="rl-btn-text" href="#how-we-work">
               {chrome.howItWorks}
             </a>
@@ -84,9 +84,9 @@ export default function HomePage() {
           />
           <Steps />
           <div className="hero-actions">
-            <BookingLink className="rl-btn rl-btn-primary" location="how-it-works">
-              {chrome.book}
-            </BookingLink>
+            <EnquiryLink className="rl-btn rl-btn-primary" location="how-it-works">
+              {chrome.enquire}
+            </EnquiryLink>
             <p className="microcopy">{howItWorks.reassurance}</p>
           </div>
         </div>
@@ -110,9 +110,9 @@ export default function HomePage() {
           </p>
           <PlanBlock />
           <div className="hero-actions">
-            <BookingLink className="rl-btn-text" location="offer">
+            <EnquiryLink className="rl-btn-text" location="offer">
               {offer.textLink}
-            </BookingLink>
+            </EnquiryLink>
             <Link className="rl-btn-text" href="/services">
               {offer.planLink}
             </Link>
@@ -177,7 +177,7 @@ export default function HomePage() {
         </section>
       ) : null}
 
-      <CtaBand index="07" />
+      <CtaBand index="07" form />
     </>
   );
 }

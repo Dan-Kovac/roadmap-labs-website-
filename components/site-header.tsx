@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
-import { BookingLink } from "@/components/booking-link";
 import { Logo } from "@/components/logo";
 import { Rich } from "@/components/rich";
+import { track } from "@/lib/analytics";
 import { chrome } from "@/lib/copy";
-import { currentNav, navItems } from "@/lib/site";
+import { currentNav, enquiryHref, navItems } from "@/lib/site";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -17,6 +17,7 @@ export function SiteHeader() {
   const panelRef = useRef<HTMLDivElement>(null);
   const wasOpen = useRef(false);
   const panelId = useId();
+  const enquire = enquiryHref(pathname);
 
   if (menuPath !== pathname) {
     setMenuPath(pathname);
@@ -91,9 +92,13 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <BookingLink className="rl-btn rl-btn-primary rl-btn-sm desk-cta" location="header">
-          {chrome.book}
-        </BookingLink>
+        <Link
+          href={enquire}
+          className="rl-btn rl-btn-primary rl-btn-sm desk-cta"
+          onClick={() => track("enquiry_click", { location: "header" })}
+        >
+          {chrome.enquire}
+        </Link>
         <button
           ref={toggleRef}
           className="menu-toggle"
@@ -125,9 +130,16 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <BookingLink className="rl-btn rl-btn-primary menu-cta" location="menu">
-          {chrome.book}
-        </BookingLink>
+        <Link
+          href={enquire}
+          className="rl-btn rl-btn-primary menu-cta"
+          onClick={() => {
+            setOpen(false);
+            track("enquiry_click", { location: "menu" });
+          }}
+        >
+          {chrome.enquire}
+        </Link>
       </div>
     </header>
   );

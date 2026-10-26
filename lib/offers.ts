@@ -9,7 +9,7 @@ export const offers = [
       "Quotes, follow-ups, onboarding and data entry, handled by automations so leads get an answer and nobody types it all by hand.",
       "We build one job at a time. Each one gets a one-month test, and if it isn't working, we switch it off and build the next one.",
     ],
-    links: [{ href: "/contact?intent=automation#book", label: "Book a call" }],
+    links: [{ href: "/contact", label: "Send enquiry" }],
   },
   {
     id: "marketing",
@@ -57,7 +57,7 @@ export const partnerPlan = {
     "If you leave, we hand over everything we've built.",
     "We only take a small handful of clients at a time.",
   ],
-  cta: { href: "/contact", label: "Book a call" },
+  cta: { href: "/contact", label: "Send enquiry" },
 } as const;
 
 // Kept so existing imports don't break. Points at the website part of the plan.
