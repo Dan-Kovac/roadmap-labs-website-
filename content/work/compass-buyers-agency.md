@@ -20,11 +20,39 @@ liveLabel: compassagency.com.au
 aboutName: Compass Buyers Agency
 aboutUrl: https://compassagency.com.au
 shots:
-  - label: Website
+  - label: Home desktop
+    place: hero
+    frame: laptop
     crop: wide
-    alt: Compass Buyers Agency website
-    caption: compassagency.com.au, captured October 2026.
-    placeholder: "[SCREENSHOT TBC]"
+    src: /work/compass/home-desktop.webp
+    alt: Compass Buyers Agency home, desktop
+    caption: Home, desktop. compassagency.com.au, captured October 2026.
+  - label: Home mobile
+    place: hero
+    frame: phone
+    crop: tall
+    src: /work/compass/home-mobile.webp
+    alt: Compass Buyers Agency home, mobile
+    caption: Home, mobile. compassagency.com.au, captured October 2026.
+  - label: Byron Bay
+    place: seo
+    crop: wide
+    src: /work/compass/byron-desktop.webp
+    alt: Compass Buyers Agency Byron Bay page
+    caption: Byron Bay page. compassagency.com.au, captured October 2026.
+  - label: Contact
+    place: conversion
+    crop: wide
+    src: /work/compass/contact-desktop.webp
+    alt: Compass Buyers Agency contact page
+    caption: Contact page. compassagency.com.au, captured October 2026.
+  - label: About
+    place: about
+    frame: phone
+    crop: tall
+    src: /work/compass/about-mobile.webp
+    alt: Compass Buyers Agency about page
+    caption: About page, the team. compassagency.com.au, captured October 2026.
 ---
 
 ## The brief
@@ -33,7 +61,15 @@ shots:
 
 ## What we built
 
-We built the Compass website, set up its SEO and worked on turning visits into enquiries.
+We built the Compass website.
+
+## SEO
+
+We set up its SEO.
+
+## Conversion
+
+We worked on turning visits into enquiries.
 
 ## Where it is now
 

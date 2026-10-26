@@ -198,6 +198,7 @@ export const dan = {
       body: "A website project: we built the site and did the SEO and conversion work.",
       meta: "View →",
       href: "/projects/compass-buyers-agency",
+      shot: "/work/compass/home-desktop.webp",
     },
   ],
 };
@@ -542,6 +543,7 @@ export const workIndex = {
       services: "Website · SEO · CRO",
       meta: "View →",
       href: "/projects/compass-buyers-agency",
+      shot: "/work/compass/home-desktop.webp",
     },
     {
       name: "ReviewBuddy",

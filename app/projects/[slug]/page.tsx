@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { JsonLd } from "@/components/json-ld";
 import { Markdown } from "@/lib/markdown";
 import { Rich } from "@/components/rich";
+import { CaseShots } from "@/components/case-shots";
 import { ShotFrame } from "@/components/shot-frame";
 import { findWork, getListedWork, getWork, nextWork } from "@/lib/content";
 import { caseStudy } from "@/lib/copy";
@@ -114,20 +115,26 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </div>
           ) : null}
         </dl>
-        <div className="prose">
-          <Markdown source={project.body} />
-        </div>
-        {project.shots.map((shot) => (
-          <ShotFrame
-            key={shot.label}
-            src={shot.src}
-            alt={shot.alt}
-            caption={shot.caption}
-            placeholder={shot.placeholder}
-            ratio={shot.crop}
-            objectPosition={shot.src?.includes("reviewbuddy-widget") ? "left center" : "top center"}
-          />
-        ))}
+        {project.shots.some((shot) => shot.place) ? (
+          <CaseShots project={project} />
+        ) : (
+          <>
+            <div className="prose">
+              <Markdown source={project.body} />
+            </div>
+            {project.shots.map((shot) => (
+              <ShotFrame
+                key={shot.label}
+                src={shot.src}
+                alt={shot.alt}
+                caption={shot.caption}
+                placeholder={shot.placeholder}
+                ratio={shot.crop}
+                objectPosition={shot.src?.includes("reviewbuddy-widget") ? "left center" : "top center"}
+              />
+            ))}
+          </>
+        )}
         {next && next.slug !== project.slug ? (
           <p style={{ marginTop: 32 }}>
             <Link href={`/projects/${next.slug}`}>

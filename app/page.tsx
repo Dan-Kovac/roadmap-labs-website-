@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { EnquiryLink } from "@/components/enquiry-link";
+import { LaptopFrame } from "@/components/laptop-frame";
 import { ComparisonTable } from "@/components/comparison-table";
 import { CtaBand } from "@/components/cta-band";
 import { JsonLd } from "@/components/json-ld";
@@ -142,15 +143,26 @@ export default function HomePage() {
           </div>
           <div>
             {dan.rows.map((row) => (
-              <article key={row.name} className="work-row">
-                <div>
-                  <h3>{row.name}</h3>
-                  <p className="rl-mono">{row.tag}</p>
+              <article key={row.name} className={row.shot ? "work-row has-frame" : "work-row"}>
+                {row.shot ? (
+                  <LaptopFrame
+                    state="image"
+                    src={row.shot}
+                    alt={`${row.name} home`}
+                    objectPosition="top center"
+                    sizes="(min-width: 768px) 340px, 100vw"
+                  />
+                ) : null}
+                <div className="work-main">
+                  <div>
+                    <h3>{row.name}</h3>
+                    <p className="rl-mono">{row.tag}</p>
+                  </div>
+                  <p>{row.body}</p>
+                  <p>
+                    <Link href={row.href}>{row.meta}</Link>
+                  </p>
                 </div>
-                <p>{row.body}</p>
-                <p>
-                  <Link href={row.href}>{row.meta}</Link>
-                </p>
               </article>
             ))}
           </div>

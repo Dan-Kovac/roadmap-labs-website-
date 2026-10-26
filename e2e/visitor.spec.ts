@@ -60,6 +60,7 @@ test("home comparison sits after how it works and links to services", async ({ p
   await expect(page.getByText("Retool")).toHaveCount(0);
   await expect(page.getByText("internal platform")).toHaveCount(0);
   await expect(page.locator('img[alt="Admin and sales automation"]')).toBeVisible();
+  await expect(page.locator("#dan img[alt=\"Compass Buyers Agency home\"]")).toBeVisible();
 });
 
 test("about states the problem and ten years in digital marketing", async ({ page }) => {
@@ -75,7 +76,15 @@ test("work lists the three projects and the compass study stays a website", asyn
   await expect(page.getByText("A website project for a buyers agency from Byron Bay to the Gold Coast.")).toBeVisible();
   await expect(page.getByText("Australian tradies")).toBeVisible();
   await expect(page.getByText("product managers")).toBeVisible();
+  await expect(page.locator('img[alt="Compass Buyers Agency home"]')).toBeVisible();
   await page.goto("/projects/compass-buyers-agency");
+  await expect(page.getByRole("link", { name: "Visit the site" })).toHaveAttribute("href", "https://compassagency.com.au");
+  await expect(page.getByRole("link", { name: "Visit the site" })).toHaveAttribute("rel", /noopener/);
+  await expect(page.locator('img[alt="Compass Buyers Agency home, desktop"]')).toBeVisible();
+  await expect(page.locator('img[alt="Compass Buyers Agency home, mobile"]')).toBeVisible();
+  await expect(page.locator('img[alt="Compass Buyers Agency Byron Bay page"]')).toBeVisible();
+  await expect(page.locator('img[alt="Compass Buyers Agency contact page"]')).toBeVisible();
+  await expect(page.locator('img[alt="Compass Buyers Agency about page"]')).toBeVisible();
   await expect(page.getByText("[[result, with Compass's OK. Leave out until real]]")).toBeVisible();
   await expect(page.getByText("[[quote, with written OK. Leave out until real]]")).toBeVisible();
   await expect(page.getByText("Nick")).toHaveCount(0);
@@ -100,6 +109,9 @@ test("insights lists both launch articles", async ({ page }) => {
 });
 
 test("work screenshots are not caught by the /work redirect", async ({ request }) => {
+  const compass = await request.get("/work/compass/home-desktop.webp", { maxRedirects: 0 });
+  expect(compass.status()).toBe(200);
+  expect(compass.headers()["content-type"] ?? "").toContain("image/webp");
   const image = await request.get("/work/reviewbuddy-widget.jpg", { maxRedirects: 0 });
   expect(image.status()).toBe(200);
   expect(image.headers()["content-type"] ?? "").toContain("image/jpeg");

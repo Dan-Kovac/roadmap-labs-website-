@@ -344,6 +344,15 @@ main {
   gap: 8px;
 }
 
+.work-main {
+  display: grid;
+  gap: 8px;
+}
+
+.work-row.has-frame .lap {
+  margin: 0;
+}
+
 .work-row a,
 .case-ref a {
   text-decoration: none;
@@ -513,9 +522,53 @@ main {
 }
 
 .shot,
-.lap {
+.lap,
+.phone-figure {
   position: relative;
   margin: 16px 0 0;
+}
+
+.shot figcaption,
+.lap figcaption,
+.phone-figure figcaption {
+  margin-top: 8px;
+  color: var(--rl-color-text-secondary);
+  font-size: var(--rl-text-small);
+}
+
+.device-pair {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.device-pair .phone-figure {
+  width: min(100%, 240px);
+  margin-inline: auto;
+}
+
+.phone {
+  padding: 10px 10px 14px;
+  background: #0b0d12;
+  border: 1px solid #2a2e36;
+  border-radius: 28px;
+}
+
+.phone-scr {
+  position: relative;
+  aspect-ratio: 390 / 844;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.visit-site {
+  margin-top: 24px;
+}
+
+.lap-body {
+  position: relative;
 }
 
 .lap-svg {
@@ -716,9 +769,19 @@ main {
     grid-template-columns: 1fr 1fr;
   }
 
-  .work-row {
+  .work-main {
     grid-template-columns: 1.2fr 2fr auto;
     align-items: baseline;
+  }
+
+  .work-row.has-frame {
+    grid-template-columns: minmax(220px, 340px) minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
+  }
+
+  .device-pair {
+    grid-template-columns: minmax(0, 1.7fr) minmax(180px, 0.72fr);
   }
 
   .dan-layout {

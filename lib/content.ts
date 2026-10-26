@@ -12,6 +12,8 @@ export type Shot = {
   src?: string;
   placeholder?: string;
   caption?: string;
+  place?: "hero" | "seo" | "conversion" | "about";
+  frame?: "laptop" | "phone";
 };
 
 export type WorkDoc = {
@@ -124,6 +126,14 @@ function asShots(value: unknown): Shot[] {
       src: asString(record.src) || undefined,
       placeholder: asString(record.placeholder) || undefined,
       caption: asString(record.caption) || undefined,
+      place:
+        record.place === "hero" ||
+        record.place === "seo" ||
+        record.place === "conversion" ||
+        record.place === "about"
+          ? record.place
+          : undefined,
+      frame: record.frame === "laptop" || record.frame === "phone" ? record.frame : undefined,
     };
   });
 }
