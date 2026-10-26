@@ -1,28 +1,53 @@
-import type { Metadata } from "next";
-import { WorkGrid } from "@/components/work-grid";
-import { getWork } from "@/lib/content";
+import Link from "next/link";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CtaBand } from "@/components/cta-band";
+import { JsonLd } from "@/components/json-ld";
+import { PageHeader } from "@/components/page-header";
+import { Rich } from "@/components/rich";
+import { workIndex } from "@/lib/copy";
 import { pageMetadata } from "@/lib/metadata";
+import { breadcrumbJsonLd, collectionJsonLd } from "@/lib/schema";
+import { seo } from "@/lib/seo";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Work",
-  description:
-    "ReviewBuddy, Flexfolio, Compass OS and the Compass Buyers Agency website.",
+export const metadata = pageMetadata({
+  title: seo.projects.title,
+  description: seo.projects.description,
   path: "/projects",
 });
 
 export default function ProjectsPage() {
-  const work = getWork();
+  const crumbs = [
+    { name: "Home", path: "/" },
+    { name: "Work", path: "/projects" },
+  ];
+  const cards = workIndex.cards;
 
   return (
-    <section className="editorial" aria-labelledby="work-title">
-      <p className="quiet">Work</p>
-      <h1 className="thesis" id="work-title">
-        <span className="thesis-line">The work, one page each.</span>
-      </h1>
-      <p className="positioning">
-        Screens where a live page could be reached. Empty frames where it could not.
-      </p>
-      <WorkGrid items={work} />
-    </section>
+    <>
+      <article className="section">
+        <JsonLd data={[collectionJsonLd({ name: seo.projects.title, description: seo.projects.description, path: "/projects" }), breadcrumbJsonLd(crumbs)]} />
+        <div className="rl-container">
+          <Breadcrumbs items={crumbs} />
+          <PageHeader label={workIndex.label} line1={workIndex.title} lead={workIndex.lead} />
+          <div>
+            {cards.map((card) => (
+              <article key={card.name} className="work-row">
+                <h2>{card.name}</h2>
+                <div>
+                  <p>{card.body}</p>
+                  <p className="rl-mono">
+                    <Rich text={card.services} />
+                  </p>
+                </div>
+                <p>
+                  {card.href ? <Link href={card.href}>{card.meta}</Link> : <span className="rl-mono">{card.meta}</span>}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </article>
+      <CtaBand index="02" />
+    </>
   );
 }

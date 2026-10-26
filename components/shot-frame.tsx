@@ -1,37 +1,57 @@
 import Image from "next/image";
-import type { Shot } from "@/lib/content";
+import { Rich } from "@/components/rich";
+import { showPlaceholders } from "@/lib/text";
 
 export function ShotFrame({
-  shot,
-  priority = false,
-  sizes,
+  src,
+  alt,
+  caption,
+  ratio = "wide",
+  placeholder,
+  objectPosition = "top center",
 }: {
-  shot: Shot;
-  priority?: boolean;
-  sizes: string;
+  src?: string;
+  alt: string;
+  caption?: string;
+  ratio?: "wide" | "tall" | "video";
+  placeholder?: string;
+  objectPosition?: string;
 }) {
+  if (!src) {
+    if (!showPlaceholders() || !placeholder) {
+      return null;
+    }
+
+    return (
+      <figure className={`shot shot-${ratio} shot-missing`}>
+        <div className="shot-slot rl-mono">
+          <Rich text={placeholder} />
+        </div>
+        {caption ? (
+          <figcaption>
+            <Rich text={caption} />
+          </figcaption>
+        ) : null}
+      </figure>
+    );
+  }
+
   return (
-    <figure className={`shot shot-${shot.crop}`}>
-      <div className="shot-well">
-        {shot.src ? (
-          <Image
-            src={shot.src}
-            alt={shot.alt}
-            fill
-            priority={priority}
-            sizes={sizes}
-            className="shot-img"
-          />
-        ) : (
-          <div className="shot-empty">
-            <span>{shot.placeholder || "[SCREENSHOT TBC]"}</span>
-          </div>
-        )}
+    <figure className={`shot shot-${ratio}`}>
+      <div className="shot-media">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          style={{ objectFit: "cover", objectPosition }}
+        />
       </div>
-      <figcaption>
-        <span>{shot.label}</span>
-        {shot.src ? <span>Captured from the live site</span> : <span>Placeholder</span>}
-      </figcaption>
+      {caption ? (
+        <figcaption>
+          <Rich text={caption} />
+        </figcaption>
+      ) : null}
     </figure>
   );
 }

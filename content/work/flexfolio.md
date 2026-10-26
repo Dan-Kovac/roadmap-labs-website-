@@ -1,35 +1,49 @@
 ---
 slug: flexfolio
-title: Flexfolio
-job: A portfolio you can publish.
-dek: A portfolio platform for product managers, showing thinking across projects and career stages.
-role: Own product
+title: "Flexfolio: a portfolio platform for product managers"
+name: Flexfolio
+job: A portfolio platform for product managers.
+dek: Flexfolio is our own company. It helps product managers show their thinking across projects and career stages. It's in beta, and it runs on our own systems.
+role: Own company
 order: 3
 home: true
+publish: true
+permission: public
+indexable: true
+seoTitle: Flexfolio, our own portfolio platform · Roadmap Labs
+seoDescription: Flexfolio is our own portfolio platform for product managers. It's in beta, and it runs on the AI systems and automations we build.
+client: Our own company
+services: Product, AI automation
+status: In beta
 liveUrl: https://flexfolio.co
-liveLabel: Visit Flexfolio
-result: "[RESULT TBC]"
-testimonial: "[TESTIMONIAL TBC]"
-thesis:
-  - Flexfolio.
-  - Publish the work.
+liveLabel: flexfolio.co
+aboutName: Flexfolio
+aboutUrl: https://flexfolio.co
 shots:
   - label: Homepage
     crop: wide
     src: /work/flexfolio-home.jpg
-    alt: Flexfolio homepage with the heading Show people how you think, and the line Free to start, 14-day Pro trial, no credit card.
-  - label: Product managers
+    alt: Flexfolio homepage
+    caption: flexfolio.co, captured October 2026.
+  - label: Profile
     crop: wide
     src: /work/flexfolio-pm.jpg
-    alt: Flexfolio page for product managers, headed A product manager portfolio that shows your impact.
+    alt: A demo profile on Flexfolio
+    caption: "A demo profile on Flexfolio, captured October 2026. [TBC: confirm it's a demo account]"
 ---
 
-Flexfolio is a Roadmap Labs product. It is a portfolio platform for product managers, and for other people who earn a living with their knowledge, so they can show their thinking across projects and career stages.
+## The brief
 
-The public site describes three things on a domain you own: a portfolio, a blog and a newsletter. For product managers, that is case studies, a career timeline and a product blog. Experience can be marked as employment, founder, consulting or freelance, so a side project can sit on the same timeline as a day job.
+Flexfolio is for product managers whose work deserves more than a line on a CV. [TBC: Dan to write why he started it, in two or three lines]
 
-It is free to start, with no credit card. The public site also offers a 14-day Pro trial.
+## What we built
 
-The screens below are the live homepage and the product-manager page, captured from flexfolio.co.
+A portfolio, a blog and a newsletter on a domain you own. The structure and layout are already designed, so you add your work and share the link.
 
-What Flexfolio has changed for the people using it is not recorded here yet.
+Each role can be marked as employment, founder, consulting or freelance. Side projects sit on the same timeline as the day job, with projects under the role they came from.
+
+Behind it, Flexfolio runs on the AI systems and automations we build for clients. [TBC: which systems and automations, named by Dan]
+
+## Where it is now
+
+Flexfolio is in beta. It's free to start, with a 14-day Pro trial. [TBC: what's next, from Dan]

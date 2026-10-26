@@ -1,57 +1,183 @@
-import { ClosingCta } from "@/components/closing-cta";
-import { OffersBand } from "@/components/offers-band";
-import { OfferStrip } from "@/components/offer-strip";
-import { WorkGrid } from "@/components/work-grid";
-import { BookingLink } from "@/components/booking-link";
-import { getHomeWork } from "@/lib/content";
-import { contactHref, lockedDescription } from "@/lib/site";
 import Link from "next/link";
+import { BookingLink } from "@/components/booking-link";
+import { ComparisonTable } from "@/components/comparison-table";
+import { CtaBand } from "@/components/cta-band";
+import { JsonLd } from "@/components/json-ld";
+import { PlanBlock } from "@/components/plan-block";
+import { PutToWork } from "@/components/put-to-work";
+import { Rich } from "@/components/rich";
+import { SectionHeader } from "@/components/section-header";
+import { Steps } from "@/components/steps";
+import { chrome, dan, homeInsights, howItWorks, offer, properly, selectedHero } from "@/lib/copy";
+import { homeInsightsVisible } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
+import { professionalServiceJsonLd, websiteJsonLd } from "@/lib/schema";
+import { seo } from "@/lib/seo";
+import { priceFigure, priceUnit } from "@/lib/text";
+
+export const metadata = pageMetadata({
+  title: seo.home.title,
+  description: seo.home.description,
+  path: "/",
+});
 
 export default function HomePage() {
-  const featured = getHomeWork();
+  const hero = selectedHero();
 
   return (
-    <div className="home">
-      <section className="fold" aria-labelledby="fold-title">
-        <div className="fold-copy">
-          <p className="fold-kicker">Melbourne</p>
-          <h1 className="fold-title" id="fold-title">
-            <span className="fold-line">Building software has never been easier.</span>
-            <span className="fold-line">Building the right software is still just as hard.</span>
+    <>
+      <JsonLd data={[professionalServiceJsonLd(), websiteJsonLd()]} />
+      <section className="section hero">
+        <div className="rl-container">
+          <p className="rl-mono">{chrome.eyebrow}</p>
+          <h1>
+            <span className="voice-2">{hero.line1}</span>
+            <span className="h-line">{hero.line2}</span>
           </h1>
-          <p className="fold-support">{lockedDescription}</p>
-          <div className="fold-actions">
-            <BookingLink className="rl-btn rl-btn-primary">Book a call</BookingLink>
-            <Link className="rl-btn rl-btn-secondary" href="/contact">
-              Get in touch
-            </Link>
-            <a className="fold-mail" href={contactHref}>
-              Email Dan
+          <p className="lead">{hero.lead}</p>
+          <div className="hero-actions">
+            <BookingLink className="rl-btn rl-btn-primary" location="hero">
+              {chrome.book}
+            </BookingLink>
+            <a className="rl-btn-text" href="#how-we-work">
+              {chrome.howItWorks}
             </a>
+          </div>
+          <p className="microcopy">{hero.microcopy}</p>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="properly-heading">
+        <div className="rl-container">
+          <SectionHeader
+            id="properly-heading"
+            index="01"
+            label={properly.label}
+            second={<Rich text={properly.line1} />}
+            title={<Rich text={properly.line2} />}
+            lead={<Rich text={properly.lead} />}
+          />
+          <div className="card-grid">
+            {properly.blocks.map((block) => (
+              <article key={block.title} className="card">
+                <h3>{block.title}</h3>
+                <p>
+                  <Rich text={block.body} />
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
-      <OffersBand />
-      <section className="underfold" aria-labelledby="underfold-title">
-        <h2 id="underfold-title">
-          <span className="underfold-line">Software that respects the time.</span>
-          <span className="underfold-line">It does the job, then it stops.</span>
-        </h2>
-        <div className="underfold-copy">
-          <p>
-            People open a tool to finish something. The useful ones let them. The rest keep a tab
-            open and spend the hour on work the software should have done.
-          </p>
-          <p>The brief is smaller than it sounds. Do the job well. Leave the rest of the day alone.</p>
-          <p>A clear step. A finished task. A product that does not ask for more time than it needs.</p>
+
+      <PutToWork />
+
+      <section className="section rl-dark" id="how-we-work" aria-labelledby="how-heading">
+        <div className="rl-container">
+          <SectionHeader
+            id="how-heading"
+            index="03"
+            label={howItWorks.label}
+            second={howItWorks.line1}
+            title={howItWorks.line2}
+            lead={howItWorks.lead}
+          />
+          <Steps />
+          <div className="hero-actions">
+            <BookingLink className="rl-btn rl-btn-primary" location="how-it-works">
+              {chrome.book}
+            </BookingLink>
+            <p className="microcopy">{howItWorks.reassurance}</p>
+          </div>
         </div>
       </section>
-      <OfferStrip />
-      <section className="work" aria-labelledby="selected-work">
-        <h2 id="selected-work">Selected work</h2>
-        <WorkGrid items={featured} />
+
+      <ComparisonTable index="04" href="/services" />
+
+      <section className="section" id="offer" aria-labelledby="fee-heading">
+        <div className="rl-container">
+          <SectionHeader
+            id="fee-heading"
+            index="05"
+            label={offer.label}
+            second={offer.line1}
+            title={offer.line2}
+            lead={offer.lead}
+          />
+          <p className="sr-only">
+            {priceFigure}
+            {priceUnit}
+          </p>
+          <PlanBlock />
+          <div className="hero-actions">
+            <BookingLink className="rl-btn-text" location="offer">
+              {offer.textLink}
+            </BookingLink>
+            <Link className="rl-btn-text" href="/services">
+              {offer.planLink}
+            </Link>
+          </div>
+        </div>
       </section>
-      <ClosingCta />
-    </div>
+
+      <section className="section" id="dan" aria-labelledby="dan-heading">
+        <div className="rl-container">
+          <SectionHeader
+            id="dan-heading"
+            index="06"
+            label={dan.label}
+            title={dan.title}
+            lead={dan.lead}
+            action={
+              <Link className="rl-btn-text" href="/projects">
+                {dan.action}
+              </Link>
+            }
+          />
+          <div className="dan-layout">
+            <p className="portrait copy-slot">{dan.portrait}</p>
+            <p className="lead">
+              <Rich text={dan.bio} />
+            </p>
+          </div>
+          <div>
+            {dan.rows.map((row) => (
+              <article key={row.name} className="work-row">
+                <div>
+                  <h3>{row.name}</h3>
+                  <p className="rl-mono">{row.tag}</p>
+                </div>
+                <p>{row.body}</p>
+                <p>
+                  <Link href={row.href}>{row.meta}</Link>
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {homeInsightsVisible() ? (
+        <section className="section" aria-labelledby="insights-heading">
+          <div className="rl-container">
+            <SectionHeader
+              id="insights-heading"
+              index=""
+              label={homeInsights.label}
+              second={<Rich text={homeInsights.line1} />}
+              title={homeInsights.line2}
+              lead={homeInsights.lead}
+              action={
+                <Link className="rl-btn-text" href="/insights">
+                  {homeInsights.action}
+                </Link>
+              }
+            />
+          </div>
+        </section>
+      ) : null}
+
+      <CtaBand index="07" />
+    </>
   );
 }

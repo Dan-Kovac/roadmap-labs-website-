@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { splitMarkers } from "@/lib/text";
 
 type Block =
   | { type: "h2"; text: string }
@@ -19,6 +20,25 @@ function safeHref(href: string) {
   }
 
   return undefined;
+}
+
+function marked(text: string, keyPrefix: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+
+  splitMarkers(text).forEach((part, index) => {
+    if (part.marker) {
+      nodes.push(
+        <span key={`${keyPrefix}-slot-${index}`} className="copy-slot">
+          {part.text}
+        </span>,
+      );
+      return;
+    }
+
+    nodes.push(...inline(part.text, `${keyPrefix}-${index}`));
+  });
+
+  return nodes;
 }
 
 function inline(text: string, keyPrefix: string): ReactNode[] {
@@ -161,15 +181,15 @@ export function Markdown({ source }: { source: string }) {
         const key = `block-${index}`;
 
         if (block.type === "h2") {
-          return <h2 key={key}>{inline(block.text, key)}</h2>;
+          return <h2 key={key}>{marked(block.text, key)}</h2>;
         }
 
         if (block.type === "h3") {
-          return <h3 key={key}>{inline(block.text, key)}</h3>;
+          return <h3 key={key}>{marked(block.text, key)}</h3>;
         }
 
         if (block.type === "quote") {
-          return <blockquote key={key}>{inline(block.text, key)}</blockquote>;
+          return <blockquote key={key}>{marked(block.text, key)}</blockquote>;
         }
 
         if (block.type === "ul" || block.type === "ol") {
@@ -178,13 +198,13 @@ export function Markdown({ source }: { source: string }) {
           return (
             <List key={key}>
               {block.items.map((item) => (
-                <li key={item}>{inline(item, `${key}-${item}`)}</li>
+                <li key={item}>{marked(item, `${key}-${item}`)}</li>
               ))}
             </List>
           );
         }
 
-        return <p key={key}>{inline(block.text, key)}</p>;
+        return <p key={key}>{marked(block.text, key)}</p>;
       })}
     </>
   );

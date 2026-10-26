@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 960" width="1600" height="960" role="img" aria-label="Laptop">
+  <!-- Roadmap Labs generic laptop frame v1. No brand marks. Screen opening: x 146, y 26, 1308 x 817.5 (16:10). -->
+  <defs>
+    <linearGradient id="deck" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E4E6EA"/>
+      <stop offset=".45" stop-color="#C9CDD3"/>
+      <stop offset="1" stop-color="#9DA2AA"/>
+    </linearGradient>
+    <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1A1D24"/>
+      <stop offset="1" stop-color="#0B0D12"/>
+    </linearGradient>
+    <filter id="blurA" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="blurB" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+  <!-- shadow: ambient + contact -->
+  <ellipse cx="800" cy="914" rx="700" ry="26" fill="#0B0D12" opacity=".10" filter="url(#blurA)"/>
+  <ellipse cx="800" cy="906" rx="760" ry="8" fill="#0B0D12" opacity=".28" filter="url(#blurB)"/>
+  <!-- lid -->
+  <path d="M152 0H1448a32 32 0 0 1 32 32V868a6 6 0 0 1-6 6H126a6 6 0 0 1-6-6V32A32 32 0 0 1 152 0Z" fill="url(#lid)"/>
+  <path d="M152 1.5H1448a30.5 30.5 0 0 1 30.5 30.5V868a4.5 4.5 0 0 1-4.5 4.5H126a4.5 4.5 0 0 1-4.5-4.5V32A30.5 30.5 0 0 1 152 1.5Z" fill="none" stroke="#4A4F59" stroke-opacity=".55" stroke-width="1.5"/>
+  <!-- screen opening (image sits over this) -->
+  <rect x="146" y="26" width="1308" height="817.5" rx="6" fill="#050608"/>
+  <!-- camera -->
+  <circle cx="800" cy="13" r="4" fill="#2A2E36"/>
+  <circle cx="800" cy="13" r="1.6" fill="#4A4F59"/>
+  <!-- hinge -->
+  <rect x="150" y="872" width="1300" height="6" fill="#2A2E36"/>
+  <!-- deck -->
+  <path d="M30 876H1570V884C1570 896 1556 904 1536 904H64C44 904 30 896 30 884Z" fill="url(#deck)"/>
+  <path d="M30 876H1570" stroke="#F4F5F7" stroke-width="2"/>
+  <path d="M30 902.5H1570" stroke="#868B93" stroke-opacity=".5" stroke-width="1"/>
+  <!-- thumb groove -->
+  <path d="M690 876H910V879C910 883 906 886 900 886H700C694 886 690 883 690 879Z" fill="#A7ACB4"/>
+</svg>

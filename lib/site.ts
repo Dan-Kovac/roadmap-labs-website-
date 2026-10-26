@@ -6,14 +6,18 @@ export const contactEmail = "dan@roadmaplabs.com.au";
 
 export const contactHref = `mailto:${contactEmail}`;
 
-export const howWeWorkId = "how-we-work";
+export const personId = `${siteUrl}/about#person`;
 
-export const howWeWorkHref = `/#${howWeWorkId}`;
+export const organizationId = `${siteUrl}/#organization`;
+
+export const logoPath = "/brand/roadmap-labs-mark-512.png";
+
+export const logoUrl = `${siteUrl}${logoPath}`;
 
 export const contactPath = "/contact";
 
 /**
- * Set NEXT_PUBLIC_BOOKING_URL when Dan has a booking page.
+ * Set NEXT_PUBLIC_BOOKING_URL to an https booking page.
  * Until then, Book a call opens the contact form.
  */
 export function bookingUrl() {
@@ -37,9 +41,14 @@ export function bookingUrl() {
 }
 
 export function bookingHref() {
-  const url = bookingUrl();
+  return bookingUrl() || "/contact?intent=call#book";
+}
 
-  return url || "/contact?intent=call#book";
+/** Set NEXT_PUBLIC_GA_ID to a GA4 measurement ID. Unset means analytics does not load. */
+export function gaId() {
+  const value = process.env.NEXT_PUBLIC_GA_ID?.trim() ?? "";
+
+  return value || "";
 }
 
 export const navItems = [
@@ -49,32 +58,12 @@ export const navItems = [
   { href: "/about", label: "About" },
 ] as const;
 
-export const lockedTitle = "Roadmap Labs - apps, websites and automations that fit real use";
+export const footerServiceLinks = [
+  { href: "/services/automations", label: "Business automation" },
+  { href: "/services/marketing", label: "SEO, websites and Google Ads" },
+  { href: "/services/software", label: "Custom software" },
+] as const;
 
-export const lockedDescription =
-  "We work out exactly what your business needs, then build apps, websites and automations around how people actually use them.";
-
-export const organisationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: siteName,
-  url: siteUrl,
-  email: contactEmail,
-  description: lockedDescription,
-  logo: `${siteUrl}/brand/roadmap-labs-primary-horizontal-blue-dmsans.svg`,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Melbourne",
-    addressRegion: "VIC",
-    addressCountry: "AU",
-  },
-  areaServed: {
-    "@type": "Country",
-    name: "Australia",
-  },
-  founder: {
-    "@type": "Person",
-    name: "Dan Kovac",
-    url: `${siteUrl}/about`,
-  },
-};
+export function currentNav(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
