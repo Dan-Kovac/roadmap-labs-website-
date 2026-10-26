@@ -15,7 +15,10 @@ seoDescription: ReviewBuddy is our own Google review software for Australian tra
 client: Our own company
 services: Product, AI automation
 status: In beta
+liveUrl: https://reviewbuddy.com.au
+liveLabel: reviewbuddy.com.au
 aboutName: ReviewBuddy
+aboutUrl: https://reviewbuddy.com.au
 shots:
   - label: Widget
     place: hero

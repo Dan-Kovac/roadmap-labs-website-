@@ -6,6 +6,7 @@ import { Markdown } from "@/lib/markdown";
 import { Rich } from "@/components/rich";
 import { CaseShots } from "@/components/case-shots";
 import { CtaBand } from "@/components/cta-band";
+import { LiveSiteLink } from "@/components/live-site-link";
 import { ShotFrame } from "@/components/shot-frame";
 import { findWork, getListedWork, getWork, nextWork } from "@/lib/content";
 import { caseStudy } from "@/lib/copy";
@@ -101,9 +102,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <div>
               <dt className="rl-mono">Live site</dt>
               <dd>
-                <a href={project.liveUrl} rel="noreferrer">
-                  {project.liveLabel ?? project.liveUrl} ↗
-                </a>
+                <LiveSiteLink href={project.liveUrl} label={project.liveLabel ?? project.liveUrl} />
               </dd>
             </div>
           ) : null}

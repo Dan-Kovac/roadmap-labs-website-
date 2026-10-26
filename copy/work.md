@@ -13,7 +13,7 @@ Images: real screenshots only, 16:10, min 2400×1500.
 > Compass Buyers Agency is a website we built for a client. ReviewBuddy and Flexfolio are our own companies, both in beta.
 >
 > 1 - **Compass Buyers Agency** · A buyers agency from Byron Bay to the Gold Coast. We built their website. · Website · SEO · Conversion · View → `/projects/compass-buyers-agency`
-> 2 - **ReviewBuddy** · Google review software for Australian tradies. Our own company. · Own company · In beta · View → `/projects/review-buddy`
+> 2 - **ReviewBuddy** · Google review software for Australian tradies. Our own company. · Own company · In beta · reviewbuddy.com.au ↗ · View → `/projects/review-buddy`
 > 3 - **Flexfolio** · A portfolio platform for product managers. Our own company. · Own company · In beta · View → `/projects/flexfolio`
 >
 > Closing band: same as home (C1 to C5). The page's one CTA is **Book a call**.

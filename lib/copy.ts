@@ -550,6 +550,8 @@ export const workIndex = {
       services: "Own company · In beta",
       meta: "View →",
       href: "/projects/review-buddy",
+      liveUrl: "https://reviewbuddy.com.au",
+      liveLabel: "reviewbuddy.com.au",
     },
     {
       name: "Flexfolio",

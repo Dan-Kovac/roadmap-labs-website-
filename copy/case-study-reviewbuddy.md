@@ -3,14 +3,14 @@
 Draft 4.7, 26 October 2026 (AEDT). Audience: Australian tradies (Dan, 26 Oct 2026, 12:59 PM AEDT). Route `/projects/review-buddy`. Same structure as `case-study-compass.md`. Rewritten as a plain case study after Dan's preview review. Counts checked by `_tools/slots.py case-reviewbuddy` (every slot passes). Pre-4.7 copy: `_tools/old/case-study-reviewbuddy_pre-4-7_2026-10-26.md`.
 
 **Own company.** No customer results, user numbers or testimonials. The result section doesn't render. Every gap is [TBC] and listed in SIGNOFF.md.
-**Status only, no live link.** reviewbuddy.com.au isn't serving yet, so the Live site fact and link are hidden (CS8). Add them back once the site is live.
+**Live site.** reviewbuddy.com.au is live. CS8 is a plain fact link, `reviewbuddy.com.au ↗`, in the same tab. It is not a second CTA. The page's one CTA stays Send enquiry.
 **The licence isn't mentioned** (D16, open).
 
 ## Facts used (and only these)
 
 - ReviewBuddy is Dan's own company, in beta (Dan, via the brief). It runs on Roadmap Labs' AI automations; which ones isn't on file.
 - ReviewBuddy site copy (`reviewbuddy/current-site/home.txt`): before someone calls, they check your Google reviews, then your website; reviews copied in by hand go stale; review link and QR code; one widget showing the review sites a business connects (Google, hipages, Service Seeking and more), updating on a new Google review; Growth plan review-request emails with one reminder, and past customers loaded from a spreadsheet; free done-for-you setup; 7-day free trial.
-- reviewbuddy.com.au returned 404 on 25 and 26 Oct 2026. Dan, 26 Oct: getting the website live is key.
+- reviewbuddy.com.au is live. `/`, `/pricing`, `/privacy` and `/terms` returned 200 on 26 Oct 2026.
 - Widget screenshot cleared by Dan via the Designer, 26 Oct ("those ReviewBuddy screenshots are pretty good. It's okay to share the Compass").
 
 ## Reading view
@@ -20,7 +20,7 @@ Draft 4.7, 26 October 2026 (AEDT). Audience: Australian tradies (Dan, 26 Oct 202
 > **H1 ReviewBuddy: Google reviews for Australian tradies**
 > ReviewBuddy is our own company. It helps Australian tradies get more Google reviews and show them on their website. It's in beta.
 >
-> Client · Our own company | Services · Product, AI automation | Status · In beta
+> Client · Our own company | Services · Product, AI automation | Status · In beta | Live site · reviewbuddy.com.au ↗
 >
 > *(Image)* The ReviewBuddy review widget, captured October 2026.
 >
@@ -66,7 +66,7 @@ Draft 4.7, 26 October 2026 (AEDT). Audience: Australian tradies (Dan, 26 Oct 202
 | CS5 Client fact value | ≤ 30 | Fact | Rec. | Our own company | 15 | ✓ |
 | CS6 Services value | ≤ 30 | Fact | Rec. | Product, AI automation | 22 | ✓ |
 | CS7 Status value | ≤ 10 | Fact | Rec. | In beta | 7 | ✓ |
-| CS8 Live link label | ≤ 30 | Dan, 26 Oct | Hidden | [DECISION: no live link or Live site fact until reviewbuddy.com.au is serving] | 0 | ✓ |
+| CS8 Live link label | ≤ 30 | Dan, 26 Oct | Rec. | reviewbuddy.com.au | 18 | ✓ |
 | CS9 Section H2s | ≤ 48 | 4.7 | 1 | Who it's for | 12 | ✓ |
 | CS9 Section H2s | ≤ 48 | 4.7 | 2 | What we built | 13 | ✓ |
 | CS9 Section H2s | ≤ 48 | 4.7 | 3 | How it works | 12 | ✓ |

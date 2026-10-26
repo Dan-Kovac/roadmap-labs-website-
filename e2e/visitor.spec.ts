@@ -106,14 +106,34 @@ test("work lists the three projects and the compass study stays a website", asyn
   await expect(page.getByText("internal platform")).toHaveCount(0);
 });
 
-test("reviewbuddy shows the widget and does not link the dead site", async ({ page }) => {
+test("reviewbuddy links to the live site as a fact, not a button", async ({ page }, testInfo) => {
+  if (testInfo.project.name === "375") {
+    await page.setViewportSize({ width: 390, height: 844 });
+  }
+
   await page.goto("/projects/review-buddy");
   await expect(page.getByText("Australian tradies").first()).toBeVisible();
   await expect(page.locator('img[alt="ReviewBuddy review widget"]')).toBeVisible();
-  await expect(page.locator('a[href*="reviewbuddy.com.au"]')).toHaveCount(0);
+  const live = page.getByRole("link", { name: /reviewbuddy\.com\.au/ });
+  await expect(live).toBeVisible();
+  await expect(live).toHaveAttribute("href", "https://reviewbuddy.com.au");
+  await expect(live).toHaveAttribute("rel", "noopener");
+  await expect(live).not.toHaveAttribute("target", /_blank/);
+  await expect(live).not.toHaveClass(/rl-btn/);
+  await expect(page.locator(".cta-band .rl-btn")).toHaveCount(1);
+  await expect(page.locator(".cta-band").getByRole("link", { name: "Send enquiry" })).toHaveAttribute("href", "/contact");
   await expect(page.getByText("After the job, the tradie shares their review link or QR code.")).toBeVisible();
   await expect(page.getByText("runs on the same AI automations")).toHaveCount(0);
   await expect(page.getByText("In beta", { exact: true })).toBeVisible();
+
+  await page.goto("/projects");
+  const card = page.locator("article", { has: page.getByRole("heading", { name: "ReviewBuddy", exact: true }) });
+  const cardLive = card.getByRole("link", { name: /reviewbuddy\.com\.au/ });
+  await expect(cardLive).toBeVisible();
+  await expect(cardLive).toHaveAttribute("href", "https://reviewbuddy.com.au");
+  await expect(cardLive).toHaveAttribute("rel", "noopener");
+  await expect(cardLive).not.toHaveAttribute("target", /_blank/);
+  await expect(cardLive).not.toHaveClass(/rl-btn/);
 });
 
 test("public pages hide placeholder brackets", async ({ page }, testInfo) => {

@@ -4,6 +4,7 @@ import { LaptopFrame } from "@/components/laptop-frame";
 import { CtaBand } from "@/components/cta-band";
 import { JsonLd } from "@/components/json-ld";
 import { PageHeader } from "@/components/page-header";
+import { LiveSiteLink } from "@/components/live-site-link";
 import { Rich } from "@/components/rich";
 import { workIndex } from "@/lib/copy";
 import { pageMetadata } from "@/lib/metadata";
@@ -49,6 +50,11 @@ export default function ProjectsPage() {
                     <p className="rl-mono">
                       <Rich text={card.services} />
                     </p>
+                    {"liveUrl" in card && card.liveUrl ? (
+                      <p>
+                        <LiveSiteLink href={card.liveUrl} label={card.liveLabel} />
+                      </p>
+                    ) : null}
                   </div>
                   <p>
                     {card.href ? <Link href={card.href}>{card.meta}</Link> : <span className="rl-mono">{card.meta}</span>}

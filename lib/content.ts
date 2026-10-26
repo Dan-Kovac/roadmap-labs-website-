@@ -163,7 +163,6 @@ export function getWork() {
       const publish = data.publish !== false;
 
       const liveUrl = asString(data.liveUrl);
-      const safeLiveUrl = /reviewbuddy\.com\.au/i.test(liveUrl) ? "" : liveUrl;
 
       return {
         slug: requireString(data.slug, file, "slug"),
@@ -175,8 +174,8 @@ export function getWork() {
         order: typeof data.order === "number" ? data.order : 99,
         home: data.home !== false,
         thesis: asLines(data.thesis),
-        liveUrl: safeLiveUrl || undefined,
-        liveLabel: safeLiveUrl ? asString(data.liveLabel) || undefined : undefined,
+        liveUrl: liveUrl || undefined,
+        liveLabel: liveUrl ? asString(data.liveLabel) || undefined : undefined,
         liveNote: asString(data.liveNote) || undefined,
         privateNote: asString(data.privateNote) || undefined,
         client: asString(data.client) || undefined,
