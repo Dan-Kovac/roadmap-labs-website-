@@ -11,7 +11,7 @@ export type EnquiryFields = {
   gotcha: string;
 };
 
-export type EnquiryField = "name" | "email" | "website" | "message";
+export type EnquiryField = "name" | "email" | "company" | "website" | "message";
 
 export type FieldErrors = Partial<Record<EnquiryField, string>>;
 
@@ -20,6 +20,7 @@ export type EnquiryStatus = "idle" | "invalid" | "sending" | "sent" | "error";
 export type EnquiryState = {
   status: EnquiryStatus;
   errors: FieldErrors;
+  formError?: string;
 };
 
 export type EnquiryRequest = {
@@ -30,7 +31,7 @@ export type EnquiryRequest = {
 export type EnquiryEvent =
   | { type: "submit"; fields: EnquiryFields; endpoint: string }
   | { type: "succeeded" }
-  | { type: "failed" };
+  | { type: "failed"; errors?: FieldErrors; formError?: string };
 
 export type EnquiryReduction = {
   state: EnquiryState;
@@ -101,7 +102,7 @@ export function validateEnquiry(fields: EnquiryFields): { errors: FieldErrors; p
 }
 
 export function firstError(errors: FieldErrors): EnquiryField | undefined {
-  return (["name", "email", "website", "message"] as const).find((key) => errors[key]);
+  return (["name", "email", "company", "website", "message"] as const).find((key) => errors[key]);
 }
 
 export function reduceEnquiry(state: EnquiryState, event: EnquiryEvent): EnquiryReduction {
@@ -110,7 +111,10 @@ export function reduceEnquiry(state: EnquiryState, event: EnquiryEvent): Enquiry
   }
 
   if (event.type === "failed") {
-    return { state: { status: "error", errors: {} } };
+    const errors = event.errors ?? {};
+    const formError = Object.keys(errors).length ? event.formError || contactCopy.invalid : "";
+
+    return { state: { status: "error", errors, formError } };
   }
 
   if (state.status === "sending") {

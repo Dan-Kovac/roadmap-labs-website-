@@ -60,7 +60,7 @@ The site builds without these. Nothing below is invented in the repo.
 
 | Variable | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_FORMSPREE_ENDPOINT` | HTTPS Formspree form URL, such as `https://formspree.io/f/xxxx`. Enquiry forms post here and Formspree delivers to dan@roadmaplabs.com.au. Until this is set, the form is replaced by a mailto link and the build logs a warning. |
+| `NEXT_PUBLIC_FORMSPREE_FORM_ID` | Optional Formspree form id. When unset, enquiry forms post to `xdeeekqw` (`https://formspree.io/f/xdeeekqw`), which delivers to dan@roadmaplabs.com.au. CI sets this to `citest` and Playwright mocks the request. |
 | `NEXT_PUBLIC_GA_ID` | GA4 measurement ID. Analytics stays off until this is set. |
 
 Contact on the site remains `dan@roadmaplabs.com.au`.

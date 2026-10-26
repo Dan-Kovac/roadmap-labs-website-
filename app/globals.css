@@ -654,9 +654,14 @@ main {
   resize: vertical;
 }
 
-.form-status,
-.form-fallback {
+.form-status {
   max-width: var(--rl-measure);
+}
+
+.form-email {
+  margin-top: 12px;
+  color: var(--rl-color-text-secondary);
+  font-size: var(--rl-text-small);
 }
 
 .choices {

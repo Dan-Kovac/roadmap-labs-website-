@@ -1,7 +1,6 @@
 import { ContactForm } from "@/components/contact-form";
 import { EnquiryLink } from "@/components/enquiry-link";
 import { chrome, start } from "@/lib/copy";
-import { formspreeEndpoint } from "@/lib/formspree";
 import { contactHref } from "@/lib/site";
 
 export function CtaBand({
@@ -24,7 +23,7 @@ export function CtaBand({
           <span className="h-line">{start.line2}</span>
         </h2>
         {form ? (
-          <ContactForm endpoint={formspreeEndpoint()} formId="start-form" />
+          <ContactForm formId="start-form" />
         ) : (
           <div className="cta-actions">
             <EnquiryLink className="rl-btn rl-btn-primary" location="closing" href="/contact">
@@ -37,13 +36,6 @@ export function CtaBand({
             ) : null}
           </div>
         )}
-        {form && secondary ? (
-          <p className="cta-note">
-            <a className="rl-link" href={contactHref}>
-              {chrome.emailDan}
-            </a>
-          </p>
-        ) : null}
         <p className="cta-note">{start.reassurance}</p>
       </div>
     </section>

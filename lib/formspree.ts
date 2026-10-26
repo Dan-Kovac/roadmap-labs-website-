@@ -1,46 +1,80 @@
-import { contactEmail } from "@/lib/site";
+import type { FieldErrors } from "@/lib/enquiry";
 
-let warned = false;
+/** Dan's Formspree form. Not a secret. Override with NEXT_PUBLIC_FORMSPREE_FORM_ID in tests. */
+export const defaultFormspreeFormId = "xdeeekqw";
 
-/** HTTPS Formspree endpoint from NEXT_PUBLIC_FORMSPREE_ENDPOINT, or "" when it is unset or not https. */
-export function formspreeEndpoint() {
-  const value = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT?.trim() ?? "";
+const formIdPattern = /^[A-Za-z0-9]+$/;
+const enquiryFields = new Set(["name", "email", "company", "website", "message"]);
 
-  if (!value) {
-    return "";
-  }
-
-  try {
-    const url = new URL(value);
-
-    if (url.protocol !== "https:") {
-      return "";
-    }
-
-    return url.toString();
-  } catch {
-    return "";
-  }
+/** `process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID ?? 'xdeeekqw'`, ignoring a blank or malformed override. */
+export function formspreeFormId() {
+  const configured = (process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID ?? defaultFormspreeFormId).trim();
+  return formIdPattern.test(configured) ? configured : defaultFormspreeFormId;
 }
 
-/** Logs once per server process when the enquiry form has to fall back to email. */
-export function warnIfFormspreeMissing() {
-  const endpoint = formspreeEndpoint();
+export function formspreeEndpoint() {
+  return `https://formspree.io/f/${formspreeFormId()}`;
+}
 
-  if (endpoint) {
-    return endpoint;
+function messageText(value: unknown) {
+  if (typeof value === "string") {
+    return value.trim();
   }
 
-  if (!warned) {
-    warned = true;
-    console.warn(
-      `NEXT_PUBLIC_FORMSPREE_ENDPOINT is not set. Enquiry forms fall back to mailto:${contactEmail}.`,
-    );
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item).trim()).filter(Boolean).join(" ");
   }
 
   return "";
 }
 
-export function resetFormspreeWarningForTests() {
-  warned = false;
+/** Field messages and a form-level message from a Formspree JSON error body. */
+export function readFormspreeErrors(body: unknown): { errors: FieldErrors; formError: string } {
+  const errors: FieldErrors = {};
+  const formMessages: string[] = [];
+
+  if (!body || typeof body !== "object") {
+    return { errors, formError: "" };
+  }
+
+  const record = body as Record<string, unknown>;
+  const raw = record.errors;
+
+  const add = (field: string, message: string) => {
+    if (!message) {
+      return;
+    }
+
+    if (enquiryFields.has(field)) {
+      errors[field as keyof FieldErrors] = message;
+      return;
+    }
+
+    formMessages.push(message);
+  };
+
+  if (Array.isArray(raw)) {
+    for (const item of raw) {
+      if (!item || typeof item !== "object") {
+        continue;
+      }
+
+      const entry = item as Record<string, unknown>;
+      add(typeof entry.field === "string" ? entry.field : "", messageText(entry.message));
+    }
+  } else if (raw && typeof raw === "object") {
+    for (const [field, value] of Object.entries(raw)) {
+      add(field, messageText(value));
+    }
+  }
+
+  const summary = messageText(record.error);
+
+  if (summary && Object.keys(errors).length) {
+    formMessages.unshift(summary);
+  } else if (summary && !formMessages.length) {
+    formMessages.push(summary);
+  }
+
+  return { errors, formError: formMessages.join(" ") };
 }

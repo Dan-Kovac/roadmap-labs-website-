@@ -7,7 +7,6 @@ import { JsonLd } from "@/components/json-ld";
 import { SiteShell } from "@/components/site-shell";
 import { rootMetadata } from "@/lib/metadata";
 import { organizationJsonLd } from "@/lib/schema";
-import { warnIfFormspreeMissing } from "@/lib/formspree";
 import { assertProductionClean } from "@/lib/surface";
 import "./globals.css";
 
@@ -36,7 +35,6 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   assertProductionClean();
-  warnIfFormspreeMissing();
 
   return (
     <html lang="en-AU" className={`${sans.variable} ${mono.variable}`}>

@@ -408,7 +408,6 @@ export const contactCopy = {
   line1: "The first step is free.",
   line2: "Tell Dan where AI should help.",
   lead: "Send a note below. Dan reads these and replies by email.",
-  fallbackBefore: "The form isn't connected yet. Email Dan at",
   name: "Name",
   email: "Email",
   company: "Company, optional",

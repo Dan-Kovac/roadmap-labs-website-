@@ -8,7 +8,7 @@ import {
   reduceEnquiry,
   type EnquiryFields,
 } from "@/lib/enquiry";
-import { formspreeEndpoint, resetFormspreeWarningForTests, warnIfFormspreeMissing } from "@/lib/formspree";
+import { defaultFormspreeFormId, formspreeEndpoint, formspreeFormId, readFormspreeErrors } from "@/lib/formspree";
 import { enquiryHref } from "@/lib/site";
 
 const endpoint = "https://formspree.io/f/test";
@@ -26,7 +26,6 @@ describe("enquiry form state", () => {
   afterEach(() => {
     vi.unstubAllEnvs();
     vi.restoreAllMocks();
-    resetFormspreeWarningForTests();
   });
 
   it("uses the approved button and success lines, with no GST wording", () => {
@@ -98,22 +97,46 @@ describe("enquiry form state", () => {
     expect(result.request).toBeUndefined();
   });
 
-  it("warns once and falls back when the Formspree env var is unset", () => {
-    vi.stubEnv("NEXT_PUBLIC_FORMSPREE_ENDPOINT", "");
-    const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("posts to Dan's form unless a test id is set", () => {
+    vi.stubEnv("NEXT_PUBLIC_FORMSPREE_FORM_ID", "");
+    expect(defaultFormspreeFormId).toBe("xdeeekqw");
+    expect(formspreeFormId()).toBe("xdeeekqw");
+    expect(formspreeEndpoint()).toBe("https://formspree.io/f/xdeeekqw");
 
-    expect(formspreeEndpoint()).toBe("");
-    expect(warnIfFormspreeMissing()).toBe("");
-    expect(warnIfFormspreeMissing()).toBe("");
-    expect(spy).toHaveBeenCalledTimes(1);
-    expect(String(spy.mock.calls[0]?.[0])).toContain("mailto:dan@roadmaplabs.com.au");
+    vi.stubEnv("NEXT_PUBLIC_FORMSPREE_FORM_ID", "citest");
+    expect(formspreeEndpoint()).toBe("https://formspree.io/f/citest");
+    expect(formspreeEndpoint()).not.toContain("xdeeekqw");
+
+    vi.stubEnv("NEXT_PUBLIC_FORMSPREE_FORM_ID", "https://formspree.io/f/xdeeekqw");
+    expect(formspreeFormId()).toBe("xdeeekqw");
   });
 
-  it("accepts an https Formspree endpoint", () => {
-    vi.stubEnv("NEXT_PUBLIC_FORMSPREE_ENDPOINT", "https://formspree.io/f/abcd");
-    expect(formspreeEndpoint()).toBe("https://formspree.io/f/abcd");
-    vi.stubEnv("NEXT_PUBLIC_FORMSPREE_ENDPOINT", "http://formspree.io/f/abcd");
-    expect(formspreeEndpoint()).toBe("");
+  it("reads Formspree field errors and a form-level error", () => {
+    expect(
+      readFormspreeErrors({
+        error: "Validation errors",
+        errors: [{ field: "email", message: "must be a valid email" }],
+      }),
+    ).toEqual({
+      errors: { email: "must be a valid email" },
+      formError: "Validation errors",
+    });
+
+    expect(readFormspreeErrors({ errors: { website: ["must be a url"] } })).toEqual({
+      errors: { website: "must be a url" },
+      formError: "",
+    });
+
+    const failed = reduceEnquiry(
+      { status: "sending", errors: {} },
+      { type: "failed", errors: { email: "must be a valid email" }, formError: "Validation errors" },
+    );
+    expect(failed.state).toEqual({
+      status: "error",
+      errors: { email: "must be a valid email" },
+      formError: "Validation errors",
+    });
+    expect(failed.request).toBeUndefined();
   });
 
   it("points home enquiries at the start form and other pages at contact", () => {

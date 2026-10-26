@@ -10,6 +10,7 @@ import {
   type EnquiryFields,
   type EnquiryState,
 } from "@/lib/enquiry";
+import { formspreeEndpoint, readFormspreeErrors } from "@/lib/formspree";
 import { contactEmail, contactHref } from "@/lib/site";
 
 function readFields(data: FormData): EnquiryFields {
@@ -23,21 +24,10 @@ function readFields(data: FormData): EnquiryFields {
   };
 }
 
-export function ContactForm({ endpoint, formId }: { endpoint: string; formId: string }) {
+export function ContactForm({ formId }: { formId: string }) {
   const [state, setState] = useState<EnquiryState>(initialEnquiryState);
   const sending = useRef(false);
-
-  if (!endpoint) {
-    return (
-      <p className="form-fallback">
-        {contactCopy.fallbackBefore}{" "}
-        <a className="rl-link" href={contactHref}>
-          {contactEmail}
-        </a>
-        .
-      </p>
-    );
-  }
+  const endpoint = formspreeEndpoint();
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -81,7 +71,17 @@ export function ContactForm({ endpoint, formId }: { endpoint: string; formId: st
 
       if (!response.ok) {
         sending.current = false;
-        setState(reduceEnquiry(reduced.state, { type: "failed" }).state);
+        const failure = readFormspreeErrors(await response.json().catch(() => null));
+        const next = reduceEnquiry(reduced.state, {
+          type: "failed",
+          errors: failure.errors,
+          formError: failure.formError,
+        });
+        setState(next.state);
+        const key = firstError(next.state.errors);
+        if (key) {
+          document.getElementById(`${formId}-${key}`)?.focus();
+        }
         return;
       }
 
@@ -97,19 +97,24 @@ export function ContactForm({ endpoint, formId }: { endpoint: string; formId: st
   const showStatus = state.status === "sent" || state.status === "error" || state.status === "invalid" || state.status === "sending";
 
   return (
+    <>
     <form id={formId === "contact-form" ? "enquiry" : formId} className="enquiry" onSubmit={onSubmit}>
       <p id={statusId} role="status" aria-live="polite" className={showStatus ? "form-status" : "sr-only"}>
         {state.status === "sending" ? contactCopy.sending : null}
         {state.status === "sent" ? contactCopy.success : null}
         {state.status === "invalid" ? contactCopy.invalid : null}
         {state.status === "error" ? (
-          <>
-            {contactCopy.errorBefore}{" "}
-            <a className="rl-link" href={contactHref}>
-              {contactEmail}
-            </a>{" "}
-            {contactCopy.errorAfter}
-          </>
+          state.formError ? (
+            state.formError
+          ) : (
+            <>
+              {contactCopy.errorBefore}{" "}
+              <a className="rl-link" href={contactHref}>
+                {contactEmail}
+              </a>{" "}
+              {contactCopy.errorAfter}
+            </>
+          )
         ) : null}
       </p>
       {state.status === "sent" ? null : (
@@ -147,6 +152,7 @@ export function ContactForm({ endpoint, formId }: { endpoint: string; formId: st
             label={contactCopy.company}
             autoComplete="organization"
             maxLength={160}
+            error={state.errors.company}
           />
           <Field
             formId={formId}
@@ -173,6 +179,13 @@ export function ContactForm({ endpoint, formId }: { endpoint: string; formId: st
         </>
       )}
     </form>
+    <p className="form-email">
+      or email{" "}
+      <a className="rl-link" href={contactHref}>
+        {contactEmail}
+      </a>
+    </p>
+    </>
   );
 }
 
