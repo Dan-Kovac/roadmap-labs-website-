@@ -1,59 +1,43 @@
-import type { Metadata } from "next";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ContactForm } from "@/components/contact-form";
+import { JsonLd } from "@/components/json-ld";
+import { PageHeader } from "@/components/page-header";
+import { contactCopy } from "@/lib/copy";
 import { pageMetadata } from "@/lib/metadata";
-import { formEndpoint } from "@/lib/delivery";
-import { bookingUrl, contactEmail, contactHref } from "@/lib/site";
+import { breadcrumbJsonLd, contactPageJsonLd } from "@/lib/schema";
+import { seo } from "@/lib/seo";
+import { contactEmail, contactHref } from "@/lib/site";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Contact",
-  description: "Book a call or write to Dan Kovac at Roadmap Labs in Melbourne.",
+export const metadata = pageMetadata({
+  title: seo.contact.title,
+  description: seo.contact.description,
   path: "/contact",
 });
 
-export default async function ContactPage({
-  searchParams,
-}: PageProps<"/contact">) {
-  const params = await searchParams;
-  const intent = typeof params.intent === "string" ? params.intent : undefined;
-  const booking = bookingUrl();
-  const defaultIntent =
-    intent === "call"
-      ? "Book a call"
-      : intent === "automation"
-        ? "Automations and AI"
-        : undefined;
+export default function ContactPage() {
+  const crumbs = [
+    { name: "Home", path: "/" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   return (
-    <article className="editorial">
-      <p className="quiet">Contact</p>
-      <h1 className="thesis" id="book">
-        <span className="thesis-line">Get in touch.</span>
-      </h1>
-      <p className="positioning">
-        A call, a product question, or the shape of a system you need built.
-      </p>
-      <div className="contact-layout">
-        <ContactForm deliveryConfigured={Boolean(formEndpoint())} defaultIntent={defaultIntent} />
-        <aside className="contact-aside">
-          <h2>Email</h2>
+    <article className="section">
+      <JsonLd data={[contactPageJsonLd(), breadcrumbJsonLd(crumbs)]} />
+      <div className="rl-container contact-grid">
+        <div>
+          <Breadcrumbs items={crumbs} />
+          <PageHeader label={contactCopy.label} line1={contactCopy.line1} line2={contactCopy.line2} lead={contactCopy.lead} />
+          <ContactForm formId="contact-form" />
+        </div>
+        <aside className="aside">
+          <p className="rl-mono">{contactCopy.asideEmail}</p>
           <p>
-            <a href={contactHref}>{contactEmail}</a>
+            <a className="rl-link" href={contactHref}>
+              {contactEmail}
+            </a>
           </p>
-          <h2>Book a call</h2>
-          {booking ? (
-            <p>
-              <a href={booking} rel="noreferrer">
-                Open the booking page
-              </a>
-            </p>
-          ) : (
-            <p>
-              [BOOKING LINK TBC]. There is no calendar link yet. Choose “Book a call” in the form,
-              or email Dan and ask for a time.
-            </p>
-          )}
-          <h2>Studio</h2>
-          <p>Roadmap Labs. Melbourne, Australia.</p>
+          <p className="rl-mono">{contactCopy.asideBased}</p>
+          <p>{contactCopy.based}</p>
         </aside>
       </div>
     </article>

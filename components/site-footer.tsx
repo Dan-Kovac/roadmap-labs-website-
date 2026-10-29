@@ -1,27 +1,45 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
-import { contactEmail, contactHref, contactPath, navItems } from "@/lib/site";
+import { chrome } from "@/lib/copy";
+import { contactEmail, contactHref, footerServiceLinks, navItems } from "@/lib/site";
 
 export function SiteFooter() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="site-footer">
-      <div className="site-bar">
-        <div className="footer-brand">
-          <Link className="logo-link" href="/">
-            <Logo variant="footer" />
-          </Link>
-          <p className="footer-descriptor">Software & automations studio</p>
-          <p className="footer-meta">Melbourne, Australia</p>
+      <div className="rl-container footer-top">
+        <div>
+          <Logo variant="footer" />
+          <p className="footer-note">{chrome.footerDescriptor}</p>
+          <p className="footer-note">{chrome.footerLocation}</p>
         </div>
-        <nav className="nav" aria-label="Footer">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href}>
-              {item.label}
-            </Link>
-          ))}
-          <Link href={contactPath}>Get in touch</Link>
-          <a href={contactHref}>Email {contactEmail}</a>
+        <nav className="footer-nav" aria-label="Footer">
+          <div>
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
+          </div>
+          <div>
+            {footerServiceLinks.map((item) => (
+              <Link key={item.href} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
+            <Link href="/privacy">Privacy</Link>
+          </div>
         </nav>
+      </div>
+      <div className="rl-container footer-bottom">
+        <p>
+          © {year} Roadmap Labs
+          <span aria-hidden="true"> · </span>
+          <a className="rl-link" href={contactHref}>
+            {contactEmail}
+          </a>
+        </p>
       </div>
     </footer>
   );

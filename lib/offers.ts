@@ -1,48 +1,72 @@
+// One plan, three parts. Copy: Roadmap Labs, draft 4.3, 26 Oct 2026.
 export const offers = [
   {
-    id: "products",
+    id: "automation",
     number: "01",
-    title: "Own products",
-    home: "ReviewBuddy and Flexfolio. Software we ship and keep.",
+    title: "AI automation",
+    home: "AI on the admin and sales jobs that eat the week.",
     paragraphs: [
-      "Roadmap Labs designs, ships and looks after its own software. The products on the site today are ReviewBuddy, for review growth, and Flexfolio, for portfolios.",
-      "They are not client projects with our name taken off. We run them.",
+      "Quotes, follow-ups, onboarding and data entry, handled by automations so leads get an answer and nobody types it all by hand.",
+      "We build one job at a time. Each one gets a one-month test, and if it isn't working, we switch it off and build the next one.",
     ],
-    links: [
-      { href: "/projects/review-buddy", label: "ReviewBuddy" },
-      { href: "/projects/flexfolio", label: "Flexfolio" },
-    ],
+    links: [{ href: "/contact", label: "Send enquiry" }],
   },
   {
-    id: "systems",
+    id: "marketing",
     number: "02",
-    title: "Operating systems",
-    home: "The private system a business actually runs on. Compass OS is built in Retool.",
+    title: "Website and marketing",
+    home: "Your website, SEO, Google Ads, social and email, kept going out.",
     paragraphs: [
-      "Some businesses need an internal platform more than another public app. We build the system the team uses to run the day: the board, the notes, and the work in one place.",
-      "Compass OS is that platform for Compass Buyers Agency. It is built in Retool, and it is private.",
+      "We build and look after your website, work on conversion, and run SEO, Google Ads management, social posting and email.",
+      "It's written for people first and keeps going out when the week gets busy.",
+      // [TBC: Google Ads spend: Dan confirming whether it's included or paid by the client. Don't add copy that answers it.]
     ],
-    links: [{ href: "/projects/compass-os", label: "Compass OS" }],
+    links: [{ href: "/services/marketing", label: "SEO, websites and Google Ads" }],
   },
   {
-    id: "automations",
+    id: "internal-tools",
     number: "03",
-    title: "Automations and AI",
-    home: "Workflows that take the repeated work off the desk.",
+    title: "Internal tools",
+    home: "A company portal that puts your data and tools in one place.",
     paragraphs: [
-      "When the same handoff happens every day, we put it in a workflow. That might be an AI step, a connection between the tools you already use, or a quieter version of a job someone was doing by hand.",
-      "The point is the same as the rest of the work. It does the job, then it stops asking for the hour.",
+      "When you're ready, we build an internal portal around how your team works, so your data and tools sit in one place and AI has something real to use.",
+      "It's usually about a month of work, at the same fee.",
     ],
-    links: [{ href: "/contact?intent=automation#book", label: "Talk through a workflow" }],
+    links: [{ href: "/services", label: "How the plan works" }],
   },
 ] as const;
 
+export const partnerPlan = {
+  id: "partner-plan",
+  name: "Partner plan",
+  price: "A$3,500/mo",
+  priceLine: "A$3,500 a month, no GST. AI model costs included. No contract.",
+  includes: [
+    "Website builds",
+    "Conversion work",
+    "SEO",
+    "Google Ads management", // [TBC: ad spend, Dan confirming]
+    "Social and email",
+    "AI automation",
+    "Software and internal tools",
+  ],
+  terms: [
+    "A$3,500 a month, no GST. AI model costs included. No contract.",
+    "AI model costs are in the fee. We pick the model for each job and keep an eye on the spend.",
+    "No contract. Cancel any month.",
+    "If you leave, we hand over everything we've built.",
+    "We only take a small handful of clients at a time.",
+  ],
+  cta: { href: "/contact", label: "Send enquiry" },
+} as const;
+
+// Kept so existing imports don't break. Points at the website part of the plan.
 export const websiteOffer = {
   id: "websites",
-  title: "Websites, SEO and conversion",
+  title: "Website and marketing",
   paragraphs: [
-    "Alongside those three, Dan takes on website, SEO and conversion work for clients. The public example is the Compass Buyers Agency site.",
-    "Pricing for client work is on request.",
+    "Website builds, conversion work, SEO, Google Ads management, social and email are part of the partner plan, alongside AI automation, software and internal tools.",
+    "It's all in the one monthly fee: A$3,500 a month, no GST. AI model costs included. No contract.",
   ],
-  links: [{ href: "/projects/compass-website", label: "Compass website" }],
+  links: [{ href: "/services/marketing", label: "SEO, websites and Google Ads" }],
 } as const;

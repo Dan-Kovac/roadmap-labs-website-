@@ -1,40 +1,49 @@
 ---
 slug: review-buddy
-title: ReviewBuddy
-job: Reviews, asked for and shown.
-dek: Review-growth software for Australian small businesses. Starter is A$49 a month and Growth is A$75 a month, including GST.
-role: Own product
+title: "ReviewBuddy: Google reviews for Australian tradies"
+name: ReviewBuddy
+job: Google review software for Australian tradies.
+dek: ReviewBuddy is our own company. It helps Australian tradies get more Google reviews and show them on their website. It's in beta.
+role: Own company
 order: 2
 home: true
-liveUrl: https://app.reviewbuddy.com.au/login
-liveLabel: Open the ReviewBuddy app
-result: "[RESULT TBC]"
-testimonial: "[TESTIMONIAL TBC]"
-thesis:
-  - ReviewBuddy.
-  - Ask for the review. Show it on the site.
+publish: true
+permission: public
+indexable: true
+seoTitle: ReviewBuddy, our own review software · Roadmap Labs
+seoDescription: ReviewBuddy is our own Google review software for Australian tradies, now in beta. What we built and how it works.
+client: Our own company
+services: Product, AI automation
+status: In beta
+liveUrl: https://reviewbuddy.com.au
+liveLabel: reviewbuddy.com.au
+aboutName: ReviewBuddy
+aboutUrl: https://reviewbuddy.com.au
 shots:
-  - label: Product
+  - label: Widget
+    place: hero
     crop: wide
-    alt: Empty field for a ReviewBuddy product screenshot
-    placeholder: "[SCREENSHOT TBC]"
-  - label: Plans
-    crop: tall
-    alt: Empty field for a ReviewBuddy pricing screenshot
-    placeholder: "[SCREENSHOT TBC]"
+    src: /work/reviewbuddy-widget.jpg
+    alt: ReviewBuddy review widget
+    caption: The ReviewBuddy review widget, captured October 2026.
 ---
 
-ReviewBuddy is Roadmap Labs software for Australian small businesses. The product in the repository is written for tradies who want more Google reviews from real customers, and want those reviews on their website.
+## Who it's for
 
-A customer is asked after the job. Reviews that come back can sit with the other review sites the business already uses, in one widget on the site. The widget is there so the next person sees a current page, not a list someone pasted in by hand.
+ReviewBuddy is for Australian tradies. Before someone rings a tradie, they check the Google reviews. Then they look at the website.
 
-Two plans are published, both including GST.
+Reviews copied onto a website by hand go out of date as soon as nobody updates them.
 
-- Starter is A$49 a month. It includes a Google review link and QR code, a live reviews widget on the website, and setup.
-- Growth is A$75 a month. It includes everything in Starter, email sequences that keep asking customers for reviews, and a way to bring past customers back in by CSV.
+## What we built
 
-There is a 7-day free trial. Setup is included. The plan can be cancelled anytime.
+Each business gets its own Google review link and QR code to share after a job. A widget on their website shows their reviews, alongside other review sites they use, like hipages.
 
-The public marketing address, reviewbuddy.com.au, is not serving a page at the moment. The button on this page opens the live app sign-in instead.
+On the Growth plan, ReviewBuddy emails customers to ask for a review, with one reminder. Past customers can be loaded in from a spreadsheet.
 
-What the product has changed for the businesses using it is not recorded here yet.
+## How it works
+
+1. After the job, the tradie shares their review link or QR code.
+2. The customer leaves a Google review.
+3. The widget on the tradie's website updates with the new review.
+
+ReviewBuddy is in beta. Setup is free, and there's a 7-day free trial.

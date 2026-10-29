@@ -1,0 +1,157 @@
+<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><title>Roadmap Labs · Components v1.0</title>
+<link rel="stylesheet" href="../build/fonts.css"><link rel="stylesheet" href="tokens.css">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:var(--rl-font-sans);color:var(--rl-color-text);background:#fff;-webkit-font-smoothing:antialiased}
+.wrap{padding:0 96px}
+.mono{font-family:var(--rl-font-mono);font-size:12px;letter-spacing:.02em;color:var(--rl-color-text-secondary);line-height:1.5}
+.sec{padding:56px 0;border-top:1px solid var(--rl-color-rule)}
+.sec>.mono:first-child{margin-bottom:28px}
+.row{display:grid;gap:48px}
+.h2{font-size:48px;line-height:1.04;letter-spacing:-.035em;font-weight:500;margin:0}
+.h1{font-size:72px;line-height:1.02;letter-spacing:-.045em;font-weight:500;margin:0}
+.h3{font-size:28px;line-height:1.15;letter-spacing:-.025em;font-weight:500;margin:0}
+.lead{font-size:20px;line-height:1.5;color:var(--rl-color-text-secondary);margin:0;letter-spacing:-.01em}
+.body{font-size:16px;line-height:1.55;color:var(--rl-color-text-secondary);margin:0}
+.sv{color:var(--rl-color-text-tertiary)}
+.rl-dark .sv{color:#6B717C}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 20px;border-radius:9999px;font:500 15px/1 var(--rl-font-sans);letter-spacing:-.005em;border:0;white-space:nowrap;text-decoration:none}
+.sm{height:36px;padding:0 16px;font-size:14px}
+.pri{background:#0B0D12;color:#fff}.pri.h{background:#262932}.pri.a{background:#000}
+.pri.d{background:#E6E8EC;color:#8B919C}
+.sec-b{background:#fff;color:#0B0D12;box-shadow:inset 0 0 0 1px #D5D8DE}.sec-b.h{background:#F7F7F8;box-shadow:inset 0 0 0 1px #8B919C}.sec-b.a{background:#E6E8EC;box-shadow:inset 0 0 0 1px #8B919C}.sec-b.d{color:#8B919C;box-shadow:inset 0 0 0 1px #E6E8EC}
+.txt{background:none;padding:0 2px;height:28px;color:#0B0D12;border-radius:4px}.txt.h{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}.txt.h .ar{transform:translateX(2px)}.txt.a{color:#000;text-decoration:underline;text-underline-offset:.22em}.txt.d{color:#8B919C}
+.f{outline:2px solid #0B0D12;outline-offset:2px}
+.rl-dark .pri{background:#fff;color:#0B0D12}.rl-dark .pri.h{background:#E6E8EC}.rl-dark .pri.a{background:#D5D8DE}.rl-dark .pri.d{background:rgba(255,255,255,.12);color:#6B717C}
+.rl-dark .sec-b{background:transparent;color:#F4F5F7;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}.rl-dark .sec-b.h{background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}.rl-dark .sec-b.a{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}.rl-dark .sec-b.d{color:#6B717C;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.rl-dark .f{outline-color:#fff}
+.ar{display:inline-block}
+table.m{border-collapse:collapse;width:100%}
+table.m td,table.m th{padding:14px 12px 14px 0;text-align:left;vertical-align:middle}
+table.m th{font:400 12px/1.5 var(--rl-font-mono);letter-spacing:.02em;color:var(--rl-color-text-secondary);border-bottom:1px solid var(--rl-color-rule)}
+table.m td:first-child{font:400 12px/1.5 var(--rl-font-mono);color:var(--rl-color-text-secondary);width:84px}
+.cap{font-size:13px;line-height:1.45;color:var(--rl-color-text-secondary);margin-top:10px}
+.ul{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em;text-decoration-color:rgba(11,13,18,.35)}
+.ul.h{text-decoration-color:#0B0D12}
+/* nav */
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rl-color-rule);padding:0 32px;background:#fff}
+.nav nav{display:flex;gap:32px;font:500 15px/1 var(--rl-font-sans)}
+.nav nav a{color:#0B0D12;text-decoration:none}.nav nav a.cur{text-decoration:underline;text-underline-offset:.35em;text-decoration-thickness:1px}
+.frame{box-shadow:0 0 0 1px var(--rl-color-rule);border-radius:12px;overflow:hidden}
+.box{box-shadow:0 0 0 1px var(--rl-color-rule);border-radius:12px;overflow:hidden}
+/* work list */
+.wl{border-bottom:1px solid var(--rl-color-rule)}
+.wr{display:grid;grid-template-columns:56px 1.1fr 1.6fr 90px;align-items:baseline;padding:28px 0;border-top:1px solid var(--rl-color-rule);gap:16px}
+.wr .h3{font-size:24px}
+.wr .go{font:500 15px/1 var(--rl-font-sans);text-align:right}
+.wr.h .h3{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em}
+.wr.h .ar{transform:translateX(2px)}
+/* details */
+dl{margin:0}dl div{display:grid;grid-template-columns:1fr 2fr;border-top:1px solid var(--rl-color-rule);padding:14px 0}
+dt{font:400 12px/1.6 var(--rl-font-mono);letter-spacing:.02em;color:var(--rl-color-text-secondary)}dd{margin:0;font-size:16px;line-height:1.5}
+/* fields */
+.fld label{display:block;font:500 14px/1.4 var(--rl-font-sans);margin-bottom:8px}
+.fld label span{color:var(--rl-color-text-secondary);font-weight:400}
+.in{height:48px;border:1px solid #8B919C;border-radius:8px;padding:0 14px;display:flex;align-items:center;font-size:16px;background:#fff}
+.in.ph{color:#8B919C}.in.hv{border-color:#5B616E}.in.fo{border-color:#0B0D12;outline:2px solid #0B0D12;outline-offset:2px}.in.er{border:2px solid #0B0D12;padding:0 13px}.in.di{background:#F7F7F8;border-color:#E6E8EC;color:#8B919C}
+.in.ta{height:120px;align-items:flex-start;padding-top:12px}
+.help{font-size:13px;color:var(--rl-color-text-secondary);margin-top:6px}.err{font-size:14px;margin-top:6px}
+.sel{justify-content:space-between}
+.foot{display:flex;justify-content:space-between;padding:48px 32px 0}
+.foot nav{display:grid;grid-template-columns:repeat(3,auto);gap:12px 48px;font-size:15px}
+.fb{display:flex;justify-content:space-between;border-top:1px solid var(--rl-color-rule);margin:40px 32px 0;padding:20px 0 28px;font-size:14px;color:var(--rl-color-text-secondary)}
+</style></head><body>
+<div class="wrap">
+<header style="display:flex;justify-content:space-between;align-items:center;height:96px">
+<img src="assets/logo/logo-black.svg" style="height:36px" alt="Roadmap Labs">
+<span class="mono">Design system v1.0 · Mono · Components · 25 Oct 2026</span></header>
+
+<section class="sec"><div class="mono">7.1 · Nav · 76px, 1px rule, logo 36px, links 15/500, current page underlined</div>
+<div class="box"><div class="nav"><img src="assets/logo/logo-black.svg" style="height:36px" alt="">
+<nav><a class="cur">Work</a><a>Services</a><a>Insights</a><a>About</a></nav>
+<div style="display:flex;gap:12px"><span class="btn sm sec-b">Get in touch</span><span class="btn sm pri">Book a call</span></div></div></div>
+</section>
+
+<section class="sec"><div class="mono">7.3 · Buttons · pill · 44 / 36px · 15/500 · exact state values in DESIGN-SYSTEM.md §8</div>
+<div class="row" style="grid-template-columns:1.3fr 1fr;gap:40px;align-items:start">
+<table class="m"><tr><th></th><th>Default</th><th>Hover</th><th>Active</th><th>Focus-visible</th><th>Disabled</th></tr>
+<tr><td>Primary</td><td><span class="btn pri">Book a call</span></td><td><span class="btn pri h">Book a call</span></td><td><span class="btn pri a">Book a call</span></td><td><span class="btn pri f">Book a call</span></td><td><span class="btn pri d">Book a call</span></td></tr>
+<tr><td>Secondary</td><td><span class="btn sec-b">Get in touch</span></td><td><span class="btn sec-b h">Get in touch</span></td><td><span class="btn sec-b a">Get in touch</span></td><td><span class="btn sec-b f">Get in touch</span></td><td><span class="btn sec-b d">Get in touch</span></td></tr>
+<tr><td>Text</td><td><span class="btn txt">All work <span class="ar">→</span></span></td><td><span class="btn txt h">All work <span class="ar">→</span></span></td><td><span class="btn txt a">All work <span class="ar">→</span></span></td><td><span class="btn txt f">All work <span class="ar">→</span></span></td><td><span class="btn txt d">All work <span class="ar">→</span></span></td></tr>
+<tr><td>Small</td><td><span class="btn sm pri">Book a call</span></td><td><span class="btn sm sec-b">Get in touch</span></td><td colspan="3"></td></tr>
+</table>
+<div class="rl-dark" style="border-radius:12px;padding:16px 20px 8px">
+<table class="m" style="color:#F4F5F7"><tr><th style="color:#9AA0AA;border-color:rgba(255,255,255,.12)">On Ink</th><th style="color:#9AA0AA;border-color:rgba(255,255,255,.12)">Default</th><th style="color:#9AA0AA;border-color:rgba(255,255,255,.12)">Hover</th><th style="color:#9AA0AA;border-color:rgba(255,255,255,.12)">Focus</th><th style="color:#9AA0AA;border-color:rgba(255,255,255,.12)">Disabled</th></tr>
+<tr><td style="color:#9AA0AA">Primary</td><td><span class="btn pri">Book a call</span></td><td><span class="btn pri h">Book a call</span></td><td><span class="btn pri f">Book a call</span></td><td><span class="btn pri d">Book a call</span></td></tr>
+<tr><td style="color:#9AA0AA">Secondary</td><td><span class="btn sec-b">Email Dan</span></td><td><span class="btn sec-b h">Email Dan</span></td><td><span class="btn sec-b f">Email Dan</span></td><td><span class="btn sec-b d">Email Dan</span></td></tr>
+</table></div></div></section>
+
+<section class="sec"><div class="row" style="grid-template-columns:1fr 1fr">
+<div><div class="mono" style="margin-bottom:28px">7.4 · Links · Ink, underline 1px, offset 0.22em, 35% → 100% on hover</div>
+<p class="body" style="font-size:18px;max-width:34rem;color:#0B0D12">Compass Buyers Agency runs from Byron Bay to the Gold Coast. We built the public site at <a class="ul">compassagency.com.au</a>&nbsp;↗ and the <a class="ul h">internal platform</a> behind it.</p>
+<p class="cap" style="margin-top:14px">Rest: rgba(11,13,18,.35) underline · Hover (second link): 100% Ink · External: ↗ after the label</p>
+<div class="rl-dark" style="margin-top:24px;border-radius:12px;padding:22px 28px"><p style="margin:0;font-size:16px;line-height:1.55;color:#9AA0AA">On Ink: <a class="ul" style="color:#F4F5F7;text-decoration-color:rgba(244,245,247,.4)">Read the Compass case study</a>. Underline at 40% white.</p></div></div>
+<div><div class="mono" style="margin-bottom:28px">7.5 · Section header · mono number label → H2 (second voice) → lead</div>
+<div class="mono">02 · How we work</div>
+<h2 class="h2" style="margin-top:16px"><span class="sv">Right software, built in the open.</span><br>Watch it get built.</h2>
+<p class="lead" style="margin-top:24px;max-width:30rem">A fixed plan, a live board and plain-English updates.</p>
+</div></div></section>
+
+<section class="sec"><div class="mono">7.6 · Work list item · rows split by hairlines · whole row is the link · second row shows hover</div>
+<div class="row" style="grid-template-columns:1.6fr 1fr">
+<div class="wl">
+<div class="wr"><span class="mono">01</span><span class="h3">Compass Buyers Agency</span><span class="body">Website, SEO and conversion for a buyers agency</span><span class="go">View <span class="ar">→</span></span></div>
+<div class="wr h"><span class="mono">02</span><span class="h3">Compass OS</span><span class="body">Internal operating system, built in Retool</span><span class="mono" style="text-align:right">Private</span></div>
+<div class="wr"><span class="mono">03</span><span class="h3">ReviewBuddy</span><span class="body">Review-growth software for small businesses</span><span class="go">View <span class="ar">→</span></span></div>
+<div class="wr"><span class="mono">04</span><span class="h3">Flexfolio</span><span class="body">Portfolio platform for product managers</span><span class="go">View <span class="ar">→</span></span></div>
+</div>
+<div><div class="frame" style="aspect-ratio:16/10"><img src="../build/compass-crop.png" style="width:100%;height:100%;object-fit:cover;object-position:top" alt="Compass Buyers Agency home page"></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:16px"><span class="h3" style="font-size:24px">Compass Buyers Agency</span><span class="go" style="font:500 15px/1 var(--rl-font-sans)">View →</span></div>
+<p class="body" style="margin-top:6px">Card variant · image frame 16:10, no card fill</p></div>
+</div></section>
+
+<section class="sec"><div class="row" style="grid-template-columns:1fr 1fr">
+<div><div class="mono" style="margin-bottom:28px">7.7 · Case study header + details list</div>
+<div class="mono">Work / Compass Buyers Agency</div>
+<h1 class="h1" style="margin-top:16px;font-size:64px">Compass Buyers Agency</h1>
+<p class="lead" style="margin-top:20px;max-width:32rem">The public website for a buyers agency working from Byron Bay to the Gold Coast.</p>
+<dl style="margin-top:36px;border-bottom:1px solid var(--rl-color-rule)">
+<div><dt>Client</dt><dd>Compass Buyers Agency</dd></div>
+<div><dt>Scope</dt><dd>Website, SEO and conversion</dd></div>
+<div><dt>Built with</dt><dd>[Stack: confirm with Dan]</dd></div>
+<div><dt>Live</dt><dd><a class="ul">compassagency.com.au</a> ↗</dd></div>
+</dl><p class="cap">No “Result” or “Testimonial” rows until real, approved text exists.</p></div>
+<div><div class="mono" style="margin-bottom:28px">7.8 · Image frame · radius 12, 1px rule ring, no shadow, caption 13 grey</div>
+<div class="frame" style="aspect-ratio:16/10;margin-top:0"><img src="../build/compass-crop.png" style="width:100%;height:100%;object-fit:cover;object-position:top" alt=""></div>
+<p class="cap">compassagency.com.au, captured October 2026 · chat widget and rating badge removed · needs client OK before publishing</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px">
+<div class="frame" style="aspect-ratio:16/10;background:#fff;display:flex;align-items:center;justify-content:center" ><span class="mono">16:10 default</span></div>
+<div class="frame" style="aspect-ratio:3/2;display:flex;align-items:center;justify-content:center"><span class="mono">3:2 wide</span></div>
+<div class="frame" style="aspect-ratio:4/5;width:70%;display:flex;align-items:center;justify-content:center"><span class="mono">4:5 mobile</span></div></div>
+<p class="cap">Ratio guides only. With no approved image, the frame isn't rendered.</p></div>
+</div></section>
+
+<section class="sec"><div class="mono">7.10 · Contact form field · 48px, 1px #8B919C border (3.2:1), radius 8 · label above, never placeholder-only</div>
+<div class="row" style="grid-template-columns:repeat(4,1fr);gap:32px">
+<div class="fld"><label>Name <span>(required)</span></label><div class="in ph">Your name</div><div class="help">Default</div></div>
+<div class="fld"><label>Email <span>(required)</span></label><div class="in hv">dan@roadmaplabs.com.au</div><div class="help">Hover · border #5B616E</div></div>
+<div class="fld"><label>Organisation, if you have one</label><div class="in fo">Compass Buyers</div><div class="help">Focus · Ink border + 2px outline, 2px offset</div></div>
+<div class="fld"><label>Email <span>(required)</span></label><div class="in er">dan@roadmaplabs</div><div class="err">Error: enter a full email address.</div></div>
+<div class="fld"><label>What do you need?</label><div class="in sel">Book a call<span>⌄</span></div><div class="help">Select · custom chevron</div></div>
+<div class="fld"><label>Phone</label><div class="in di">Not needed</div><div class="help">Disabled · #F7F7F8 / #E6E8EC</div></div>
+<div class="fld" style="grid-column:span 2"><label>Message <span>(required)</span></label><div class="in ta ph">What has to happen?</div></div>
+</div>
+<div style="margin-top:28px"><span class="btn pri">Send</span></div></section>
+</div>
+
+<section class="rl-dark" style="padding:96px 96px;margin-top:0">
+<div class="mono" style="color:#9AA0AA">7.9 · CTA band · 04 · Start</div>
+<h2 class="h2" style="margin-top:16px;color:#F4F5F7"><span class="sv">Got a job that keeps repeating?</span><br>Tell Dan what has to happen.</h2>
+<div style="display:flex;gap:12px;margin-top:40px"><span class="btn pri">Book a call</span><span class="btn sec-b">Email Dan</span></div>
+</section>
+
+<div class="wrap"><section style="padding:48px 0 0"><div class="mono">7.2 · Footer · 1px rule top, logo 32px, descriptor + location, text-only links</div>
+<div class="foot"><div><img src="assets/logo/logo-black.svg" style="height:32px" alt=""><p class="body" style="font-size:14px;margin-top:14px">Software & automations studio<br>Melbourne, Australia</p></div>
+<nav><a>Work</a><a>Services</a><a>Get in touch</a><a>Insights</a><a>About</a><a class="ul">dan@roadmaplabs.com.au</a></nav></div>
+<div class="fb"><span>© 2026 Roadmap Labs</span><span>roadmaplabs.com.au</span></div></section></div>
+</body></html>

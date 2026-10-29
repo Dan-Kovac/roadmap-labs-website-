@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { visibleCopy } from "@/lib/text";
 
 type Block =
   | { type: "h2"; text: string }
@@ -19,6 +20,16 @@ function safeHref(href: string) {
   }
 
   return undefined;
+}
+
+function marked(text: string, keyPrefix: string): ReactNode[] {
+  const clean = visibleCopy(text);
+
+  if (!clean) {
+    return [];
+  }
+
+  return inline(clean, keyPrefix);
 }
 
 function inline(text: string, keyPrefix: string): ReactNode[] {
@@ -161,30 +172,39 @@ export function Markdown({ source }: { source: string }) {
         const key = `block-${index}`;
 
         if (block.type === "h2") {
-          return <h2 key={key}>{inline(block.text, key)}</h2>;
+          return <h2 key={key}>{marked(block.text, key)}</h2>;
         }
 
         if (block.type === "h3") {
-          return <h3 key={key}>{inline(block.text, key)}</h3>;
+          return <h3 key={key}>{marked(block.text, key)}</h3>;
         }
 
         if (block.type === "quote") {
-          return <blockquote key={key}>{inline(block.text, key)}</blockquote>;
+          return <blockquote key={key}>{marked(block.text, key)}</blockquote>;
         }
 
         if (block.type === "ul" || block.type === "ol") {
           const List = block.type === "ul" ? "ul" : "ol";
+          const items = block.items.filter((item) => visibleCopy(item));
+
+          if (!items.length) {
+            return null;
+          }
 
           return (
             <List key={key}>
-              {block.items.map((item) => (
-                <li key={item}>{inline(item, `${key}-${item}`)}</li>
+              {items.map((item) => (
+                <li key={item}>{marked(item, `${key}-${item}`)}</li>
               ))}
             </List>
           );
         }
 
-        return <p key={key}>{inline(block.text, key)}</p>;
+        if (!visibleCopy(block.text)) {
+          return null;
+        }
+
+        return <p key={key}>{marked(block.text, key)}</p>;
       })}
     </>
   );

@@ -1,9 +1,5 @@
-import { organisationJsonLd } from "@/lib/site";
+export function JsonLd({ data }: { data: object | object[] }) {
+  const json = JSON.stringify(data).replace(/</g, "\\u003c");
 
-export function JsonLd() {
-  const json = JSON.stringify(organisationJsonLd).replace(/</g, "\\u003c");
-
-  return (
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />
-  );
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />;
 }

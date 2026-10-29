@@ -1,104 +1,259 @@
 "use client";
 
-import { useActionState } from "react";
-import { submitEnquiry, type EnquiryState } from "@/app/contact/actions";
+import { useRef, useState, type FormEvent } from "react";
+import { track } from "@/lib/analytics";
+import { contactCopy } from "@/lib/copy";
+import {
+  firstError,
+  initialEnquiryState,
+  reduceEnquiry,
+  type EnquiryFields,
+  type EnquiryState,
+} from "@/lib/enquiry";
+import { formspreeEndpoint, readFormspreeErrors } from "@/lib/formspree";
+import { contactEmail, contactHref } from "@/lib/site";
 
-const initialState: EnquiryState = { status: "idle" };
+function readFields(data: FormData): EnquiryFields {
+  return {
+    name: String(data.get("name") ?? ""),
+    email: String(data.get("email") ?? ""),
+    company: String(data.get("company") ?? ""),
+    website: String(data.get("website") ?? ""),
+    message: String(data.get("message") ?? ""),
+    gotcha: String(data.get("_gotcha") ?? ""),
+  };
+}
 
-const intents = [
-  "Book a call",
-  "An own-product question",
-  "An internal operating system",
-  "Automations and AI",
-  "Website, SEO or conversion",
-  "Something else",
-] as const;
+export function ContactForm({ formId }: { formId: string }) {
+  const [state, setState] = useState<EnquiryState>(initialEnquiryState);
+  const sending = useRef(false);
+  const endpoint = formspreeEndpoint();
 
-export function ContactForm({
-  deliveryConfigured,
-  defaultIntent,
-}: {
-  deliveryConfigured: boolean;
-  defaultIntent?: string;
-}) {
-  const [state, formAction, pending] = useActionState(submitEnquiry, initialState);
-  const intent =
-    defaultIntent && intents.includes(defaultIntent as (typeof intents)[number])
-      ? defaultIntent
-      : "Book a call";
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    if (sending.current) {
+      return;
+    }
+
+    const reduced = reduceEnquiry(state, {
+      type: "submit",
+      fields: readFields(new FormData(form)),
+      endpoint,
+    });
+    setState(reduced.state);
+
+    if (!reduced.request) {
+      const key = firstError(reduced.state.errors);
+      if (key) {
+        document.getElementById(`${formId}-${key}`)?.focus();
+      }
+      return;
+    }
+
+    sending.current = true;
+
+    try {
+      const response = await fetch(reduced.request.endpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reduced.request.payload),
+      });
+
+      if (!response.ok) {
+        sending.current = false;
+        const failure = readFormspreeErrors(await response.json().catch(() => null));
+        const next = reduceEnquiry(reduced.state, {
+          type: "failed",
+          errors: failure.errors,
+          formError: failure.formError,
+        });
+        setState(next.state);
+        const key = firstError(next.state.errors);
+        if (key) {
+          document.getElementById(`${formId}-${key}`)?.focus();
+        }
+        return;
+      }
+
+      track("contact_submit", { location: formId });
+      setState(reduceEnquiry(reduced.state, { type: "succeeded" }).state);
+    } catch {
+      sending.current = false;
+      setState(reduceEnquiry(reduced.state, { type: "failed" }).state);
+    }
+  }
+
+  const statusId = `${formId}-status`;
+  const showStatus = state.status === "sent" || state.status === "error" || state.status === "invalid" || state.status === "sending";
 
   return (
-    <form className="enquiry" action={formAction} noValidate>
-      {deliveryConfigured ? (
-        <p className="form-note">Dan reads these and replies by email.</p>
-      ) : (
-        <p className="form-note">
-          The form is on the page. It is not connected to an inbox yet, so a note typed here
-          is not stored and is not emailed. For anything that needs a reply now, email Dan
-          directly. On send, you can open a prefilled email with what you wrote.
-        </p>
+    <>
+    <form id={formId === "contact-form" ? "enquiry" : formId} className="enquiry" onSubmit={onSubmit}>
+      <p id={statusId} role="status" aria-live="polite" className={showStatus ? "form-status" : "sr-only"}>
+        {state.status === "sending" ? contactCopy.sending : null}
+        {state.status === "sent" ? contactCopy.success : null}
+        {state.status === "invalid" ? contactCopy.invalid : null}
+        {state.status === "error" ? (
+          state.formError ? (
+            state.formError
+          ) : (
+            <>
+              {contactCopy.errorBefore}{" "}
+              <a className="rl-link" href={contactHref}>
+                {contactEmail}
+              </a>{" "}
+              {contactCopy.errorAfter}
+            </>
+          )
+        ) : null}
+      </p>
+      {state.status === "sent" ? null : (
+        <>
+          <input type="hidden" name="_subject" value="New Roadmap Labs enquiry" />
+          <div className="hp" aria-hidden="true">
+            <label>
+              Leave this blank
+              <input name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
+            </label>
+          </div>
+          <Field
+            formId={formId}
+            name="name"
+            label={contactCopy.name}
+            required
+            autoComplete="name"
+            minLength={2}
+            maxLength={120}
+            error={state.errors.name}
+          />
+          <Field
+            formId={formId}
+            name="email"
+            label={contactCopy.email}
+            type="email"
+            required
+            autoComplete="email"
+            maxLength={160}
+            error={state.errors.email}
+          />
+          <Field
+            formId={formId}
+            name="company"
+            label={contactCopy.company}
+            autoComplete="organization"
+            maxLength={160}
+            error={state.errors.company}
+          />
+          <Field
+            formId={formId}
+            name="website"
+            label={contactCopy.website}
+            autoComplete="url"
+            inputMode="url"
+            maxLength={200}
+            error={state.errors.website}
+          />
+          <Field
+            formId={formId}
+            name="message"
+            label={contactCopy.message}
+            required
+            minLength={2}
+            maxLength={4000}
+            multiline
+            error={state.errors.message}
+          />
+          <button className="rl-btn rl-btn-primary" type="submit" disabled={state.status === "sending"} aria-busy={state.status === "sending"}>
+            {state.status === "sending" ? contactCopy.sending : contactCopy.send}
+          </button>
+        </>
       )}
+    </form>
+    <p className="form-email">
+      or email{" "}
+      <a className="rl-link" href={contactHref}>
+        {contactEmail}
+      </a>
+    </p>
+    </>
+  );
+}
 
-      <div className="hp" aria-hidden="true">
-        <label>
-          Company website
-          <input name="company_website" tabIndex={-1} autoComplete="off" />
-        </label>
-      </div>
+function Field({
+  formId,
+  name,
+  label,
+  type = "text",
+  required = false,
+  autoComplete,
+  inputMode,
+  minLength,
+  maxLength,
+  multiline = false,
+  error,
+}: {
+  formId: string;
+  name: string;
+  label: string;
+  type?: string;
+  required?: boolean;
+  autoComplete?: string;
+  inputMode?: "url";
+  minLength?: number;
+  maxLength?: number;
+  multiline?: boolean;
+  error?: string;
+}) {
+  const id = `${formId}-${name}`;
+  const errorId = `${id}-error`;
+  const describedBy = error ? errorId : undefined;
 
-      <div className="field">
-        <label htmlFor="name">Name</label>
-        <input id="name" name="name" autoComplete="name" required maxLength={120} />
-      </div>
-      <div className="field">
-        <label htmlFor="email">Email</label>
-        <input id="email" name="email" type="email" autoComplete="email" required maxLength={160} />
-      </div>
-      <div className="field">
-        <label htmlFor="organisation">Organisation, if you have one</label>
-        <input
-          id="organisation"
-          name="organisation"
-          autoComplete="organization"
-          maxLength={160}
+  return (
+    <div className="field">
+      <label htmlFor={id}>
+        {label}
+        {required ? <span className="sr-only">, required</span> : null}
+      </label>
+      {multiline ? (
+        <textarea
+          id={id}
+          name={name}
+          rows={5}
+          required={required}
+          minLength={minLength}
+          maxLength={maxLength}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={describedBy}
         />
-      </div>
-      <div className="field">
-        <label htmlFor="intent">What do you need?</label>
-        <select id="intent" name="intent" defaultValue={intent}>
-          {intents.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="field">
-        <label htmlFor="message">Message</label>
-        <textarea id="message" name="message" required maxLength={4000} rows={6} />
-      </div>
-
-      {state.status === "invalid" ? (
-        <p className="form-error" role="alert">
-          {state.message}
+      ) : (
+        <input
+          id={id}
+          name={name}
+          type={type}
+          required={required}
+          autoComplete={autoComplete}
+          inputMode={inputMode}
+          minLength={minLength}
+          maxLength={maxLength}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={describedBy}
+        />
+      )}
+      {error ? (
+        <p id={errorId} className="field-error">
+          {error}
         </p>
       ) : null}
-
-      <button className="rl-btn rl-btn-primary form-submit" type="submit" disabled={pending}>
-        {pending ? "Sending…" : "Send"}
-      </button>
-
-      {state.status === "unconfigured" || state.status === "sent" || state.status === "error" ? (
-        <div className="form-result" role="status" tabIndex={-1}>
-          <h2>{state.status === "sent" ? "Sent" : "Not sent"}</h2>
-          <p>{state.message}</p>
-          {state.mailto ? (
-            <a className="platform-line" href={state.mailto}>
-              Email this note to Dan
-            </a>
-          ) : null}
-        </div>
-      ) : null}
-    </form>
+    </div>
   );
 }
