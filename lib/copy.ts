@@ -67,7 +67,7 @@ export const chrome = {
   menuOpen: "Menu",
   menuClose: "Close",
   skip: "Skip to content",
-  footerDescriptor: "AI, software and automations",
+  footerDescriptor: "AI automation, software and marketing",
   footerLocation: "Melbourne, Australia",
   banner: "Notes from building with AI",
 };
@@ -163,12 +163,19 @@ export const howItWorks = {
   ],
 };
 
+export const founderPhoto = {
+  src: "/brand/dan-kovac.webp",
+  alt: "Dan Kovac, founder of Roadmap Labs",
+  width: 640,
+  height: 800,
+};
+
 export const dan = {
   label: "Dan Kovac",
   title: "Dan builds it. His own companies run on it.",
   lead: "Roadmap Labs, Flexfolio and ReviewBuddy are Dan's own companies. Compass Buyers Agency was a client project.",
   bio: "Dan Kovac is an AI consultant in Melbourne and founder of Roadmap Labs. He spent ten years in digital marketing, running Roadmap Digital. He builds his own apps, Flexfolio and ReviewBuddy, on the systems clients get.",
-  portrait: "[PHOTO TBC]",
+  portrait: founderPhoto.src,
   action: "All work →",
   rows: [
     {
@@ -329,7 +336,7 @@ export const homeInsights = {
 export const start = {
   label: "Start",
   line1: "Not sure where AI fits yet?",
-  line2: "Send a note and Dan will reply.",
+  line2: "That's what the first call is for.",
   reassurance: "No pressure and no contract. We take on a small handful of clients at a time.",
 };
 
@@ -527,7 +534,7 @@ export const aboutCopy = {
       href: "/projects/flexfolio",
     },
   ],
-  photo: "[PHOTO TBC]",
+  photo: founderPhoto.src,
   sameAs: "[DECISION: LinkedIn, Substack and X URLs for sameAs]",
 };
 
@@ -652,7 +659,7 @@ export const marketingPage = {
   close: {
     label: "Start",
     line1: "Marketing keeps getting dropped?",
-    line2: "Send a note and Dan will reply.",
+    line2: "That's what the first call is for.",
     reassurance: "No pressure and no contract. We take on a small handful of clients at a time.",
   },
 };

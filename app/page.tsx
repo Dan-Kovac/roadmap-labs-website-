@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { EnquiryLink } from "@/components/enquiry-link";
+import { FounderPortrait } from "@/components/founder-portrait";
 import { LaptopFrame } from "@/components/laptop-frame";
 import { ComparisonTable } from "@/components/comparison-table";
 import { CtaBand } from "@/components/cta-band";
@@ -135,8 +136,8 @@ export default function HomePage() {
               </Link>
             }
           />
-          <div className={visibleCopy(dan.portrait) ? "dan-layout" : undefined}>
-            {visibleCopy(dan.portrait) ? <p className="portrait copy-slot">{visibleCopy(dan.portrait)}</p> : null}
+          <div className="dan-layout">
+            <FounderPortrait sizes="240px" />
             <p className="lead">
               <Rich text={dan.bio} />
             </p>

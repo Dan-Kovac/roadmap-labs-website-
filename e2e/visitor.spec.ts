@@ -61,6 +61,8 @@ test("home comparison sits after how it works and links to services", async ({ p
   await expect(page.getByText("internal platform")).toHaveCount(0);
   await expect(page.locator('img[alt="Admin and sales automation"]')).toBeVisible();
   await expect(page.locator("#dan img[alt=\"Compass Buyers Agency home\"]")).toBeVisible();
+  await expect(page.locator("#dan img[alt=\"Dan Kovac, founder of Roadmap Labs\"]")).toBeVisible();
+  await expect(page.getByText("That's what the first call is for.")).toBeVisible();
 });
 
 test("about states the problem and ten years in digital marketing", async ({ page }) => {
@@ -68,6 +70,14 @@ test("about states the problem and ten years in digital marketing", async ({ pag
   await expect(page.getByText("Dan did ten years in digital marketing.")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Why AI isn't working for most businesses yet." })).toBeVisible();
   await expect(page.getByRole("heading", { name: "No time to work it out" })).toBeVisible();
+  const portrait = page.getByRole("img", { name: "Dan Kovac, founder of Roadmap Labs" });
+  await expect(portrait).toBeVisible();
+  const box = await portrait.boundingBox();
+  expect(box?.width ?? 0).toBeGreaterThan(160);
+  expect((box?.width ?? 0) / (box?.height ?? 1)).toBeCloseTo(0.8, 1);
+  await expect(page.getByText("That's what the first call is for.")).toBeVisible();
+  await expect(page.getByText("AI automation, software and marketing")).toBeVisible();
+  await expect(page.getByText("[PHOTO TBC]")).toHaveCount(0);
 });
 
 test("work lists the three projects and the compass study stays a website", async ({ page }) => {
@@ -76,7 +86,7 @@ test("work lists the three projects and the compass study stays a website", asyn
   await expect(page.getByText("A buyers agency from Byron Bay to the Gold Coast. We built their website.")).toBeVisible();
   await expect(page.getByText("Website · SEO · Conversion")).toBeVisible();
   await expect(page.getByText("Own company · In beta")).toHaveCount(2);
-  await expect(page.getByText("AI automation")).toHaveCount(0);
+  await expect(page.locator(".work-row").getByText("AI automation")).toHaveCount(0);
   await expect(page.getByText("Australian tradies")).toBeVisible();
   await expect(page.getByText("product managers")).toBeVisible();
   await expect(page.locator('img[alt="Compass Buyers Agency home"]')).toBeVisible();

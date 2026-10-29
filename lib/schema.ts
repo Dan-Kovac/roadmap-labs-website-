@@ -41,6 +41,7 @@ export const personJsonLd = {
   name: "Dan Kovac",
   jobTitle: "Founder",
   url: `${siteUrl}/about`,
+  image: `${siteUrl}/brand/dan-kovac.webp`,
   worksFor: { "@id": organizationId },
   knowsAbout: ["Software", "Automations", "Marketing"],
 };

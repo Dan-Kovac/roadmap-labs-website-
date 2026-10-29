@@ -708,14 +708,30 @@ main {
 }
 
 .portrait {
+  position: relative;
+  width: min(100%, 280px);
+  margin: 0;
   aspect-ratio: 4 / 5;
-  max-width: 240px;
-  margin: 24px 0 0;
-  display: grid;
-  align-content: end;
-  padding: 16px;
+  overflow: hidden;
   background: var(--rl-color-bg-subtle);
   box-shadow: 0 0 0 1px var(--rl-color-rule);
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-intro {
+  display: grid;
+  gap: 32px;
+  margin-top: 8px;
+}
+
+.about-intro .portrait {
+  order: -1;
 }
 
 .dan-layout {
@@ -793,11 +809,22 @@ main {
     display: grid;
     grid-template-columns: 240px 1fr;
     gap: 32px;
-    align-items: center;
+    align-items: start;
   }
 
-  .portrait {
-    margin: 0;
+  .dan-layout .portrait {
+    width: 240px;
+  }
+
+  .about-intro {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .about-intro .portrait {
+    order: 0;
+    width: 320px;
   }
 
   .cmp-head,

@@ -3,6 +3,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CtaBand } from "@/components/cta-band";
 import { JsonLd } from "@/components/json-ld";
 import { PageHeader } from "@/components/page-header";
+import { FounderPortrait } from "@/components/founder-portrait";
 import { Rich } from "@/components/rich";
 import { aboutCopy } from "@/lib/copy";
 import { pageMetadata } from "@/lib/metadata";
@@ -29,13 +30,15 @@ export default function AboutPage() {
         <div className="rl-container">
           <Breadcrumbs items={crumbs} />
           <PageHeader label={aboutCopy.label} line1={aboutCopy.title} lead={<Rich text={aboutCopy.lead} />} />
-          {visibleCopy(aboutCopy.photo) ? <p className="copy-slot">{visibleCopy(aboutCopy.photo)}</p> : null}
-          <div className="prose">
-            {aboutCopy.body.map((paragraph) => (
-              <p key={paragraph}>
-                <Rich text={paragraph} />
-              </p>
-            ))}
+          <div className="about-intro">
+            <div className="prose">
+              {aboutCopy.body.map((paragraph) => (
+                <p key={paragraph}>
+                  <Rich text={paragraph} />
+                </p>
+              ))}
+            </div>
+            <FounderPortrait priority sizes="(min-width: 768px) 320px, 280px" />
           </div>
           <section style={{ marginTop: 48 }}>
             <p className="rl-mono">{aboutCopy.problemLabel}</p>
