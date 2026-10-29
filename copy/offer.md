@@ -1,0 +1,269 @@
+# The offer: Roadmap Labs partner plan
+
+Draft 4, 26 October 2026 (AEDT). Source of truth: Dan's positioning canvas (45052edf) and Dan's pricing call on 26 Oct: **A$3,500 a month, no GST. AI model costs included. No contract.**
+This file is the source for `/services`. The slot tables at the end are checked by `_tools/slots.py services` (every slot passes). Draft 3 is archived at `_tools/old/offer_draft3_2026-10-25.md`.
+One CTA everywhere: **Book a call.**
+
+## 1. The offer in one line
+
+Outsourced marketing, software and AI automation, run from Melbourne. A$3,500 a month, no GST. AI model costs included. No contract.
+
+*Search phrase for this page (draft 4.3): "outsourced marketing", in the SEO title (ST1), the meta (ST2) and one heading (SL2) only. "Fractional CMO" no longer has a heading on this page: SC1 to SC4 retired in 4.4 and the 4.5c comparison is in-house vs us, so the phrase lives in article B (/insights/fractional-cmo-vs-agency). "Partner plan" stays the product name (OF5), never the headline. Page targets may shift when real Australian volumes arrive, so the phrase lives in those two slots and nowhere else on purpose.*
+
+## 2. Who it's for
+
+Australian businesses with 5 or more staff that aren't using AI well yet, or don't know where to start, and want to cut costs and get their marketing campaigns running. We're based in Melbourne. Usually it's one of four things:
+
+1 - There's no time to work it out.
+2 - The tools and data aren't set up for it, so AI has nothing real to work from.
+3 - They're not sure how to do it safely with client data.
+4 - They don't know what to do first.
+
+The partner line from the canvas is the test for every page: *"They'll finally make AI work for us, properly, and we'll know it's being done safely."*
+
+**Who it's not for** (from the brief, for Dan to confirm): solo operators and very small teams, businesses with no repeatable process yet, larger firms needing procurement or IT sign-off, anyone wanting a one-off website or app quoted as a project, anyone wanting guaranteed results, and businesses handling sensitive data such as health records until the safety paragraph is written.
+
+## 3. What we run for you
+
+- **AI automation for admin and sales.** Quotes, follow-ups, onboarding, data entry and the rest of the work that sits there all week.
+- **Website and marketing.** Website builds, conversion work, SEO, Google Ads management, social posting and email, written for people first and kept going out.
+- **Internal tools and your company portal.** A company portal that puts customer records, jobs and files in one place, for your team and your automations. It comes when you're ready, and it's usually about a month of work at the same fee.
+- **Security.** We look after the security of your data and the automations we build. [TBC: safety paragraph from Dan: where client data lives, who can see it, whose accounts it runs on]
+- **The AI models.** We pick the model for each job and keep an eye on what it costs. The model costs are in your fee. [DECISION: fair-use limit]
+
+**How we stay current:** new AI models and tools go into Flexfolio and ReviewBuddy, our own companies, first, and what works there comes to you. [TBC: confirm with Dan]
+
+## 4. How it works
+
+1 - **A free call.** We look at how the business runs, what you've tried with AI and where it would make the most difference. [DECISION: length and format]
+2 - **A roadmap with the numbers.** For each automation we estimate what it could save, what growth it could bring, how long it takes to get running and when it should start paying back. They're estimates with the working shown. No pressure. Look over the numbers, then decide.
+3 - **One job at a time.** We build one automation, then give it a one-month test. If it isn't working, we switch it off and build the next one.
+4 - **The portal, when you're ready.** Most businesses see value sooner from a couple of working automations, so the portal usually comes after. It's about a month of work, at the same fee.
+
+## 5. The terms
+
+- A$3,500 a month, no GST. AI model costs included. No contract. [DECISION: fair-use limit]
+- No contract. Cancel any month.
+- If you leave, we hand over everything we've built. [DECISION: handover terms]
+- We only take a small handful of partner clients at a time, so each one gets done properly.
+
+## 6. What changes for you
+
+In plain terms, and only ever as estimates on your roadmap:
+
+- Leads get an answer and a follow-up without anyone chasing them by hand.
+- Marketing keeps going out when the week gets busy.
+- Your team spends less time on admin and more on the work clients pay for.
+- Customer records, jobs and files sit in one place, so your team and the automations work from the same information.
+- You know what AI is doing in the business and could explain it to a client.
+
+## 7. The price, in perspective
+
+About **A$808 a week** (A$3,500 × 12 ÷ 52 = A$807.69).
+
+| What it replaces | Typical cost |
+|---|---|
+| SEO campaign, well run | A$2,000/mo |
+| Agency fees: Meta, Google or social ads | A$1,000/mo |
+| Virtual assistant at A$500+ a week | A$2,170+/mo |
+| **Together** | **About A$5,170/mo** |
+| **Roadmap Labs** | **A$3,500/mo** |
+| **Difference** | **About A$1,670/mo** |
+
+*Typical costs from Dan's ten years in digital marketing. The ad row is the agency's management fee on its own. Our fee works out at about A$808 a week.*
+
+Maths (rechecked 26 Oct, no GST adjustment): SEO A$2,000 + ads A$1,000 + VA A$2,166.67 (A$500 × 52 ÷ 12) = A$5,166.67. Less A$3,500 = A$1,666.67, shown as about A$1,670. A$3,500 × 12 ÷ 52 = A$807.69, shown as about A$808 a week.
+That's about A$1,670 a month you could put back into the business or your people.
+
+**In-house or us** (draft 4.5c: your team doing it vs Roadmap Labs, per Dan 26 Oct; same table as homepage 04; replaces SC1 to SC4)
+**Why not just get your team to do it?**
+Your team could set up AI tools themselves, and plenty try. Here's where it usually goes wrong when they do, and what we do instead.
+
+| Issue | Your team does it | Roadmap Labs runs it | Why it matters |
+|---|---|---|---|
+| **Data and security** | Someone pastes client details into a free AI tool, and nobody knows where they end up. | Security and model choice are part of the fee. We set them up before anything goes live. [TBC: what security covers] | *Your clients trust you with their details. That's much harder to win back than a tool is to set up.* |
+| **Tools that don't talk** | Each tool is set up on its own, so people still copy data from the CRM into spreadsheets. | We connect the software you already use so data moves by itself. Your portal comes later. | *AI can only work with what it can see. If the data is stuck in separate tools, someone is still typing it in.* |
+| **Knowing what good looks like** | They know the business, but maybe not what a well-run ad account or sales follow-up is. | We set it up the way good sales and marketing runs, from Dan's ten years in the field. | *AI speeds up whatever process you give it. A weak follow-up just goes out faster, to more people.* |
+| **Token and running costs** | The priciest model runs everything, usage creeps up and per-seat tools keep piling on. | We pick the model for each job and cut tools nobody uses. AI model costs are in the fee. | *AI bills grow a little each month. Nobody owns them until someone checks the card statement.* |
+| **Does it actually work?** | Something gets set up, nobody measures it, and months later no one knows if it helped. | Each automation gets a one-month test. If it isn't working, we switch it off. | *You find out within a month, and you only keep paying for the jobs that earn their place.* |
+| **Picking the right jobs** | AI goes wherever someone had a spare afternoon, which isn't always where the money is. | Before we build, you get a roadmap with savings and growth estimates for each job. | *Starting with the job worth the most is the quickest way to find out whether this pays off.* |
+| **Who keeps it running** | It falls to whoever is keenest, then stalls when they get busy or leave the business. | We build it and run it for one monthly fee, no contract, and hand it over if you cancel. [DECISION: handover terms] | *A system that lives in one person's head walks out the door with them.* |
+
+*Drawn from what Dan's seen in ten years of digital marketing. Savings and growth on your roadmap are estimates, with the working shown.*
+[See how we work →](#how-it-works) [DECISION: anchor id for section 03]
+
+*Retired in draft 4.4 (kept for the record, not for the page):* SC1 "Compared" · SC2 "How it compares with a fractional CMO or an agency" · SC3 "A fractional CMO mostly sells strategy hours. Published fees start from about A$2,450 a month, and hands-on work runs A$6,500 to A$14,500. An agency usually runs one channel. We plan the work, then build it and run it." · SC4 "Fractional CMO, agency or in-house: what it costs →". The fractional CMO figures can live in article B instead.
+
+*Retired in draft 4.5c (kept for the record, not for the page): the draft 4.4 three-column table.* CMP2 "Your AI, run by people who do this for a living." (SEO alt "How we compare with an agency or a fractional CMO") · CMP3 "Anyone can sign up for an AI tool. The work is in setting it up safely and making sure it pays for itself. Here's how the options compare." · CMP4 "Agency fees are typical figures from Dan's ten years in digital marketing: SEO about A$2,000 a month, ad management about A$1,000 a month." · CMP5 "Fractional CMO costs →" (/insights/fractional-cmo-vs-agency).
+
+| | You, with AI tools | A freelancer or agency | Roadmap Labs |
+|---|---|---|---|
+| **Security and safety** | Up to you to check where each tool keeps data | Varies. Worth asking where your data goes | Security and model choice, both in the fee [TBC: what security covers, from Dan] |
+| **Does it actually work?** | Hard to tell without time to measure it | Depends on what they report, and how often | One-month test per job. Off if it isn't working |
+| **Wasted money** | Easy to pay for tools nobody ends up using | A separate fee for each channel you hire | One fee. What doesn't work gets switched off |
+| **Moves the needle** | Wherever you find the time to try it | Measured on their channel, like rankings | A roadmap of savings and growth before we build |
+| **What's covered** | Whatever you have time to learn | Usually one channel, like SEO or ads | Automations, a portal, website and marketing |
+| **If you stop** | You keep whatever you set up | Depends on the contract and notice period | Cancel any month. You keep what we built [DECISION: handover terms] |
+
+**Before you commit** (approved draft line): Before you commit, you see what each automation could save, when it'll be running and when it should pay back. The most you can spend finding out after that is one month, and you keep what we built.
+
+## 8. FAQ (reader's words; 7 live, 1 on hold for Dan's safety paragraph)
+
+**What happens on the call?** We talk about how the business runs, what you've tried with AI and where it could make the most difference. It's free. [DECISION: length and format]
+**How do I know it'll be worth it?** Before you decide, we work out what each automation could save your team and the growth it could bring, and map out how long each takes to get running and start paying back. They're estimates with the working shown, not promises.
+**Are the savings guaranteed?** No. They're estimates, and we'll walk you through how we got to each one. What we do promise is the one-month test: if an automation isn't working, we switch it off.
+**Are the AI model costs extra?** No. They're in the A$3,500. We pick the model for each job and keep an eye on the spend, so there's no second bill. [DECISION: fair-use limit]
+**Will this be out of date in six months?** We try new models and tools on our own companies first. When something works better, we bring it into yours. [TBC: confirm with Dan]
+**Do we have to build the portal first?** No. We usually start with a couple of automations and build the portal once you can see the value. It's usually about a month of work, at the same fee.
+**What happens if we cancel?** Cancel any month. We hand over everything we've built and show you what it would cost to run on your own accounts. [DECISION: handover terms]
+**Is our client data safe with you?** *(hold)* [TBC: Dan's safety paragraph]
+**Is Google Ads spend included?** *(hold)* [TBC: Dan confirming]
+
+Spares and holds (what counts as one automation, turnaround, GST, AI knowledge, what the fee covers) are in the slot table below.
+
+## Slot tables: `/services`
+
+### Page head
+
+| Slot | Limit | Source | Option | Copy | Chars | OK |
+|---|---|---|---|---|---|---|
+| ST1 SEO title (absolute) | ≤ 60 | SEO brief | Rec. | Outsourced marketing and AI team · Roadmap Labs | 47 | ✓ |
+| ST2 Meta description | ≤ 155 | SEO brief | Rec. | Outsourced marketing, software and AI automation in one plan. A$3,500 a month, no GST. AI model costs included. No contract. | 124 | ✓ |
+| S1 Label | ≤ 24 | Keep | Keep | Services & Pricing | 18 | ✓ |
+| S2 H1 line 1 (grey) | ≤ 26 | NEW 4.4 | Rec. | We build it and run it. | 23 | ✓ |
+| S2 H1 line 2 (ink) | ≤ 26 | NEW | Rec. | One monthly fee. | 16 | ✓ |
+| S3 Lead | ≤ 170 | NEW | Rec. | Marketing, software and AI automation for Australian businesses with 5 or more staff, run from Melbourne. A$3,500 a month, no GST. AI model costs included. No contract. | 168 | ✓ |
+
+### 01 · What we build
+
+| Slot | Limit | Source | Option | Copy | Chars | OK |
+|---|---|---|---|---|---|---|
+| O1 title | ≤ 24 | NEW | Rec. | AI automation | 13 | ✓ |
+| O1 body | ≤ 100 | NEW 4.4 | Rec. | Admin, quotes, sales follow-ups and onboarding, built one at a time. We keep each one running. | 94 | ✓ |
+| O6 title (new 4th cell) | ≤ 24 | Scope, 26 Oct | Rec. | Website and marketing | 21 | ✓ |
+| O6 body | ≤ 100 | Scope, 26 Oct | Rec. | Website builds, conversion work, SEO, Google Ads, social and email, written for people first. | 93 | ✓ |
+| O2 title | ≤ 24 | NEW | Rec. | Internal tools | 14 | ✓ |
+| O2 body | ≤ 100 | NEW 4.4 | Rec. | A company portal with customer records, jobs and files in one place, for your team and automations. | 99 | ✓ |
+| O3 title | ≤ 24 | NEW | Rec. | Safety and security | 19 | ✓ |
+| O3 body | ≤ 100 | NEW | Hold until Dan answers | [TBC: safety paragraph from Dan, short version] | 0 | ✓ |
+| O1 to O3 and O6 meta | ≤ 20 | NEW | All four | In the fee | 10 | ✓ |
+| O4 own-products line | ≤ 90 | Fact | Rec. | Our own companies, ReviewBuddy and Flexfolio, run on the same systems. | 70 | ✓ |
+
+### 02 · The offer
+
+| Slot | Limit | Source | Option | Copy | Chars | OK |
+|---|---|---|---|---|---|---|
+| SO1 Offer block | - | Same as home | Note | Use OF2 to OF10 from homepage.md | - | - |
+| SO1 Included / not included line | ≤ 170 | NEW | Rec. | AI model costs are in the fee. Software you already pay for, like your CRM, stays on your own accounts. [DECISION: fair-use limit] | 103 | ✓ |
+| SO2 Before-you-commit line (end of offer) | ≤ 200 | Approved draft | Keep | Before you commit, you see what each automation could save, when it'll be running and when it should pay back. The most you can spend finding out after that is one month, and you keep what we built. | 198 | ✓ |
+| SO1 Supporting line | ≤ 140 | NEW | Rec. | That's about A$1,670 a month you could put back into the business or your people. | 81 | ✓ |
+
+### 02b · In-house or us (comparison, draft 4.5c; replaces SC1 to SC4)
+
+| Slot | Limit | Source | Option | Copy | Chars | OK |
+|---|---|---|---|---|---|---|
+| CMP1 Label | ≤ 24 | Dan, 26 Oct | Rec. | In-house or us | 14 | ✓ |
+| CMP2 H2 | ≤ 52 | NEW 4.5c | Rec. | Why not just get your team to do it? | 36 | ✓ |
+| CMP3 Lead | ≤ 160 | NEW 4.5c | Rec. | Your team could set up AI tools themselves, and plenty try. Here's where it usually goes wrong when they do, and what we do instead. | 132 | ✓ |
+| CMP column headers ×2 | ≤ 24 | NEW 4.5c | Col 1 | Your team does it | 17 | ✓ |
+| CMP column headers ×2 | ≤ 24 | NEW 4.5c | Col 2 | Roadmap Labs runs it | 20 | ✓ |
+| CMP-R1-label | ≤ 28 | Dan's issues | Label | Data and security | 17 | ✓ |
+| CMP-R1-team | ≤ 90 | NEW 4.5c | Your team | Someone pastes client details into a free AI tool, and nobody knows where they end up. | 86 | ✓ |
+| CMP-R1-us | ≤ 90 | NEW 4.5c | Roadmap Labs | Security and model choice are part of the fee. We set them up before anything goes live. [TBC: what security covers] | 88 | ✓ |
+| CMP-R1-why | ≤ 120 | NEW 4.5c | Why it matters | Your clients trust you with their details. That's much harder to win back than a tool is to set up. | 99 | ✓ |
+| CMP-R2-label | ≤ 28 | Dan's issues | Label | Tools that don't talk | 21 | ✓ |
+| CMP-R2-team | ≤ 90 | NEW 4.5c | Your team | Each tool is set up on its own, so people still copy data from the CRM into spreadsheets. | 89 | ✓ |
+| CMP-R2-us | ≤ 90 | NEW 4.5c | Roadmap Labs | We connect the software you already use so data moves by itself. Your portal comes later. | 89 | ✓ |
+| CMP-R2-why | ≤ 120 | NEW 4.5c | Why it matters | AI can only work with what it can see. If the data is stuck in separate tools, someone is still typing it in. | 109 | ✓ |
+| CMP-R3-label | ≤ 28 | Dan's issues | Label | Knowing what good looks like | 28 | ✓ |
+| CMP-R3-team | ≤ 90 | NEW 4.5c | Your team | They know the business, but maybe not what a well-run ad account or sales follow-up is. | 87 | ✓ |
+| CMP-R3-us | ≤ 90 | NEW 4.5c | Roadmap Labs | We set it up the way good sales and marketing runs, from Dan's ten years in the field. | 86 | ✓ |
+| CMP-R3-why | ≤ 120 | NEW 4.5c | Why it matters | AI speeds up whatever process you give it. A weak follow-up just goes out faster, to more people. | 97 | ✓ |
+| CMP-R4-label | ≤ 28 | Dan's issues | Label | Token and running costs | 23 | ✓ |
+| CMP-R4-team | ≤ 90 | NEW 4.5c | Your team | The priciest model runs everything, usage creeps up and per-seat tools keep piling on. | 86 | ✓ |
+| CMP-R4-us | ≤ 90 | NEW 4.5c | Roadmap Labs | We pick the model for each job and cut tools nobody uses. AI model costs are in the fee. | 88 | ✓ |
+| CMP-R4-why | ≤ 120 | NEW 4.5c | Why it matters | AI bills grow a little each month. Nobody owns them until someone checks the card statement. | 92 | ✓ |
+| CMP-R5-label | ≤ 28 | Dan's issues | Label | Does it actually work? | 22 | ✓ |
+| CMP-R5-team | ≤ 90 | NEW 4.5c | Your team | Something gets set up, nobody measures it, and months later no one knows if it helped. | 86 | ✓ |
+| CMP-R5-us | ≤ 90 | NEW 4.5c | Roadmap Labs | Each automation gets a one-month test. If it isn't working, we switch it off. | 77 | ✓ |
+| CMP-R5-why | ≤ 120 | NEW 4.5c | Why it matters | You find out within a month, and you only keep paying for the jobs that earn their place. | 89 | ✓ |
+| CMP-R6-label | ≤ 28 | Dan's issues | Label | Picking the right jobs | 22 | ✓ |
+| CMP-R6-team | ≤ 90 | NEW 4.5c | Your team | AI goes wherever someone had a spare afternoon, which isn't always where the money is. | 86 | ✓ |
+| CMP-R6-us | ≤ 90 | NEW 4.5c | Roadmap Labs | Before we build, you get a roadmap with savings and growth estimates for each job. | 82 | ✓ |
+| CMP-R6-why | ≤ 120 | NEW 4.5c | Why it matters | Starting with the job worth the most is the quickest way to find out whether this pays off. | 91 | ✓ |
+| CMP-R7-label | ≤ 28 | Dan's issues | Label | Who keeps it running | 20 | ✓ |
+| CMP-R7-team | ≤ 90 | NEW 4.5c | Your team | It falls to whoever is keenest, then stalls when they get busy or leave the business. | 85 | ✓ |
+| CMP-R7-us | ≤ 90 | NEW 4.5c | Roadmap Labs | We build it and run it for one monthly fee, no contract, and hand it over if you cancel. [DECISION: handover terms] | 88 | ✓ |
+| CMP-R7-why | ≤ 120 | NEW 4.5c | Why it matters | A system that lives in one person's head walks out the door with them. | 70 | ✓ |
+| CMP4 Footnote | ≤ 140 | NEW 4.5c | Rec. | Drawn from what Dan's seen in ten years of digital marketing. Savings and growth on your roadmap are estimates, with the working shown. | 135 | ✓ |
+| CMP5 Link | ≤ 24 | NEW 4.5c | Rec. | See how we work → | 17 | ✓ |
+| CMP5 Link | ≤ 24 | NEW 4.5c | href | #how-it-works [DECISION: anchor id for section 03] | 13 | ✓ |
+
+### 03 · How it works (dark)
+
+| Slot | Limit | Source | Option | Copy | Chars | OK |
+|---|---|---|---|---|---|---|
+| SH1 Lead | ≤ 170 | Keep | Keep | You don't have to start with the portal. Most businesses see value sooner from a couple of working automations, so that's where the build starts. | 145 | ✓ |
+| SH2 Steps | - | Same as home | Note | Use HW4 and HW5 from homepage.md | - | - |
+
+### 04 · Fine print
+
+| Slot | Limit | Source | Option | Copy | Chars | OK |
+|---|---|---|---|---|---|---|
+| S4 H2 | ≤ 24 | Keep | Keep | In plain English. | 17 | ✓ |
+| SF1 Fine print 1 to 4 | - | Same as home | Note | Use OF11 from homepage.md | - | - |
+| SF1 Fine print 5 title | ≤ 24 | OPTION | Option | Tax | 3 | ✓ |
+| SF1 Fine print 5 body | ≤ 120 | OPTION | Option | Generally a deductible business expense - check with your accountant. | 69 | ✓ |
+
+### 05 · Questions
+
+| Slot | Limit | Source | Option | Copy | Chars | OK |
+|---|---|---|---|---|---|---|
+| S4 H2 | ≤ 24 | Keep | Keep | Before you book. | 16 | ✓ |
+| SQ1 Question (Live) | ≤ 60 | NEW | Live | What happens on the call? | 25 | ✓ |
+| SQ1 Answer (Live) | ≤ 240 | NEW | Live | We talk about how the business runs, what you've tried with AI and where it could make the most difference. It's free. [DECISION: length and format, e.g. 60 minutes on a video call] | 118 | ✓ |
+| SQ2 Question (Live) | ≤ 60 | NEW | Live | How do I know it'll be worth it? | 32 | ✓ |
+| SQ2 Answer (Live) | ≤ 240 | NEW | Live | Before you decide, we work out what each automation could save your team and the growth it could bring, and map out how long each takes to get running and start paying back. They're estimates with the working shown, not promises. | 229 | ✓ |
+| SQ3 Question (Live) | ≤ 60 | NEW | Live | Are the savings guaranteed? | 27 | ✓ |
+| SQ3 Answer (Live) | ≤ 240 | NEW | Live | No. They're estimates, and we'll walk you through how we got to each one. What we do promise is the one-month test: if an automation isn't working, we switch it off. | 165 | ✓ |
+| SQ4 Question (Live) | ≤ 60 | NEW | Live | Are the AI model costs extra? | 29 | ✓ |
+| SQ4 Answer (Live) | ≤ 240 | NEW | Live | No. They're in the A$3,500. We pick the model for each job and keep an eye on the spend, so there's no second bill. [DECISION: fair-use limit] | 115 | ✓ |
+| SQ5 Question (Live) | ≤ 60 | NEW | Live | Will this be out of date in six months? | 39 | ✓ |
+| SQ5 Answer (Live) | ≤ 240 | NEW | Live | We try new models and tools on our own companies first. When something works better, we bring it into yours. [TBC: confirm with Dan] | 108 | ✓ |
+| SQ6 Question (Live) | ≤ 60 | NEW | Live | Do we have to build the portal first? | 37 | ✓ |
+| SQ6 Answer (Live) | ≤ 240 | NEW | Live | No. We usually start with a couple of automations and build the portal once you can see the value. It's usually about a month of work, at the same fee. | 151 | ✓ |
+| SQ7 Question (Live) | ≤ 60 | NEW | Live | What happens if we cancel? | 26 | ✓ |
+| SQ7 Answer (Live) | ≤ 240 | NEW | Live | Cancel any month. We hand over everything we've built and show you what it would cost to run on your own accounts. [DECISION: handover terms] | 114 | ✓ |
+| SQ8 Question (Hold until Dan answers) | ≤ 60 | NEW | Hold until Dan answers | Is our client data safe with you? | 33 | ✓ |
+| SQ8 Answer (Hold until Dan answers) | ≤ 240 | NEW | Hold until Dan answers | [TBC: Dan's safety paragraph: where client data lives, who can see it and whose accounts it runs on] | 0 | ✓ |
+| SQ9 Question (Spare) | ≤ 60 | NEW | Spare | Is there GST on top? | 20 | ✓ |
+| SQ9 Answer (Spare) | ≤ 240 | NEW | Spare | No. A$3,500 a month, no GST. AI model costs included. No contract. | 66 | ✓ |
+| SQ10 Question (Spare) | ≤ 60 | NEW | Spare | Do I need to know anything about AI? | 36 | ✓ |
+| SQ10 Answer (Spare) | ≤ 240 | NEW | Spare | No. You know your business, and that's the part we need. We look after the models, the setup and the running costs, and explain it in plain English. | 148 | ✓ |
+| SQ11 Question (Spare) | ≤ 60 | NEW | Spare | What does the fee cover? | 24 | ✓ |
+| SQ11 Answer (Spare) | ≤ 240 | NEW | Spare | Software and internal tools, AI automation, website builds, conversion work, SEO, Google Ads, social and email. It all sits inside the one fee, and nothing is quoted separately. | 177 | ✓ |
+| SQ12 Question (Hold until Dan answers) | ≤ 60 | NEW | Hold until Dan answers | Is Google Ads spend included? | 29 | ✓ |
+| SQ12 Answer (Hold until Dan answers) | ≤ 240 | NEW | Hold until Dan answers | [TBC: Dan confirming] | 0 | ✓ |
+| SQ13 Question (Hold until Dan answers) | ≤ 60 | NEW | Hold until Dan answers | What counts as one automation? | 30 | ✓ |
+| SQ13 Answer (Hold until Dan answers) | ≤ 240 | NEW | Hold until Dan answers | [DECISION] Suggested: one workflow that does one job, like publishing a weekly blog post or chasing unpaid invoices. | 106 | ✓ |
+| SQ14 Question (Hold until Dan answers) | ≤ 60 | NEW | Hold until Dan answers | How fast do you build each automation? | 38 | ✓ |
+| SQ14 Answer (Hold until Dan answers) | ≤ 240 | NEW | Hold until Dan answers | [DECISION: typical turnaround] | 0 | ✓ |
+
+### 06 · Start (dark)
+
+| Slot | Limit | Source | Option | Copy | Chars | OK |
+|---|---|---|---|---|---|---|
+| Start band | - | Same as home | Note | Use C1 to C5 from homepage.md | - | - |
+
+### Section labels and small label (COPY-BRIEF, render 09-services)
+
+| Slot | Limit | Source | Option | Copy | Chars | OK |
+|---|---|---|---|---|---|---|
+| SL1 01 section label | ≤ 14 | COPY-BRIEF | Rec. | What we build | 13 | ✓ |
+| SL2 01 section H2 (the one /services heading carrying the search phrase) | ≤ 26 | COPY-BRIEF + SEO | Rec. | Your outsourced marketing. | 26 | ✓ |
+| SL2 01 section H2 (the one /services heading carrying the search phrase) | ≤ 26 | COPY-BRIEF + SEO | Alt (no phrase) | What we build for you. | 22 | ✓ |
+| SL3 04 section label | ≤ 14 | COPY-BRIEF | Rec. | Fine print | 10 | ✓ |
+| SL4 05 section label | ≤ 14 | COPY-BRIEF | Rec. | Questions | 9 | ✓ |
+| SL5 Small label (plan label above the price) | ≤ 14 | COPY-BRIEF | Rec. | Partner plan | 12 | ✓ |
+
+SL1, SL3 and SL4 match the labels already in the headings above ("01 · What we build", "04 · Fine print", "05 · Questions"). SL5: I read COPY-BRIEF's "small label ≤ 14" as the plan label above the price, the same as OF5 on the homepage. If the designer meant a different marker in `09-services.png`, tell me and I'll move it.

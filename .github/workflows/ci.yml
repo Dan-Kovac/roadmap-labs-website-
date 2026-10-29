@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      # Fake id so CI never posts to Dan's form. Playwright still mocks formspree.io. Vercel stays unset and uses the default id in lib/formspree.ts.
+      NEXT_PUBLIC_FORMSPREE_FORM_ID: citest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:unit
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
