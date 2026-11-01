@@ -5,7 +5,8 @@ test("home renders the draft 4.3 hero and price line", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("lang", "en-AU");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Finally make it work.");
   await expect(page.locator(".hero")).not.toContainText("A$3,500");
-  await expect(page.getByText("A$3,500 a month, no GST. AI model costs included. No contract.")).toBeVisible();
+  await expect(page.locator("#offer")).toContainText("A$3,500");
+  await expect(page.locator("#offer")).toContainText("No GST. AI model costs included. No contract.");
   await expect(page.getByText("incl. GST")).toHaveCount(0);
   await expect(page.getByText("Compass OS")).toHaveCount(0);
   const canonical = page.locator('link[rel="canonical"]');
@@ -41,28 +42,59 @@ test("an insight is self-canonical", async ({ page }) => {
   expect(href ?? "").not.toContain("substack");
 });
 
-test("home comparison sits after how it works and links to services", async ({ page }) => {
+test("home bottom is work, what we run, the fee, who we are, then start", async ({ page }, testInfo) => {
+  const mobile = testInfo.project.name === "375";
+  if (mobile) {
+    await page.setViewportSize({ width: 390, height: 844 });
+  }
   await page.goto("/");
   const labels = (await page.locator(".section-label").allTextContents()).map((label) => label.replace(/\s+/g, " ").trim());
-  expect(labels).toEqual([
-    "01 · Properly",
-    "02 · Put to work",
-    "03 · How it works",
-    "04 · In-house or us",
-    "05 · The fee",
-    "06 · Dan Kovac",
-    "07 · Start",
+  expect(labels).toEqual(["01 · Properly", "02 · Put to work"]);
+  const indexes = (await page.locator(".nb .idx").allTextContents()).map((label) => label.replace(/\s+/g, " ").trim());
+  expect(indexes).toEqual([
+    "03 · Work",
+    "What we run",
+    "Brands we've built",
+    "04 · The fee",
+    "05 · Who we are",
+    "Founder, Melbourne",
+    "06 · Start",
   ]);
+  await expect(page.getByRole("heading", { name: "What we've built lately" })).toBeVisible();
+  await expect(page.locator(".wk-f.dv")).toHaveCount(3);
+  await expect(page.locator("#work a[href='/projects/compass-buyers-agency']")).toHaveCount(1);
+  await expect(page.locator("#work a[href='/projects/review-buddy']")).toHaveCount(1);
+  await expect(page.locator("#work a[href='/projects/flexfolio']")).toHaveCount(1);
+  await expect(page.locator(".lp li")).toHaveCount(7);
+  await expect(page.locator(".lp li.on")).toHaveText("Live");
+  await expect(page.locator(".rn-cols > div")).toHaveCount(5);
+  await expect(page.locator("#offer .cmp .rw")).toHaveCount(6);
+  await expect(page.locator("#offer")).toContainText("No GST. AI model costs included. No contract.");
+  await expect(page.locator("#offer a.btn")).toHaveAttribute("href", "/contact");
+  await expect(page.locator("#dan img[alt='Dan Kovac, founder of Roadmap Labs']")).toBeVisible();
+  await expect(page.locator("#dan a[href='/about']")).toHaveText("About us →");
+  await expect(page.locator("#start a.btn")).toHaveAttribute("href", "/contact");
+  await expect(page.getByRole("heading", { name: "Tell us what's eating your week" })).toBeVisible();
+  await expect(page.getByText("Notes from building with AI, written up as we go")).toHaveCount(0);
   await expect(page.getByText("Then Dan writes it up.")).toHaveCount(0);
-  await expect(page.getByRole("link", { name: "See how we work →" })).toHaveAttribute("href", "/services");
-  await expect(page.getByText("Client project", { exact: true })).toBeVisible();
+  await expect(page.locator("footer")).not.toContainText("Business automation");
   await expect(page.getByText("Compass OS")).toHaveCount(0);
   await expect(page.getByText("Retool")).toHaveCount(0);
   await expect(page.getByText("internal platform")).toHaveCount(0);
+  await expect(page.getByText("incl. GST")).toHaveCount(0);
   await expect(page.locator('img[alt="Admin and sales automation"]')).toBeVisible();
-  await expect(page.locator("#dan img[alt=\"Compass Buyers Agency home\"]")).toBeVisible();
-  await expect(page.locator("#dan img[alt=\"Dan Kovac, founder of Roadmap Labs\"]")).toBeVisible();
-  await expect(page.getByText("That's what the first call is for.")).toBeVisible();
+
+  const columns = await page.locator(".wk-grid").evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(" ").length);
+  if (testInfo.project.name === "1440") {
+    expect(columns).toBe(3);
+  }
+  if (mobile) {
+    expect(columns).toBe(1);
+    const display = await page.locator("#offer .cmp .rw").first().evaluate((el) => getComputedStyle(el).display);
+    expect(display).toBe("grid");
+  }
+  const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+  expect(scrollWidth).toBeLessThanOrEqual((page.viewportSize()?.width ?? scrollWidth) + 1);
 });
 
 test("about states the problem and ten years in digital marketing", async ({ page }) => {
