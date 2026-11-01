@@ -91,13 +91,9 @@ test("enquiry form posts to Formspree at 390 and 1440", async ({ page }, testInf
 
     await page.goto("/");
     await expect(page.locator(".desk-cta")).toHaveAttribute("href", "#start");
-    await expect(page.locator("#start form")).toBeVisible();
-    await expect(page.locator("#start .form-email a")).toHaveAttribute("href", "mailto:dan@roadmaplabs.com.au");
-    mode = "ok";
-    await fill(page.locator("#start"));
-    await page.locator("#start").getByRole("button", { name: "Send enquiry" }).click();
-    await expect(page.locator("#start").getByRole("status")).toHaveText(success);
-    await expect(page).toHaveURL(/\/$/);
+    await expect(page.locator("#start form")).toHaveCount(0);
+    await expect(page.locator("#start a.btn")).toHaveAttribute("href", "/contact");
+    await expect(page.locator("#start a.btn")).toHaveText("Send enquiry");
   }
 });
 
