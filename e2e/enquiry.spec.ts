@@ -92,7 +92,7 @@ test("enquiry form posts to Formspree at 390 and 1440", async ({ page }, testInf
     await page.goto("/");
     await expect(page.locator(".desk-cta")).toHaveAttribute("href", "#book-placeholder");
     await expect(page.locator(".desk-cta")).toHaveText("Book a call");
-    await expect(page.locator("#book-placeholder a.book").first()).toHaveAttribute("href", "#book-placeholder");
+    await expect(page.locator("#book-placeholder a.btn")).toHaveAttribute("href", "#book-placeholder");
   }
 });
 

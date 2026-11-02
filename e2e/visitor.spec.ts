@@ -4,9 +4,11 @@ test("home renders the planning-page hero and the client-paid fee", async ({ pag
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("lang", "en-AU");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Make AI do real work in your business");
-  await expect(page.locator(".ev-hero")).not.toContainText("A$3,500");
+  await expect(page.locator(".hero")).not.toContainText("A$3,500");
   await expect(page.locator("#fee")).toContainText("A$3,500");
-  await expect(page.locator("#fee")).toContainText("No GST · No contract");
+  await expect(page.locator("#fee")).toContainText("a month, no GST");
+  await expect(page.locator("#fee")).toContainText("No contract. That's about A$808 a week.");
+  await expect(page.getByText("hand it your repetitive admin one job at a time.")).toBeVisible();
   await expect(page.getByText("AI model costs included")).toHaveCount(0);
   await expect(page.getByText("incl. GST")).toHaveCount(0);
   await expect(page.getByText("Nick Saraev")).toHaveCount(0);
@@ -53,26 +55,31 @@ test("home follows the three-step plan and books the call", async ({ page }, tes
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Three steps, in this order" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Get your data ready" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Set it up properly" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Set it up in your own account" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Automate one job at a time" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "We start where the money's stuck" })).toBeVisible();
-  await expect(page.getByText("How many people see your business?")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "We run it on ourselves first" })).toBeVisible();
-  await expect(page.locator(".wk-f.dv")).toHaveCount(3);
+  await expect(page.getByRole("heading", { name: "We start where the money gets stuck" })).toBeVisible();
+  await expect(page.getByText("How many people come across your business each week?")).toBeVisible();
+  await expect(page.getByText("repetitive work that's slowing the business down most")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "We use this on ourselves every day" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Find the first job to take off your team's plate" })).toBeVisible();
+  await expect(page.locator(".work .wcard")).toHaveCount(3);
   await expect(page.locator("a[href='/projects/compass-buyers-agency']")).toHaveCount(1);
   await expect(page.locator("a[href='/projects/review-buddy']")).toHaveCount(1);
   await expect(page.locator("a[href='/projects/flexfolio']")).toHaveCount(1);
-  await expect(page.locator("#book-placeholder a.book").first()).toHaveAttribute("href", "#book-placeholder");
+  const compass = page.locator(".wcard", { has: page.getByRole("heading", { name: "Compass Buyers Agency" }) });
+  await expect(compass).toContainText("A website we built for Compass Buyers Agency");
+  await expect(compass).not.toContainText("CLIENT");
+  await expect(page.locator("#book-placeholder a.btn")).toHaveAttribute("href", "#book-placeholder");
   const header = page.locator(".site-header");
   expect(await header.locator("a[href='/#how-it-works']").count()).toBeGreaterThan(0);
   expect(await header.locator("a[href='/#fee']").count()).toBeGreaterThan(0);
   await expect(header.locator("a", { hasText: /^Insights$/ })).toHaveCount(0);
   await expect(page.getByText("RACE")).toHaveCount(0);
-  const columns = await page.locator(".wk-grid").evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(" ").length);
+  const columns = await page.locator(".work").evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(" ").length);
   if (testInfo.project.name === "1440") {
     expect(columns).toBe(3);
   }
-  if (mobile) {
+  if (mobile || Number(testInfo.project.name) <= 700) {
     expect(columns).toBe(1);
     const toggle = page.locator(".menu-toggle");
     const color = await toggle.evaluate((el) => getComputedStyle(el).color);

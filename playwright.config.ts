@@ -21,6 +21,8 @@ export default defineConfig({
   },
   projects: [
     { name: "375", use: { ...devices["Desktop Chrome"], viewport: { width: 375, height: 812 } } },
+    { name: "390", use: { ...devices["Desktop Chrome"], viewport: { width: 390, height: 844 } } },
+    { name: "430", use: { ...devices["Desktop Chrome"], viewport: { width: 430, height: 932 } } },
     { name: "768", use: { ...devices["Desktop Chrome"], viewport: { width: 768, height: 1024 } } },
     { name: "1024", use: { ...devices["Desktop Chrome"], viewport: { width: 1024, height: 768 } } },
     { name: "1440", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },

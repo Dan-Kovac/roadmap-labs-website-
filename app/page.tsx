@@ -1,4 +1,4 @@
-import { HomeElevated } from "@/components/home-elevated";
+import { HomeHifi } from "@/components/home-hifi";
 import { JsonLd } from "@/components/json-ld";
 import { pageMetadata } from "@/lib/metadata";
 import { professionalServiceJsonLd, websiteJsonLd } from "@/lib/schema";
@@ -14,7 +14,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={[professionalServiceJsonLd(), websiteJsonLd()]} />
-      <HomeElevated />
+      <HomeHifi />
     </>
   );
 }
