@@ -91,6 +91,24 @@ test("home follows the three-step plan and books the call", async ({ page }, tes
   }
   const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
   expect(scrollWidth).toBeLessThanOrEqual((page.viewportSize()?.width ?? scrollWidth) + 1);
+  await page.waitForFunction(() =>
+    [...document.querySelectorAll<HTMLImageElement>("img.logo")].every((img) => img.naturalWidth > 0),
+  );
+  const logos = await page.locator("img.logo").evaluateAll((imgs) =>
+    imgs.map((node) => {
+      const img = node as HTMLImageElement;
+      return {
+        alt: img.alt,
+        rendered: img.getBoundingClientRect().width,
+        natural: img.naturalWidth,
+      };
+    }),
+  );
+  expect(logos.length).toBeGreaterThan(0);
+  for (const logo of logos) {
+    if (logo.rendered < 1) continue;
+    expect(logo.natural, logo.alt).toBeGreaterThanOrEqual(logo.rendered * 2);
+  }
 });
 
 test("about states the problem and ten years in digital marketing", async ({ page }) => {

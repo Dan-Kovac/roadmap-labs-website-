@@ -28,27 +28,69 @@ const work = [
   {
     href: "/projects/compass-buyers-agency",
     src: "/hifi/compass-home-2880x1800.jpg",
+    phone: "/home-bottom/compass-m-1170x2532.jpg",
     alt: "Compass Buyers Agency website",
     meta: "A website we built for Compass Buyers Agency",
     title: "Compass Buyers Agency",
     line: "We built the site and set up its SEO and enquiry form.",
+    caption: "The Compass Buyers Agency website, on a laptop and a phone.",
   },
   {
     href: "/projects/review-buddy",
     src: "/hifi/reviewbuddy-home-2880x1800.jpg",
+    phone: "/home-bottom/reviewbuddy-m-1170x2532.jpg",
     alt: "ReviewBuddy",
     meta: "Our product, for Australian tradies",
     title: "ReviewBuddy",
     line: "Gets tradies more Google reviews and shows them on their website.",
+    caption: "ReviewBuddy, on a laptop and a phone.",
   },
   {
     href: "/projects/flexfolio",
     src: "/hifi/flexfolio-home-2880x1800.jpg",
+    phone: "/home-bottom/flexfolio-m-1170x2532.jpg",
     alt: "Flexfolio",
     meta: "Our product, for product managers",
     title: "Flexfolio",
     line: "A portfolio that shows the thinking behind your work.",
+    caption: "Flexfolio, on a laptop and a phone.",
   },
+] as const;
+
+const marks = [
+  {
+    src: "/brand/compass-wordmark.svg",
+    alt: "Compass",
+    className: "logo logo-compass",
+    caption: "A website we built for Compass Buyers Agency",
+  },
+  {
+    src: "/brand/flexfolio-wordmark.svg",
+    alt: "Flexfolio",
+    className: "logo logo-flexfolio",
+    caption: "Flexfolio, our product",
+  },
+  {
+    src: "/brand/reviewbuddy-wordmark.svg",
+    alt: "ReviewBuddy",
+    className: "logo logo-reviewbuddy",
+    caption: "ReviewBuddy, our product",
+  },
+] as const;
+
+const buildFlow = [
+  ["01", "Ticket", "The change starts as a ticket"],
+  ["02", "Agent", "An AI engineer builds it"],
+  ["03", "Tests", "Lint, unit and end-to-end checks run"],
+  ["04", "Preview", "Desktop and phone, ready to review"],
+  ["05", "Sign-off", "Dan reviews it, then it ships"],
+] as const;
+
+const mailFlow = [
+  ["01", "Email arrives", "A client writes in"],
+  ["02", "Harry drafts", "Our AI assistant writes the reply"],
+  ["03", "Dan checks", "He reviews it before it sends"],
+  ["04", "Update goes out", "The client gets the reply"],
 ] as const;
 
 export function HomeHifi() {
@@ -93,10 +135,13 @@ export function HomeHifi() {
               </div>
             </div>
           </div>
-          <div className="caption meta">
-            <span>A website we built for Compass Buyers Agency</span>
-            <span>Flexfolio, our product</span>
-            <span>ReviewBuddy, our product</span>
+          <div className="marks">
+            {marks.map((mark) => (
+              <figure key={mark.alt}>
+                <img className={mark.className} src={mark.src} alt={mark.alt} />
+                <figcaption>{mark.caption}</figcaption>
+              </figure>
+            ))}
           </div>
         </div>
       </header>
@@ -113,25 +158,21 @@ export function HomeHifi() {
               </h2>
             </div>
           </div>
+          <figure className="build">
+            <ol>
+              {buildFlow.map((step) => (
+                <li key={step[0]}>
+                  <span>{step[0]}</span>
+                  <strong>{step[1]}</strong>
+                  <em>{step[2]}</em>
+                </li>
+              ))}
+            </ol>
+            <figcaption>How a change gets built, from ticket to sign-off.</figcaption>
+          </figure>
           <div className="steps">
             <div className="card">
               <div className="num">01</div>
-              <div className="dg">
-                <div className="row">
-                  <span className="tick">✓</span>CRM<span className="bar k" />
-                </div>
-                <div className="row">
-                  <span className="tick">✓</span>Drive<span className="bar k" style={{ flex: 0.7 }} />
-                  <span className="bar" />
-                </div>
-                <div className="row">
-                  <span className="tick">✓</span>Inbox<span className="bar k" style={{ flex: 0.45 }} />
-                  <span className="bar" />
-                </div>
-                <div className="row">
-                  ○ Private<span className="bar" />
-                </div>
-              </div>
               <h3>Get your data ready</h3>
               <p>
                 AI can only work with what it can read. We go through your tools and files and sort them so AI can read
@@ -141,27 +182,6 @@ export function HomeHifi() {
             </div>
             <div className="card">
               <div className="num">02</div>
-              <div className="dg" style={{ alignItems: "center", gap: 8 }}>
-                <div className="node k" style={{ width: "80%" }}>
-                  Your business
-                </div>
-                <div style={{ width: 1, height: 12, background: "var(--g2)" }} />
-                <div className="node" style={{ width: "80%" }}>
-                  Claude Enterprise · Grok Bot Teams
-                </div>
-                <div style={{ width: 1, height: 12, background: "var(--g2)" }} />
-                <div className="row" style={{ width: "80%" }}>
-                  <div className="node" style={{ flex: 1 }}>
-                    Team
-                  </div>
-                  <div className="node" style={{ flex: 1 }}>
-                    Data
-                  </div>
-                  <div className="node" style={{ flex: 1 }}>
-                    Jobs
-                  </div>
-                </div>
-              </div>
               <h3>Set it up in your own account</h3>
               <p>
                 We set you up on Claude Enterprise or Grok Bot Teams, whichever suits how your team works. The account
@@ -171,29 +191,6 @@ export function HomeHifi() {
             </div>
             <div className="card">
               <div className="num">03</div>
-              <div className="dg">
-                <div className="row">
-                  <span className="node k" style={{ flex: "none", padding: "8px 12px" }}>
-                    Job 1
-                  </span>
-                  <span className="bar k" />
-                  <span>running</span>
-                </div>
-                <div className="row">
-                  <span className="node" style={{ flex: "none", padding: "8px 12px" }}>
-                    Job 2
-                  </span>
-                  <span className="bar" />
-                  <span>next</span>
-                </div>
-                <div className="row">
-                  <span className="node" style={{ flex: "none", padding: "8px 12px" }}>
-                    Job 3
-                  </span>
-                  <span className="bar" />
-                  <span>later</span>
-                </div>
-              </div>
               <h3>Automate one job at a time</h3>
               <p>
                 We find the repetitive work that&apos;s slowing the business down most, agree its price and the number
@@ -284,7 +281,7 @@ export function HomeHifi() {
             </div>
             <div className="ccol rl">
               <div className="ch">
-                <img src="/hifi/roadmap-labs-white.svg" alt="Roadmap Labs" />
+                <img className="logo" src="/hifi/roadmap-labs-white.svg" alt="Roadmap Labs" />
               </div>
               {compareRows.map((row) => (
                 <div className="cc" key={row[0]}>
@@ -450,16 +447,31 @@ export function HomeHifi() {
             </div>
             <p>Two of our own products, and a website we built for Compass Buyers Agency.</p>
           </div>
-          <div className="work">
+          <div className="shots">
             {work.map((card) => (
-              <div className="wcard" key={card.href}>
-                <div className="shot">
-                  <div className="laptop">
-                    <div className="scr">
-                      <img src={card.src} alt={card.alt} />
+              <figure key={card.href}>
+                <div className="devices">
+                  <div className="mac">
+                    <div className="bezel">
+                      <div className="screen">
+                        <img src={card.src} alt={card.alt} width={2880} height={1800} />
+                      </div>
+                    </div>
+                    <div className="base" />
+                  </div>
+                  <div className="phone">
+                    <div className="screen">
+                      <img src={card.phone} alt="" width={1170} height={2532} />
                     </div>
                   </div>
                 </div>
+                <figcaption>{card.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className="work">
+            {work.map((card) => (
+              <div className="wcard" key={card.href}>
                 <div className="meta">{card.meta}</div>
                 <h3>{card.title}</h3>
                 <p>{card.line}</p>
@@ -478,19 +490,18 @@ export function HomeHifi() {
             <p style={{ marginTop: 20, fontSize: 18 }}>
               ReviewBuddy and Flexfolio each have their own AI designer, engineer and writer.
             </p>
-            <div className="pipe">
-              <div className="pnode">
-                Ticket<span>Change starts here</span>
-              </div>
-              <div className="arrow" />
-              <div className="pnode">
-                Preview<span>Desktop and phone</span>
-              </div>
-              <div className="arrow" />
-              <div className="pnode on">
-                ✓ Checks passed, Dan signs off<span>Review</span>
-              </div>
-            </div>
+            <figure className="mail">
+              <ol>
+                {mailFlow.map((step) => (
+                  <li key={step[0]} className={step[0] === "03" ? "on" : undefined}>
+                    <span>{step[0]}</span>
+                    <strong>{step[1]}</strong>
+                    <em>{step[2]}</em>
+                  </li>
+                ))}
+              </ol>
+              <figcaption>Harry handling a client email.</figcaption>
+            </figure>
           </div>
           <div className="list">
             <div>
