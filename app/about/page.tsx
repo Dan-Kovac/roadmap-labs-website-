@@ -90,7 +90,7 @@ export default function AboutPage() {
           ) : null}
         </div>
       </article>
-      <CtaBand index="03" />
+      <CtaBand />
     </>
   );
 }

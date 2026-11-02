@@ -15,7 +15,7 @@ export const seo = {
   services: {
     title: "Outsourced marketing and AI team · Roadmap Labs",
     description:
-      "Outsourced marketing, software and AI automation in one plan. A$3,500 a month, no GST. AI model costs included. No contract.",
+      "Outsourced marketing, software and AI automation in one plan. A$3,500 a month, no GST. No contract. You pay your own AI fees.",
   },
   automations: {
     title: "AI and business automation for small business · Roadmap Labs",

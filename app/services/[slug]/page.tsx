@@ -216,7 +216,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </EnquiryLink>
         </div>
       </div>
-      <CtaBand index="02" />
+      <CtaBand />
     </article>
   );
 }

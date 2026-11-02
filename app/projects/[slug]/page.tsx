@@ -144,7 +144,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         ) : null}
       </div>
     </article>
-    <CtaBand secondary={false} />
+    <CtaBand />
     </>
   );
 }

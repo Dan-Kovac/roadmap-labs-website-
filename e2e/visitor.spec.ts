@@ -1,13 +1,16 @@
 import { expect, test } from "@playwright/test";
 
-test("home renders the draft 4.3 hero and price line", async ({ page }) => {
+test("home renders the planning-page hero and the client-paid fee", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("lang", "en-AU");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Finally make it work.");
-  await expect(page.locator(".hero")).not.toContainText("A$3,500");
-  await expect(page.locator("#offer")).toContainText("A$3,500");
-  await expect(page.locator("#offer")).toContainText("No GST. AI model costs included. No contract.");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Make AI do real work in your business");
+  await expect(page.locator(".ev-hero")).not.toContainText("A$3,500");
+  await expect(page.locator("#fee")).toContainText("A$3,500");
+  await expect(page.locator("#fee")).toContainText("No GST · No contract");
+  await expect(page.getByText("AI model costs included")).toHaveCount(0);
   await expect(page.getByText("incl. GST")).toHaveCount(0);
+  await expect(page.getByText("Nick Saraev")).toHaveCount(0);
+  await expect(page.getByText("price cap", { exact: false })).toHaveCount(0);
   await expect(page.getByText("Compass OS")).toHaveCount(0);
   const canonical = page.locator('link[rel="canonical"]');
   await expect(canonical).toHaveAttribute("href", "https://roadmaplabs.com.au");
@@ -42,56 +45,42 @@ test("an insight is self-canonical", async ({ page }) => {
   expect(href ?? "").not.toContain("substack");
 });
 
-test("home bottom is work, what we run, the fee, who we are, then start", async ({ page }, testInfo) => {
+test("home follows the three-step plan and books the call", async ({ page }, testInfo) => {
   const mobile = testInfo.project.name === "375";
   if (mobile) {
     await page.setViewportSize({ width: 390, height: 844 });
   }
   await page.goto("/");
-  const labels = (await page.locator(".section-label").allTextContents()).map((label) => label.replace(/\s+/g, " ").trim());
-  expect(labels).toEqual(["01 · Properly", "02 · Put to work"]);
-  const indexes = (await page.locator(".nb .idx").allTextContents()).map((label) => label.replace(/\s+/g, " ").trim());
-  expect(indexes).toEqual([
-    "03 · Work",
-    "What we run",
-    "Brands we've built",
-    "04 · The fee",
-    "05 · Who we are",
-    "Founder, Melbourne",
-    "06 · Start",
-  ]);
-  await expect(page.getByRole("heading", { name: "What we've built lately" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Three steps, in this order" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Get your data ready" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Set it up properly" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Automate one job at a time" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "We start where the money's stuck" })).toBeVisible();
+  await expect(page.getByText("How many people see your business?")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "We run it on ourselves first" })).toBeVisible();
   await expect(page.locator(".wk-f.dv")).toHaveCount(3);
-  await expect(page.locator("#work a[href='/projects/compass-buyers-agency']")).toHaveCount(1);
-  await expect(page.locator("#work a[href='/projects/review-buddy']")).toHaveCount(1);
-  await expect(page.locator("#work a[href='/projects/flexfolio']")).toHaveCount(1);
-  await expect(page.locator(".lp li")).toHaveCount(7);
-  await expect(page.locator(".lp li.on")).toHaveText("Live");
-  await expect(page.locator(".rn-cols > div")).toHaveCount(5);
-  await expect(page.locator("#offer .cmp .rw")).toHaveCount(6);
-  await expect(page.locator("#offer")).toContainText("No GST. AI model costs included. No contract.");
-  await expect(page.locator("#offer a.btn")).toHaveAttribute("href", "/contact");
-  await expect(page.locator("#dan img[alt='Dan Kovac, founder of Roadmap Labs']")).toBeVisible();
-  await expect(page.locator("#dan a[href='/about']")).toHaveText("About us →");
-  await expect(page.locator("#start a.btn")).toHaveAttribute("href", "/contact");
-  await expect(page.getByRole("heading", { name: "Tell us what's eating your week" })).toBeVisible();
-  await expect(page.getByText("Notes from building with AI, written up as we go")).toHaveCount(0);
-  await expect(page.getByText("Then Dan writes it up.")).toHaveCount(0);
-  await expect(page.locator("footer")).not.toContainText("Business automation");
-  await expect(page.getByText("Compass OS")).toHaveCount(0);
-  await expect(page.getByText("Retool")).toHaveCount(0);
-  await expect(page.getByText("internal platform")).toHaveCount(0);
-  await expect(page.getByText("incl. GST")).toHaveCount(0);
-  await expect(page.locator('img[alt="Admin and sales automation"]')).toBeVisible();
-
+  await expect(page.locator("a[href='/projects/compass-buyers-agency']")).toHaveCount(1);
+  await expect(page.locator("a[href='/projects/review-buddy']")).toHaveCount(1);
+  await expect(page.locator("a[href='/projects/flexfolio']")).toHaveCount(1);
+  await expect(page.locator("#book-placeholder a.book").first()).toHaveAttribute("href", "#book-placeholder");
+  const header = page.locator(".site-header");
+  expect(await header.locator("a[href='/#how-it-works']").count()).toBeGreaterThan(0);
+  expect(await header.locator("a[href='/#fee']").count()).toBeGreaterThan(0);
+  await expect(header.locator("a", { hasText: /^Insights$/ })).toHaveCount(0);
+  await expect(page.getByText("RACE")).toHaveCount(0);
   const columns = await page.locator(".wk-grid").evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(" ").length);
   if (testInfo.project.name === "1440") {
     expect(columns).toBe(3);
   }
   if (mobile) {
     expect(columns).toBe(1);
-    const display = await page.locator("#offer .cmp .rw").first().evaluate((el) => getComputedStyle(el).display);
-    expect(display).toBe("grid");
+    const toggle = page.locator(".menu-toggle");
+    const color = await toggle.evaluate((el) => getComputedStyle(el).color);
+    expect(color).toBe("rgb(11, 13, 18)");
+    expect(color).not.toMatch(/0,\s*122,\s*255|0,\s*0,\s*255/);
+    await toggle.click();
+    await expect(page.getByRole("dialog", { name: "Menu" })).toBeVisible();
+    await expect(page.locator(".menu-cta")).toHaveText("Book a call");
   }
   const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
   expect(scrollWidth).toBeLessThanOrEqual((page.viewportSize()?.width ?? scrollWidth) + 1);
@@ -107,7 +96,8 @@ test("about states the problem and ten years in digital marketing", async ({ pag
   const box = await portrait.boundingBox();
   expect(box?.width ?? 0).toBeGreaterThan(160);
   expect((box?.width ?? 0) / (box?.height ?? 1)).toBeCloseTo(0.8, 1);
-  await expect(page.getByText("That's what the first call is for.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Get a clear AI plan, free" })).toBeVisible();
+  await expect(page.locator("#book-placeholder a")).toHaveAttribute("href", "#book-placeholder");
   await expect(page.getByText("AI automation, software and marketing")).toBeVisible();
   await expect(page.getByText("[PHOTO TBC]")).toHaveCount(0);
 });
@@ -127,7 +117,7 @@ test("work lists the three projects and the compass study stays a website", asyn
   const live = page.getByRole("link", { name: /compassagency\.com\.au/ });
   await expect(live).toHaveAttribute("href", "https://compassagency.com.au");
   await expect(live).not.toHaveClass(/rl-btn/);
-  await expect(page.locator(".cta-band").getByRole("link", { name: "Send enquiry" })).toHaveAttribute("href", "/contact");
+  await expect(page.locator("#book-placeholder").getByRole("link", { name: "Book a free 30-minute call" })).toHaveAttribute("href", "#book-placeholder");
   await expect(page.getByRole("heading", { name: "The result" })).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "What's next" })).toHaveCount(0);
   await expect(page.getByText("Home page on desktop, with the free consultation and call buttons.")).toBeVisible();
@@ -162,8 +152,7 @@ test("reviewbuddy links to the live site as a fact, not a button", async ({ page
   await expect(live).toHaveAttribute("rel", "noopener");
   await expect(live).not.toHaveAttribute("target", /_blank/);
   await expect(live).not.toHaveClass(/rl-btn/);
-  await expect(page.locator(".cta-band .rl-btn")).toHaveCount(1);
-  await expect(page.locator(".cta-band").getByRole("link", { name: "Send enquiry" })).toHaveAttribute("href", "/contact");
+  await expect(page.locator("#book-placeholder").getByRole("link", { name: "Book a free 30-minute call" })).toHaveAttribute("href", "#book-placeholder");
   await expect(page.getByText("After the job, the tradie shares their review link or QR code.")).toBeVisible();
   await expect(page.getByText("runs on the same AI automations")).toHaveCount(0);
   await expect(page.getByText("In beta", { exact: true })).toBeVisible();

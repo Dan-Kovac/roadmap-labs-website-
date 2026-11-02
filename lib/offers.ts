@@ -1,3 +1,5 @@
+import { BOOKING_URL, bookingCta } from "@/lib/booking";
+
 // One plan, three parts. Copy: Roadmap Labs, draft 4.3, 26 Oct 2026.
 export const offers = [
   {
@@ -9,7 +11,7 @@ export const offers = [
       "Quotes, follow-ups, onboarding and data entry, handled by automations so leads get an answer and nobody types it all by hand.",
       "We build one job at a time. Each one gets a one-month test, and if it isn't working, we switch it off and build the next one.",
     ],
-    links: [{ href: "/contact", label: "Send enquiry" }],
+    links: [{ href: BOOKING_URL, label: bookingCta }],
   },
   {
     id: "marketing",
@@ -40,7 +42,7 @@ export const partnerPlan = {
   id: "partner-plan",
   name: "Partner plan",
   price: "A$3,500/mo",
-  priceLine: "A$3,500 a month, no GST. AI model costs included. No contract.",
+  priceLine: "A$3,500 a month, no GST. No contract.",
   includes: [
     "Website builds",
     "Conversion work",
@@ -51,13 +53,13 @@ export const partnerPlan = {
     "Software and internal tools",
   ],
   terms: [
-    "A$3,500 a month, no GST. AI model costs included. No contract.",
-    "AI model costs are in the fee. We pick the model for each job and keep an eye on the spend.",
+    "A$3,500 a month, no GST. No contract.",
+    "You pay your AI model and token fees direct. We pick the model for each job.",
     "No contract. Cancel any month.",
     "If you leave, we hand over everything we've built.",
     "We only take a small handful of clients at a time.",
   ],
-  cta: { href: "/contact", label: "Send enquiry" },
+  cta: { href: BOOKING_URL, label: bookingCta },
 } as const;
 
 // Kept so existing imports don't break. Points at the website part of the plan.
@@ -66,7 +68,7 @@ export const websiteOffer = {
   title: "Website and marketing",
   paragraphs: [
     "Website builds, conversion work, SEO, Google Ads management, social and email are part of the partner plan, alongside AI automation, software and internal tools.",
-    "It's all in the one monthly fee: A$3,500 a month, no GST. AI model costs included. No contract.",
+    "It's all in the one monthly fee: A$3,500 a month, no GST. No contract. You pay your own AI fees.",
   ],
   links: [{ href: "/services/marketing", label: "SEO, websites and Google Ads" }],
 } as const;

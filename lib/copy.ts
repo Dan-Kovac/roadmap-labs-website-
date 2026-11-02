@@ -213,15 +213,15 @@ export const dan = {
 export const offer = {
   label: "The fee",
   line1: "One monthly fee.",
-  line2: "AI model costs included.",
-  lead: "We build one job at a time, as many as you need over the months, and keep each one running. AI model costs are in the fee, so there's no second bill.",
+  line2: "No GST. No contract.",
+  lead: "We build one job at a time, as many as you need over the months, and keep each one running. You pay your AI model and token fees on your own account.",
   planLabel: "Partner plan",
   priceLine,
   included: [
     "AI automation for admin and sales, each with a one-month test",
     "Website builds, conversion work, SEO, Google Ads, social and email",
     "Internal tools and a company portal, when you're ready",
-    "AI models picked for each job, with running costs in the fee [DECISION: fair-use limit]",
+    "You pay your own AI model and token fees. We pick the model for each job. [DECISION: fair-use limit]",
     "Security for your data and automations [TBC: what this covers, from Dan]",
     "A full handover if you leave [DECISION: handover terms]",
   ],
@@ -239,7 +239,7 @@ export const offer = {
   fine: [
     {
       title: "AI model costs",
-      body: "They're in the fee. We pick the model for each job and keep an eye on the spend. [DECISION: fair-use limit]",
+      body: "You pay them direct on your own account. We pick the model for each job. [DECISION: fair-use limit]",
     },
     {
       title: "One-month test",
@@ -260,7 +260,7 @@ export const offer = {
     body: "Generally a deductible business expense - check with your accountant.",
   },
   notIncluded:
-    "AI model costs are in the fee. Software you already pay for, like your CRM, stays on your own accounts. [DECISION: fair-use limit]",
+    "AI model and token fees are billed to your own account. Software you already pay for, like your CRM, stays on your own accounts. [DECISION: fair-use limit]",
   supporting: "That's about A$1,670 a month you could put back into the business or your people.",
   beforeYouCommit:
     "Before you commit, you see what each automation could save, when it'll be running and when it should pay back. The most you can spend finding out after that is one month, and you keep what we built.",
@@ -298,7 +298,7 @@ export const comparison = {
     {
       label: "Token and running costs",
       team: "The priciest model runs everything, usage creeps up and per-seat tools keep piling on.",
-      us: "We pick the model for each job and cut tools nobody uses. AI model costs are in the fee.",
+      us: "We pick the model for each job. You pay the model and token fees on your own account.",
       why: "AI bills grow a little each month. Nobody owns them until someone checks the card statement.",
     },
     {
@@ -344,7 +344,7 @@ export const servicesPage = {
   label: "Services & Pricing",
   line1: "AI doing the actual work.",
   line2: "One monthly fee.",
-  lead: "Marketing, software and AI automation for Australian businesses with 5 or more staff, run from Melbourne. A$3,500 a month, no GST. AI model costs included. No contract.",
+  lead: "Marketing, software and AI automation for Australian businesses with 5 or more staff, run from Melbourne. A$3,500 a month, no GST. No contract.",
   buildLabel: "What we build",
   buildTitle: "Outsourced marketing team.",
   offerLabel: "The offer",
@@ -394,7 +394,7 @@ export const faq = [
   },
   {
     q: "Are the AI model costs extra?",
-    a: "No. They're in the A$3,500. We pick the model for each job and keep an eye on the spend, so there's no second bill. [DECISION: fair-use limit]",
+    a: "Yes. You pay your AI model and token fees direct, on your own account. The A$3,500 is our fee. No GST. No contract. [DECISION: fair-use limit]",
   },
   {
     q: "Will this be out of date in six months?",
@@ -649,7 +649,7 @@ export const marketingPage = {
     },
     {
       q: "Is it a separate fee?",
-      a: "No. It's the same partner plan: A$3,500 a month, no GST. AI model costs included. No contract.",
+      a: "No. It's the same partner plan: A$3,500 a month, no GST. No contract. You pay your own AI fees.",
     },
     {
       q: "What happens if we cancel?",
