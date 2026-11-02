@@ -3,7 +3,8 @@ import { feeRows, feeTerms, homeWork, runLoop, runRows, words } from "@/lib/home
 
 describe("home bottom copy", () => {
   it("keeps the fee terms verbatim and six comparison rows", () => {
-    expect(feeTerms).toBe("No GST. AI model costs included. No contract.");
+    expect(feeTerms).toBe("No GST. No contract.");
+    expect(feeTerms).not.toContain("AI model costs included");
     expect(feeTerms).not.toContain("incl. GST");
     expect(feeRows).toHaveLength(6);
     for (const row of feeRows) {

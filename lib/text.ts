@@ -16,7 +16,9 @@ export function stripGst(input: string): string {
 export const priceStatement = "A$3,500 a month, no GST";
 export const priceFigure = "A$3,500";
 export const priceUnit = "/mo";
-export const priceLine = "A$3,500 a month, no GST. AI model costs included. No contract.";
+export const priceLine = "A$3,500 a month, no GST. No contract.";
+export const aiFeesLine =
+  "Your AI model and token fees are billed to your own account, so you only pay what you use.";
 
 /** Preview and local builds show slot markers. Production builds must not. */
 export function showPlaceholders() {

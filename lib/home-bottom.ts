@@ -1,6 +1,6 @@
 /** Home page from Work down. Copy: home-bottom-simple.md. Layout: SPEC.md option B. */
 
-export const feeTerms = "No GST. AI model costs included. No contract.";
+export const feeTerms = "No GST. No contract.";
 
 export const homeWork = [
   {

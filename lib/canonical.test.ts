@@ -54,7 +54,8 @@ describe("copy 4.3", () => {
   });
 
   it("uses the exact price line and seven plan parts", () => {
-    expect(priceLine).toBe("A$3,500 a month, no GST. AI model costs included. No contract.");
+    expect(priceLine).toBe("A$3,500 a month, no GST. No contract.");
+    expect(priceLine).not.toContain("AI model costs included");
     expect(partnerPlan.priceLine).toBe(priceLine);
     expect(offer.priceLine).toBe(priceLine);
     expect(partnerPlan.includes).toEqual([

@@ -109,7 +109,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <CtaBand index="06" />
+      <CtaBand />
     </article>
   );
 }

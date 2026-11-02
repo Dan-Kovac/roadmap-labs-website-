@@ -1,5 +1,3 @@
-import fs from "node:fs";
-import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { contactCopy } from "@/lib/copy";
 import {
@@ -9,6 +7,7 @@ import {
   type EnquiryFields,
 } from "@/lib/enquiry";
 import { defaultFormspreeFormId, formspreeEndpoint, formspreeFormId, readFormspreeErrors } from "@/lib/formspree";
+import { BOOKING_URL, bookingNav } from "@/lib/booking";
 import { enquiryHref } from "@/lib/site";
 
 const endpoint = "https://formspree.io/f/test";
@@ -146,25 +145,8 @@ describe("enquiry form state", () => {
     expect(enquiryHref("/services/marketing")).toBe("/contact");
   });
 
-  it("keeps Book a call off the rendered site", () => {
-    const roots = ["app", "components", "lib", "content/insights", "content/work"];
-
-    function filesIn(dir: string): string[] {
-      return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-        const full = path.join(dir, entry.name);
-
-        if (entry.isDirectory()) {
-          return filesIn(full);
-        }
-
-        return /\.(ts|tsx|md|mdx)$/.test(entry.name) && !entry.name.endsWith(".test.ts") ? [full] : [];
-      });
-    }
-
-    const hits = roots.flatMap((root) =>
-      filesIn(path.join(process.cwd(), root)).filter((file) => fs.readFileSync(file, "utf8").includes("Book a call")),
-    );
-
-    expect(hits).toEqual([]);
+  it("points the booking buttons at the placeholder constant", () => {
+    expect(BOOKING_URL).toBe("#book-placeholder");
+    expect(bookingNav).toBe("Book a call");
   });
 });

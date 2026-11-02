@@ -6,8 +6,9 @@ import { useEffect, useId, useRef, useState } from "react";
 import { Logo } from "@/components/logo";
 import { Rich } from "@/components/rich";
 import { track } from "@/lib/analytics";
+import { BOOKING_URL, bookingNav } from "@/lib/booking";
 import { chrome } from "@/lib/copy";
-import { currentNav, enquiryHref, navItems } from "@/lib/site";
+import { currentNav, navItems } from "@/lib/site";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -17,7 +18,7 @@ export function SiteHeader() {
   const panelRef = useRef<HTMLDivElement>(null);
   const wasOpen = useRef(false);
   const panelId = useId();
-  const enquire = enquiryHref(pathname);
+  const [scrolled, setScrolled] = useState(false);
 
   if (menuPath !== pathname) {
     setMenuPath(pathname);
@@ -30,7 +31,19 @@ export function SiteHeader() {
     }
 
     wasOpen.current = open;
+    document.body.style.overflow = open ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!open) {
@@ -76,7 +89,8 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="site-header">
+    <>
+    <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
       <div className="rl-container header-bar">
         <Link href="/" className="header-logo" aria-label="Roadmap Labs">
           <Logo priority />
@@ -93,11 +107,11 @@ export function SiteHeader() {
           ))}
         </nav>
         <Link
-          href={enquire}
+          href={BOOKING_URL}
           className="rl-btn rl-btn-primary rl-btn-sm desk-cta"
           onClick={() => track("enquiry_click", { location: "header" })}
         >
-          {chrome.enquire}
+          {bookingNav}
         </Link>
         <button
           ref={toggleRef}
@@ -110,6 +124,7 @@ export function SiteHeader() {
           <Rich text={open ? chrome.menuClose : chrome.menuOpen} />
         </button>
       </div>
+    </header>
       <div
         id={panelId}
         ref={panelRef}
@@ -131,16 +146,16 @@ export function SiteHeader() {
           ))}
         </nav>
         <Link
-          href={enquire}
+          href={BOOKING_URL}
           className="rl-btn rl-btn-primary menu-cta"
           onClick={() => {
             setOpen(false);
             track("enquiry_click", { location: "menu" });
           }}
         >
-          {chrome.enquire}
+          {bookingNav}
         </Link>
       </div>
-    </header>
+    </>
   );
 }

@@ -90,10 +90,9 @@ test("enquiry form posts to Formspree at 390 and 1440", async ({ page }, testInf
     await expect(page.getByRole("button", { name: "Send enquiry" })).toHaveCount(0);
 
     await page.goto("/");
-    await expect(page.locator(".desk-cta")).toHaveAttribute("href", "#start");
-    await expect(page.locator("#start form")).toHaveCount(0);
-    await expect(page.locator("#start a.btn")).toHaveAttribute("href", "/contact");
-    await expect(page.locator("#start a.btn")).toHaveText("Send enquiry");
+    await expect(page.locator(".desk-cta")).toHaveAttribute("href", "#book-placeholder");
+    await expect(page.locator(".desk-cta")).toHaveText("Book a call");
+    await expect(page.locator("#book-placeholder a.btn")).toHaveAttribute("href", "#book-placeholder");
   }
 });
 

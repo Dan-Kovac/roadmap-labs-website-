@@ -37,9 +37,9 @@ export function gaId() {
 }
 
 export const navItems = [
+  { href: "/#how-it-works", label: "How it works" },
   { href: "/projects", label: "Work" },
-  { href: "/services", label: "Services" },
-  { href: "/insights", label: "Insights" },
+  { href: "/#fee", label: "Pricing" },
   { href: "/about", label: "About" },
 ] as const;
 
